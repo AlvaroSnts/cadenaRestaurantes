@@ -4,7 +4,10 @@ import vistas.ventanaLogin;
 import vistas.ventanaCarrito;
 import vistas.ventanaListaCategorias;
 import vistas.ventanaProductosCategoria;
+import vistas.ventanaCerrarSesion;
+import java.util.ArrayList;
 import modelo.logica;
+import modelo.vo.categoriasVo;
 
 public class coordinador {
 
@@ -12,12 +15,16 @@ public class coordinador {
 	private ventanaCarrito ventanaCarrito;
 	private ventanaListaCategorias ventanaListaCategorias;
 	private ventanaProductosCategoria ventanaProductosCategoria;
+	private ventanaCerrarSesion ventanaCerrarSesion;
 	
 	private logica logica;
 	
 	//Ventana de login
 	public void mostrarVentanaLogin() {
 		ventanaLogin.setVisible(true);
+	}
+	public void ocultarVentanaLogin() {
+		ventanaLogin.setVisible(false);
 	}
 	public void setVentanaLogin(ventanaLogin ventanaLogin) {
 		this.ventanaLogin=ventanaLogin;
@@ -27,6 +34,10 @@ public class coordinador {
 	public void mostrarVentanaCarrito() {
 		ventanaCarrito.setVisible(true);
 	}
+	public void ocultarVentanaCarrito() {
+		ventanaCarrito.setVisible(false);
+	}
+	
 	public void setVentanaCarrito(ventanaCarrito ventanaCarrito) {
 		this.ventanaCarrito=ventanaCarrito;
 	}
@@ -34,6 +45,9 @@ public class coordinador {
 	//Ventana listar categorias
 	public void mostrarVentanaListaCategorias() {
 		ventanaListaCategorias.setVisible(true);
+	}
+	public void ocultarVentanaListaCategorias() {
+		ventanaListaCategorias.setVisible(false);
 	}
 	public void setVentanaListaCategorias(ventanaListaCategorias ventanaListaCategorias) {
 		this.ventanaListaCategorias=ventanaListaCategorias;
@@ -43,10 +57,23 @@ public class coordinador {
 	public void mostrarVentanaProductosCategoria() {
 		ventanaProductosCategoria.setVisible(true);
 	}
+	public void ocultarVentanaProductosCategoria() {
+		ventanaProductosCategoria.setVisible(false);
+	}
 	public void setVentanaProductosCategoria(ventanaProductosCategoria ventanaProductosCategoria) {
 		this.ventanaProductosCategoria=ventanaProductosCategoria;
 	}
 	
+	//Ventana de cerrar sesion
+	public void mostrarVentanaCerrarSesion() {
+		ventanaCerrarSesion.setVisible(true);
+	}
+	public void ocultarVentanaCerrarSesion() {
+		ventanaCerrarSesion.setVisible(false);
+	}
+	public void setVentanaCerrarSesion(ventanaCerrarSesion ventanaCerrarSesion) {
+		this.ventanaCerrarSesion=ventanaCerrarSesion;
+	}
 	
 	//Parte logica
 	public logica getLogica() {
@@ -54,5 +81,9 @@ public class coordinador {
 	}
 	public void setLogica(logica logica) {
 		this.logica=logica;
+	}
+	
+	public void mostrarCategorias(ArrayList<categoriasVo> categoria) {
+		ventanaListaCategorias.mostrarCategorias(categoria);
 	}
 }

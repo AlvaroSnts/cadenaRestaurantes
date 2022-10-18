@@ -2,7 +2,7 @@ package modelo.vo;
 
 public class categoriasVo {
 	private int codCat;
-	private int nombre;
+	private String nombre;
 	private String descripcion;
 	public int getCodCat() {
 		return codCat;
@@ -10,10 +10,10 @@ public class categoriasVo {
 	public void setCodCat(int codCat) {
 		this.codCat = codCat;
 	}
-	public int getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(int nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	public String getDescripcion() {

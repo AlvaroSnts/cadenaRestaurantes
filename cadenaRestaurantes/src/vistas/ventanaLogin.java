@@ -74,6 +74,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		
 		botonEntrar = new JButton("Entrar");
 		botonEntrar.setBounds(171, 227, 89, 23);
+		botonEntrar.addActionListener(this);
 		panel.add(botonEntrar);
 	}
 	
@@ -95,9 +96,10 @@ public class ventanaLogin extends JFrame implements ActionListener {
 			else {
 				coordinador.mostrarVentanaListaCategorias();
 				this.setVisible(false);
+				textFieldUsuario.setText("");
+				passwordField.setText("");
 			}
 		
 		}
 	}
 }
-
