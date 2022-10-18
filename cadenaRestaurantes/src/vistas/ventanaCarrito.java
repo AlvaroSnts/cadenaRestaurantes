@@ -23,7 +23,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 
 	
 	public ventanaCarrito() {
-		setSize(750, 520);
+		setSize(720, 520);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Carrito");
 		construirPanel();
