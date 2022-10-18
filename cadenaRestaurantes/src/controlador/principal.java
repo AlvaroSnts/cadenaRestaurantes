@@ -1,6 +1,7 @@
 package controlador;
 
 import vistas.ventanaCarrito;
+import vistas.ventanaCerrarSesion;
 import vistas.ventanaListaCategorias;
 import vistas.ventanaLogin;
 import vistas.ventanaProductosCategoria;
@@ -15,6 +16,7 @@ public class principal {
 	static ventanaListaCategorias listaCategorias;
 	static ventanaProductosCategoria productosCategoria;
 	static ventanaCarrito carrito;
+	static ventanaCerrarSesion cerrarSesion;
 	
 	public static void main(String[] args) {
 		
@@ -26,18 +28,21 @@ public class principal {
 		listaCategorias=new ventanaListaCategorias();
 		productosCategoria=new ventanaProductosCategoria();
 		carrito=new ventanaCarrito();
+		cerrarSesion=new ventanaCerrarSesion();
 		
 		//Relaciones entre clases
 		login.setCoordinador(coordinador);
 		carrito.setCoordinador(coordinador);
 		listaCategorias.setCoordinador(coordinador);
 		productosCategoria.setCoordinador(coordinador);
+		cerrarSesion.setCoordinador(coordinador);
 		
 		//Relaciones con la clase coordinador
 		coordinador.setVentanaLogin(login);
 		coordinador.setVentanaListaCategorias(listaCategorias);
 		coordinador.setVentanaProductosCategoria(productosCategoria);
 		coordinador.setVentanaCarrito(carrito);
+		coordinador.setVentanaCerrarSesion(cerrarSesion);
 		
 		coordinador.setLogica(logica);
 		logica.setCoordinador(coordinador);
