@@ -33,7 +33,6 @@ public class restaurantesDao {
 		
 		try {
 			Statement estatuto = conexionBD.conectarBD().createStatement();
-			//estatuto.executeUpdate();
 			
 			System.out.println("Datos añadidos correctamente.");
 			estatuto.close();
