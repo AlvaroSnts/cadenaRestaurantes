@@ -24,8 +24,6 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
 	private JList <String> list;
-	private DefaultListModel<String> modelo = new DefaultListModel<String>();
-	private JScrollPane desplazamiento;
 
 	
 	public ventanaCarrito() {
@@ -40,15 +38,16 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		btnConfirmaPedido = new JButton("Confirma pedido");
 		btnConfirmaPedido.setBounds(805, 599, 119, 51);
 		panel.add(btnConfirmaPedido);
-		
+		btnConfirmaPedido.addActionListener(this);
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 599, 119, 51);
 		panel.add(btnVolver);
 		list = new JList<String>();
-		DefaultListModel<String> modelo= new DefaultListModel<String>();
-		modelo.add(0,"Hola");
 		list.setBounds(153, 213, 636, 356);
 		panel.add(list);
+		DefaultListModel<String> modelo = new DefaultListModel<String>();
+		modelo.addElement("Bote ColaCao - Cantidad 1 - Precio Total 23,90€");
+		list.setModel(modelo);
 	    setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -75,7 +74,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmaPedido) {
-			modelo.addElement("Hola");
+			
 		}
 	}
 
