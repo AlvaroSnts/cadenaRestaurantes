@@ -4,31 +4,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import modelo.conexion.conexion;
+
 import modelo.vo.categoriasVo;
 
 public class categoriasDao {
 
 	
-	public ArrayList<categoriasVo> listarCategorias(ArrayList<categoriasVo> categorias) {
+public ArrayList<categoriasVo> mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias){
 		
-		conexion conexion=new conexion();
+		conexion conexionBD= new conexion();
+		
 		boolean existe=false;
 		try {
-			Statement estatuto = conexion.conectarBD().createStatement();
+			Statement estatuto = conexionBD.conectarBD().createStatement();
 			ResultSet res = estatuto.executeQuery("SELECT * FROM categorias");
 			while(res.next()){
 				existe=true;
 				categoriasVo categoria= new categoriasVo();
-				categoria.setNombre(res.getString("categoria"));
-				
+				categoria.setCodCat(res.getInt("codCat"));
+				categoria.setNombre(res.getString("nombre"));
+				categoria.setDescripcion(res.getString("descripcion"));
 				categorias.add(categoria);
 			 }
 			res.close();
-			conexion.desconectarBD();
+			conexionBD.desconectarBD();
 								
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error, no se ha podido conectar");
@@ -38,6 +39,6 @@ public class categoriasDao {
 		if (existe) {
 			return categorias;
 		}
-		else return null;	
+		else return null;				
 	}
 }
