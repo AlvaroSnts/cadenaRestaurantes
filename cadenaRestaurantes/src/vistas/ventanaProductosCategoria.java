@@ -17,21 +17,28 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JPanel panel;
 	private JFrame frame;
 	private JLabel labelTitulo;
-	private JButton botonVolver;
 	private coordinador coordinador;
 	private JButton Carrito;
 
 
 	public ventanaProductosCategoria() {
-		setSize(750, 520);
+		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Categoria");
 		construirPanel();
 		setContentPane(panel);
-		
-		Carrito = new JButton("Carrito");
-		Carrito.setBounds(605, 419, 119, 51);
+		setResizable(false);
+		Carrito = new JButton("Volver");
+		Carrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Carrito.setBounds(10, 599, 119, 51);
 		panel.add(Carrito);
+		
+		JButton Carrito_1 = new JButton("Carrito");
+		Carrito_1.setBounds(805, 599, 119, 51);
+		panel.add(Carrito_1);
 	    setLocationRelativeTo(null);
 		setVisible(false);
 	}
@@ -49,12 +56,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(255, 255, 255));
-		labelTitulo.setBounds(152, 11, 431, 100);
+		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
-		
-		botonVolver = new JButton("Volver");
-		botonVolver.setBounds(10, 447, 78, 23);
-		panel.add(botonVolver);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

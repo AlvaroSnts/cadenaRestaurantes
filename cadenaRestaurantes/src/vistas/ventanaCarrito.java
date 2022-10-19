@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JList;
 
 public class ventanaCarrito extends JFrame implements ActionListener {
 
@@ -20,22 +21,23 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JLabel labelTitulo;
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
+	private JList list;
 
 	
 	public ventanaCarrito() {
-		setSize(720, 520);
+		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Carrito");
 		construirPanel();
 		setContentPane(panel);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(172, 151, 408, 233);
-		panel.add(scrollPane);
-		
+		setResizable(false);
 		btnConfirmaPedido = new JButton("Confirma pedido");
-		btnConfirmaPedido.setBounds(605, 419, 119, 51);
+		btnConfirmaPedido.setBounds(805, 599, 119, 51);
 		panel.add(btnConfirmaPedido);
+		
+		list = new JList();
+		list.setBounds(173, 212, 618, 329);
+		panel.add(list);
 	    setLocationRelativeTo(null);
 		setVisible(false);
 	}
@@ -45,6 +47,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
+		panel.setVisible(false);
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setLayout(null);
 		
@@ -52,8 +55,8 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTitulo.setForeground(new Color(255, 255, 255));
 		labelTitulo.setBackground(new Color(255, 255, 255));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		labelTitulo.setBounds(193, 38, 345, 81);
+		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		labelTitulo.setBounds(196, 52, 574, 157);
 		panel.add(labelTitulo);
 	}
 	
