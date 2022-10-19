@@ -17,16 +17,19 @@ import java.awt.Font;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
 
 public class ventanaListaCategorias extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
 	private JFrame frame;
 	private JLabel labelTitulo;
-	private JButton botonLogout, botonVerCarrito;
+	private JButton botonLogout, botonVerCarrito, botonSeleccionar;
 	private coordinador coordinador;
-	private JList listaCategorias;
+	public static JList listaCategorias;
 	private JScrollBar scrollBar;
+	private String[] categoriass={"Hola", "Que", "Tal"};
 
 	
 	public ventanaListaCategorias() {
@@ -35,6 +38,11 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		setTitle("Lista de categorias");
 		construirPanel();
 		setContentPane(panel);
+		
+		botonSeleccionar = new JButton("Seleccionar");
+		botonSeleccionar.addActionListener(this);
+		botonSeleccionar.setBounds(318, 327, 89, 23);
+		panel.add(botonSeleccionar);
 		
 		
 	}
@@ -60,7 +68,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panel.add(panelCabecera);
 		panelCabecera.setLayout(null);
 		
-		botonLogout = new JButton("Cerrar sesión");
+		botonLogout = new JButton("Cerrar sesion");
 		botonLogout.setBounds(0, 0, 97, 42);
 		botonLogout.addActionListener(this);
 		panelCabecera.add(botonLogout);
@@ -76,23 +84,13 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setForeground(Color.WHITE);
-		
 		listaCategorias = new JList();
-		listaCategorias.setBounds(23, 91, 177, 167);
+		listaCategorias.setBounds(21, 89, 386, 227);
 		panel.add(listaCategorias);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
-	}
-	
-	public void mostrarCategorias(ArrayList<categoriasVo> categorias) {
-		DefaultListModel lista = new DefaultListModel();
-		for (categoriasVo aux:categorias) {
-			lista.addElement(aux.getNombre());
-		}
-		listaCategorias.setModel(lista);
-
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -101,6 +99,10 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		}
 		if (e.getSource()==botonVerCarrito) {
 			coordinador.mostrarVentanaCarrito();
+			this.setVisible(false);
+		}
+		if (e.getSource()==botonSeleccionar) {
+			coordinador.mostrarVentanaProductosCategoria();
 			this.setVisible(false);
 		}
 	}

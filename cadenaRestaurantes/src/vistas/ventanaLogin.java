@@ -6,14 +6,19 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import controlador.coordinador;
 import modelo.conexion.conexion;
+import modelo.dao.categoriasDao;
+import modelo.vo.categoriasVo;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Font;
 
 public class ventanaLogin extends JFrame implements ActionListener {
@@ -24,7 +29,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 	private JPasswordField passwordField;
 	private JButton botonEntrar;
 	private coordinador coordinador;
-
+	public static String[] categoriasString;
 	
 	public ventanaLogin() {
 		setSize(450, 400);
@@ -81,6 +86,21 @@ public class ventanaLogin extends JFrame implements ActionListener {
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
+	public void mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias) {
+		String[] categoriasArray=new String[500];
+		
+		if (categorias!=null) {
+			for (int i=0; i<categorias.size(); i++) {
+				categoriasArray[i]=categorias.get(i).getNombre();
+			}
+			ventanaListaCategorias.listaCategorias.setListData(categoriasArray);
+		}
+		else {
+			categoriasArray[0]="Esta vacío";
+			ventanaListaCategorias.listaCategorias.setListData(categoriasArray);
+		}
+	}
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==botonEntrar) {
@@ -95,6 +115,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 			}
 			else {
 				coordinador.mostrarVentanaListaCategorias();
+				coordinador.getLogica().validarMostrarTodasLasCategorias();
 				this.setVisible(false);
 				textFieldUsuario.setText("");
 				passwordField.setText("");
