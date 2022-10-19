@@ -11,6 +11,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JScrollPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -21,7 +22,10 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JLabel labelTitulo;
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
-	private JList list;
+	private JButton btnVolver;
+	private JList <String> list;
+	private DefaultListModel<String> modelo = new DefaultListModel<String>();
+	private JScrollPane desplazamiento;
 
 	
 	public ventanaCarrito() {
@@ -30,24 +34,29 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		setTitle("Carrito");
 		construirPanel();
 		setContentPane(panel);
-		setResizable(false);
+		
+		
+		
 		btnConfirmaPedido = new JButton("Confirma pedido");
 		btnConfirmaPedido.setBounds(805, 599, 119, 51);
 		panel.add(btnConfirmaPedido);
 		
-		list = new JList();
-		list.setBounds(173, 212, 618, 329);
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 599, 119, 51);
+		panel.add(btnVolver);
+		list = new JList<String>();
+		DefaultListModel<String> modelo= new DefaultListModel<String>();
+		modelo.add(0,"Hola");
+		list.setBounds(153, 213, 636, 356);
 		panel.add(list);
 	    setLocationRelativeTo(null);
-		setVisible(false);
+		setVisible(true);
 	}
-
 	private void construirPanel() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
-		panel.setVisible(false);
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setLayout(null);
 		
@@ -55,8 +64,8 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTitulo.setForeground(new Color(255, 255, 255));
 		labelTitulo.setBackground(new Color(255, 255, 255));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		labelTitulo.setBounds(196, 52, 574, 157);
+		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		labelTitulo.setBounds(289, 84, 345, 81);
 		panel.add(labelTitulo);
 	}
 	
@@ -65,7 +74,9 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource()==btnConfirmaPedido) {
+			modelo.addElement("Hola");
+		}
 	}
 
 }
