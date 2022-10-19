@@ -24,17 +24,12 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
 	private JList <String> list;
-
-	
 	public ventanaCarrito() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Carrito");
 		construirPanel();
 		setContentPane(panel);
-		
-		
-		
 		btnConfirmaPedido = new JButton("Confirma pedido");
 		btnConfirmaPedido.setBounds(805, 599, 119, 51);
 		panel.add(btnConfirmaPedido);
@@ -42,14 +37,14 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 599, 119, 51);
 		panel.add(btnVolver);
+		btnVolver.addActionListener(this);
 		list = new JList<String>();
 		list.setBounds(153, 213, 636, 356);
 		panel.add(list);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
-		modelo.addElement("Bote ColaCao - Cantidad 1 - Precio Total 23,90€");
 		list.setModel(modelo);
 	    setLocationRelativeTo(null);
-		setVisible(true);
+		setVisible(false);
 	}
 	private void construirPanel() {
 		frame = new JFrame();
@@ -67,15 +62,16 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTitulo.setBounds(289, 84, 345, 81);
 		panel.add(labelTitulo);
 	}
-	
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
-	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmaPedido) {
 			
 		}
+		if(e.getSource()==btnVolver) {
+			coordinador.mostrarVentanaProductosCategoria();
+			this.setVisible(false);
+		}
 	}
-
 }
