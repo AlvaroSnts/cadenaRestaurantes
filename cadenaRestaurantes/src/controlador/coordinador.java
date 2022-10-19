@@ -83,7 +83,8 @@ public class coordinador {
 		this.logica=logica;
 	}
 	
-	public void mostrarCategorias(ArrayList<categoriasVo> categoria) {
-		ventanaListaCategorias.mostrarCategorias(categoria);
+	
+	public void mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias) {
+		ventanaLogin.mostrarTodasLasCategorias(categorias);
 	}
 }
