@@ -57,6 +57,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panelCabecera.setLayout(null);
 		
 		botonLogout = new JButton("Cerrar sesion");
+		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
 		botonLogout.addActionListener(this);
 		panelCabecera.add(botonLogout);
@@ -71,7 +72,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelTituloCabecera.setForeground(new Color(255, 255, 255));
 		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelTituloCabecera.setBackground(Color.BLACK);
-		labelTituloCabecera.setBounds(195, 8, 739, 21);
+		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
 		
 		labelTitulo = new JLabel("Lista de categorias:");
@@ -79,7 +80,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panel.add(labelTitulo);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTitulo.setForeground(Color.WHITE);
+		labelTitulo.setForeground(new Color(0, 0, 0));
 		
 		
 		listaCategorias = new JList();
@@ -88,7 +89,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		
 		botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(this);
-		botonSeleccionar.setBounds(835, 627, 89, 23);
+		botonSeleccionar.setBounds(806, 599, 119, 51);
 		panel.add(botonSeleccionar);
 		
 		labelLogo = new JLabel("");

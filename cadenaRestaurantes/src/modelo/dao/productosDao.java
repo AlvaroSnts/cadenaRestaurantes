@@ -1,6 +1,6 @@
 package modelo.dao;
 
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import modelo.conexion.conexion;
-import modelo.vo.categoriasVo;
 import modelo.vo.productosVo;
 import vistas.ventanaListaCategorias;
 
@@ -23,7 +22,6 @@ public class productosDao {
 		try {
 			Statement estatuto = conexionBD.conectarBD().createStatement();
 			ResultSet res = estatuto.executeQuery("SELECT * FROM productos WHERE categoria='"+ventanaListaCategorias.categoriaInt+"';");
-			System.out.println(ventanaListaCategorias.categoriaInt);
 			while(res.next()){
 				existe=true;
 				productosVo producto= new productosVo();
