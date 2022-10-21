@@ -79,7 +79,7 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVolver) {
-			coordinador.mostrarCategorias(null);
+			//coordinador.mostrarCategorias(null);
 			this.setVisible(false);
 		}
 		
