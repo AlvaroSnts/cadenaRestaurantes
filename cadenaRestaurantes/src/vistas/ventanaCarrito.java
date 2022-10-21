@@ -37,10 +37,34 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel.add(btnVolver);
 		btnVolver.addActionListener(this);
 		list = new JList<String>();
-		list.setBounds(153, 213, 636, 356);
+		list.setBounds(154, 226, 636, 356);
 		panel.add(list);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		list.setModel(modelo);
+		
+		JPanel panelCabecera = new JPanel();
+		panelCabecera.setLayout(null);
+		panelCabecera.setForeground(Color.BLACK);
+		panelCabecera.setBackground(Color.BLACK);
+		panelCabecera.setBounds(0, 0, 934, 42);
+		panel.add(panelCabecera);
+		
+		JButton botonLogout = new JButton("Cerrar sesion");
+		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		botonLogout.setBounds(0, 0, 97, 42);
+		panelCabecera.add(botonLogout);
+		
+		JButton botonVerCarrito = new JButton("Carrito");
+		botonVerCarrito.setBounds(97, 0, 97, 42);
+		panelCabecera.add(botonVerCarrito);
+		
+		JLabel labelTituloCabecera = new JLabel("Los Pollos Hermanos");
+		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTituloCabecera.setForeground(Color.WHITE);
+		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelTituloCabecera.setBackground(Color.BLACK);
+		labelTituloCabecera.setBounds(98, 8, 739, 21);
+		panelCabecera.add(labelTituloCabecera);
 	    setLocationRelativeTo(null);
 		setVisible(false);
 	}
@@ -49,15 +73,15 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
-		panel.setBackground(new Color(0, 0, 0));
+		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
 		
 		labelTitulo = new JLabel("Carrito:");
-		labelTitulo.setForeground(new Color(255, 255, 255));
+		labelTitulo.setForeground(new Color(0, 0, 0));
 		labelTitulo.setBackground(new Color(255, 255, 255));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		labelTitulo.setBounds(289, 84, 345, 81);
+		labelTitulo.setBounds(290, 119, 345, 81);
 		panel.add(labelTitulo);
 	}
 	public void setCoordinador(coordinador coordinador) {

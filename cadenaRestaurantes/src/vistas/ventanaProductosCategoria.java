@@ -13,7 +13,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 
-public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionListener {
+public class ventanaProductosCategoria extends JFrame implements ActionListener {
 
 	private JPanel panel;
 	private JFrame frame;
@@ -21,6 +21,10 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 	private coordinador coordinador;
 	private JButton botonVolver,botonCarrito;
 	public static JList listaProductosCategoria;
+	private JPanel panelCabecera;
+	private JButton botonLogout;
+	private JButton botonVerCarrito;
+	private JLabel labelTituloCabecera;
 
 
 	public ventanaProductosCategoria() {
@@ -29,6 +33,30 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		setTitle("Categoria");
 		construirPanel();
 		setContentPane(panel);
+		
+		panelCabecera = new JPanel();
+		panelCabecera.setLayout(null);
+		panelCabecera.setForeground(Color.BLACK);
+		panelCabecera.setBackground(Color.BLACK);
+		panelCabecera.setBounds(0, 0, 934, 42);
+		panel.add(panelCabecera);
+		
+		botonLogout = new JButton("Cerrar sesion");
+		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		botonLogout.setBounds(0, 0, 97, 42);
+		panelCabecera.add(botonLogout);
+		
+		botonVerCarrito = new JButton("Carrito");
+		botonVerCarrito.setBounds(97, 0, 97, 42);
+		panelCabecera.add(botonVerCarrito);
+		
+		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
+		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTituloCabecera.setForeground(Color.WHITE);
+		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelTituloCabecera.setBackground(Color.BLACK);
+		labelTituloCabecera.setBounds(98, 8, 739, 21);
+		panelCabecera.add(labelTituloCabecera);
 		setResizable(false);
 	    setLocationRelativeTo(null);
 	    setVisible(false);
@@ -40,13 +68,13 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
-		panel.setBackground(new Color(0, 0, 0));
+		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
 		
 		labelTitulo = new JLabel("Productos de la categoria:");
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		labelTitulo.setForeground(new Color(255, 255, 255));
+		labelTitulo.setForeground(new Color(0, 0, 0));
 		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
 		
@@ -61,7 +89,7 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		botonCarrito.addActionListener(this); 
 		
 		listaProductosCategoria = new JList();
-		listaProductosCategoria.setBounds(204, 77, 548, 521);
+		listaProductosCategoria.setBounds(204, 199, 548, 399);
 		panel.add(listaProductosCategoria);
 	}
 	
@@ -75,7 +103,7 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVolver) {
-			//coordinador.mostrarCategorias(null);
+			coordinador.mostrarVentanaListaCategorias();
 			this.setVisible(false);
 		}
 		
