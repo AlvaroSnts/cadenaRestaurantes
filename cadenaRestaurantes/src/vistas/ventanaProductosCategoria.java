@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
+import modelo.dao.productosDao;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -39,14 +41,8 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		botonCarrito.setBounds(805, 599, 119, 51);
 		panel.add(botonCarrito);
 		botonCarrito.addActionListener(this); 
-		list = new JList<String>();
-		list.setBounds(153, 206, 636, 356);
-		panel.add(list);
-		DefaultListModel<String> modelo = new DefaultListModel<String>();
-		list.setModel(modelo);
-		modelo.addElement("Bote ColaCao - Cantidad 1 - Precio Total 23,90");
+		mostrarLista();
 	    setLocationRelativeTo(null);
-		setVisible(true);
 	}
 
 	private void construirPanel() {
@@ -67,6 +63,14 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 	}
 	public JList<String> getList() {
 		return list;
+	}
+	public void  mostrarLista() {
+		list = new JList<String>();
+		list.setBounds(153, 206, 636, 356);
+		panel.add(list);
+		DefaultListModel<String> modelo = new DefaultListModel<String>();
+		list.setModel(modelo);
+		modelo.addElement(productosDao.mostrarTodosLosProductosCateCategoria());
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
