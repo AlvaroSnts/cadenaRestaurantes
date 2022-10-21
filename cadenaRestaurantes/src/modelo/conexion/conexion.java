@@ -14,10 +14,6 @@ public class conexion {
 	      try{
 
 	         conn = DriverManager.getConnection(url,login,password);
-
-	         if (conn!=null){
-	            System.out.println("La conexion a "+bd+" se ha realizado con exito.");
-	         }
 	      }
 	      catch(SQLException e){
 	         System.out.println(e);
