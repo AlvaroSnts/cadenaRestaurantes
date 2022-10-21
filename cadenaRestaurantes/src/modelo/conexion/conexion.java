@@ -3,7 +3,7 @@ package modelo.conexion;
 import java.sql.*;
 
 public class conexion {
-	   static String bd = "cadenaRestaurante";
+	   static String bd = "cadenaRestaurantes";
 	   private static String login;
 	   private static String password;
 	   static String url = "jdbc:mysql://localhost/"+bd;
