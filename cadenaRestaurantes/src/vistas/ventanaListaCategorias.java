@@ -2,38 +2,29 @@ package vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import controlador.coordinador;
-import modelo.vo.categoriasVo;
-import javax.swing.JScrollBar;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
+import javax.swing.ImageIcon;
 
 public class ventanaListaCategorias extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
 	private JFrame frame;
-	private JLabel labelTitulo;
+	private JLabel labelTitulo, labelLogo, labelTituloCabecera;
 	private JButton botonLogout, botonVerCarrito, botonSeleccionar;
 	private coordinador coordinador;
 	public static JList listaCategorias;
-	private JScrollBar scrollBar;
-	private String[] categoriass={"Hola", "Que", "Tal"};
 
 	
 	public ventanaListaCategorias() {
-		setSize(450, 400);
+		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Lista de categorias");
 		construirPanel();
@@ -41,8 +32,13 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		
 		botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(this);
-		botonSeleccionar.setBounds(318, 327, 89, 23);
+		botonSeleccionar.setBounds(835, 627, 89, 23);
 		panel.add(botonSeleccionar);
+		
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoGrande.png"));
+		labelLogo.setBounds(0, 162, 205, 298);
+		panel.add(labelLogo);
 		
 		
 	}
@@ -54,17 +50,13 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
 		
-		scrollBar = new JScrollBar();
-		scrollBar.setBounds(417, 0, 17, 361);
-		panel.add(scrollBar);
-		
 		panelCabecera = new JPanel();
-		panelCabecera.setBackground(Color.BLACK);
+		panelCabecera.setBackground(new Color(0, 0, 0));
 		panelCabecera.setForeground(Color.BLACK);
-		panelCabecera.setBounds(0, 0, 424, 42);
+		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
 		panelCabecera.setLayout(null);
 		
@@ -78,14 +70,22 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		botonVerCarrito.addActionListener(this);
 		panelCabecera.add(botonVerCarrito);
 		
+		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
+		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTituloCabecera.setForeground(new Color(255, 255, 255));
+		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelTituloCabecera.setBackground(Color.BLACK);
+		labelTituloCabecera.setBounds(195, 8, 739, 21);
+		panelCabecera.add(labelTituloCabecera);
+		
 		labelTitulo = new JLabel("Lista de categorias:");
-		labelTitulo.setBounds(90, 44, 316, 22);
+		labelTitulo.setBounds(0, 44, 934, 22);
 		panel.add(labelTitulo);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setForeground(Color.WHITE);
 		listaCategorias = new JList();
-		listaCategorias.setBounds(21, 89, 386, 227);
+		listaCategorias.setBounds(204, 77, 548, 521);
 		panel.add(listaCategorias);
 	}
 	
