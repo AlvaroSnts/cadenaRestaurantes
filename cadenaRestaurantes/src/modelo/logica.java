@@ -6,7 +6,9 @@ import javax.swing.JOptionPane;
 
 import controlador.coordinador;
 import modelo.dao.categoriasDao;
+import modelo.dao.productosDao;
 import modelo.vo.categoriasVo;
+import modelo.vo.productosVo;
 
 public class logica {
 	
@@ -27,6 +29,32 @@ public class logica {
 		}else {
 			coordinador.mostrarTodasLasCategorias(categorias);
 		}
-
+	}
+	
+	public void validarMostrarTodosLosProductosCategoria(){
+		productosDao producto=new productosDao();
+		ArrayList<productosVo> productos=new ArrayList<productosVo>();
+		
+		productos=producto.mostrarTodosLosProductosCategoria(productos);
+		
+		if (productos == null) {
+			JOptionPane.showMessageDialog(null,"No hay clientes","Advertencia",JOptionPane.WARNING_MESSAGE);
+		}else {
+			coordinador.mostrarTodosLosProductosCategoria(productos);
+		}
+	}
+	
+	
+	public void validarMostrarCategoriaPorNombre(){
+		categoriasDao categoria=new categoriasDao();
+		ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
+		
+		categorias=categoria.mostrarCategoriaPorNombre(categorias);
+		
+		if (categorias == null) {
+			JOptionPane.showMessageDialog(null,"No hay clientes","Advertencia",JOptionPane.WARNING_MESSAGE);
+		}else {
+			coordinador.mostrarCategoriaPorNombre(categorias);
+		}
 	}
 }
