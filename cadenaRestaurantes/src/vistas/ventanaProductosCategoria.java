@@ -2,14 +2,11 @@ package vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
-import modelo.dao.productosDao;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -23,7 +20,7 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 	private JLabel labelTitulo;
 	private coordinador coordinador;
 	private JButton botonVolver,botonCarrito;
-	private JList <String> list;
+	public static JList listaProductosCategoria;
 
 
 	public ventanaProductosCategoria() {
@@ -33,16 +30,8 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		construirPanel();
 		setContentPane(panel);
 		setResizable(false);
-		botonVolver = new JButton("Volver");
-		botonVolver.setBounds(10, 599, 119, 51);
-		panel.add(botonVolver);
-		botonVolver.addActionListener(this);
-		botonCarrito = new JButton("Carrito");
-		botonCarrito.setBounds(805, 599, 119, 51);
-		panel.add(botonCarrito);
-		botonCarrito.addActionListener(this); 
-		mostrarLista();
 	    setLocationRelativeTo(null);
+	    setVisible(false);
 	}
 
 	private void construirPanel() {
@@ -60,17 +49,20 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		labelTitulo.setForeground(new Color(255, 255, 255));
 		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
-	}
-	public JList<String> getList() {
-		return list;
-	}
-	public void  mostrarLista() {
-		list = new JList<String>();
-		list.setBounds(153, 206, 636, 356);
-		panel.add(list);
-		DefaultListModel<String> modelo = new DefaultListModel<String>();
-		list.setModel(modelo);
-		modelo.addElement(productosDao.mostrarTodosLosProductosCateCategoria());
+		
+		botonVolver = new JButton("Volver");
+		botonVolver.setBounds(10, 599, 119, 51);
+		panel.add(botonVolver);
+		botonVolver.addActionListener(this);
+		
+		botonCarrito = new JButton("Carrito");
+		botonCarrito.setBounds(805, 599, 119, 51);
+		panel.add(botonCarrito);
+		botonCarrito.addActionListener(this); 
+		
+		listaProductosCategoria = new JList();
+		listaProductosCategoria.setBounds(204, 77, 548, 521);
+		panel.add(listaProductosCategoria);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
@@ -89,3 +81,4 @@ public class ventanaProductosCategoria<Jlist> extends JFrame implements ActionLi
 		
 	}
 }
+

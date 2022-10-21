@@ -32,14 +32,12 @@ public class ventanaLogin extends JFrame implements ActionListener {
 
 	private JPanel panel;
 	private JFrame frame;
-	private JLabel labelTitulo, labelUsuario, labelPassword, labelImagen;
+	private JLabel labelTitulo, labelUsuario, labelPassword, labelImagen, labelSusFring;
 	private JTextField textFieldUsuario;
 	private JPasswordField passwordField;
 	private JButton botonEntrar;
 	private coordinador coordinador;
 	public static String[] categoriasString;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
 	
 	public ventanaLogin() {
 		setSize(450, 400);
@@ -47,19 +45,6 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		setTitle("Login");
 		construirPanel();
 		setContentPane(panel);
-		
-		labelTitulo = new JLabel("Los Pollos Hermanos");
-		labelTitulo.setBounds(0, 35, 434, 21);
-		panel.add(labelTitulo);
-		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		labelTitulo.setForeground(new Color(0, 0, 0));
-		labelTitulo.setBackground(Color.BLACK);
-		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\SusFring.png"));
-		lblNewLabel_1.setBounds(223, 130, 383, 361);
-		panel.add(lblNewLabel_1);
 	    setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -100,9 +85,22 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		panel.add(botonEntrar);
 		
 		labelImagen=new JLabel("");
-		labelImagen.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoPequeno.png"));
+		labelImagen.setIcon(new ImageIcon("C:\\Users\\javie\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoPequeno.png"));
 		labelImagen.setBounds(69, 0, 65, 88);
 		panel.add(labelImagen);
+		
+		labelTitulo = new JLabel("Los Pollos Hermanos");
+		labelTitulo.setBounds(0, 35, 434, 21);
+		panel.add(labelTitulo);
+		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelTitulo.setForeground(new Color(0, 0, 0));
+		labelTitulo.setBackground(Color.BLACK);
+		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		labelSusFring = new JLabel("");
+		labelSusFring.setIcon(new ImageIcon("C:\\Users\\javie\\eclipse-workspace\\ABP3\\fotos\\SusFring.png"));
+		labelSusFring.setBounds(223, 130, 383, 361);
+		panel.add(labelSusFring);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

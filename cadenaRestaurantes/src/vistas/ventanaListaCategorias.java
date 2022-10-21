@@ -2,6 +2,8 @@ package vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -13,6 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.ImageIcon;
 
+import modelo.vo.categoriasVo;
+import modelo.vo.productosVo;
+
 public class ventanaListaCategorias extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
@@ -21,7 +26,8 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	private JButton botonLogout, botonVerCarrito, botonSeleccionar;
 	private coordinador coordinador;
 	public static JList listaCategorias;
-
+	public static String categoriaString;
+	public static int categoriaInt;
 	
 	public ventanaListaCategorias() {
 		setSize(950, 700);
@@ -29,18 +35,8 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		setTitle("Lista de categorias");
 		construirPanel();
 		setContentPane(panel);
-		
-		botonSeleccionar = new JButton("Seleccionar");
-		botonSeleccionar.addActionListener(this);
-		botonSeleccionar.setBounds(835, 627, 89, 23);
-		panel.add(botonSeleccionar);
-		
-		labelLogo = new JLabel("");
-		labelLogo.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoGrande.png"));
-		labelLogo.setBounds(0, 162, 205, 298);
-		panel.add(labelLogo);
-		
-		
+		setLocationRelativeTo(null);
+		setVisible(false);
 	}
 
 	
@@ -84,14 +80,48 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setForeground(Color.WHITE);
+		
+		
 		listaCategorias = new JList();
 		listaCategorias.setBounds(204, 77, 548, 521);
 		panel.add(listaCategorias);
+		
+		botonSeleccionar = new JButton("Seleccionar");
+		botonSeleccionar.addActionListener(this);
+		botonSeleccionar.setBounds(835, 627, 89, 23);
+		panel.add(botonSeleccionar);
+		
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon("C:\\Users\\javie\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoGrande.png"));
+		labelLogo.setBounds(0, 162, 205, 298);
+		panel.add(labelLogo);
+		
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
+	
+	public void mostrarCategoriaPorNombre(ArrayList<categoriasVo> categorias) {
+		categoriaInt=categorias.get(0).getCodCat();
+	}
+	
+	public void mostrarTodosLosProductosCategoria(ArrayList<productosVo> productos) {
+		String[] categoriasArray=new String[500];
+		
+		if (productos!=null) {
+			for (int i=0; i<productos.size(); i++) {
+				categoriasArray[i]=productos.get(i).getNombre();
+			}
+			ventanaProductosCategoria.listaProductosCategoria.setListData(categoriasArray);
+		}
+		else {
+			categoriasArray[0]="Esta vacío";
+			ventanaProductosCategoria.listaProductosCategoria.setListData(categoriasArray);
+		}
+	}
+	
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==botonLogout) {
@@ -102,6 +132,9 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			this.setVisible(false);
 		}
 		if (e.getSource()==botonSeleccionar) {
+			categoriaString=listaCategorias.getSelectedValue().toString();
+			coordinador.getLogica().validarMostrarCategoriaPorNombre();
+			coordinador.getLogica().validarMostrarTodosLosProductosCategoria();
 			coordinador.mostrarVentanaProductosCategoria();
 			this.setVisible(false);
 		}
