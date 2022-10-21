@@ -8,6 +8,7 @@ import vistas.ventanaCerrarSesion;
 import java.util.ArrayList;
 import modelo.logica;
 import modelo.vo.categoriasVo;
+import modelo.vo.productosVo;
 
 public class coordinador {
 
@@ -86,5 +87,13 @@ public class coordinador {
 	
 	public void mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias) {
 		ventanaLogin.mostrarTodasLasCategorias(categorias);
+	}
+	
+	public void mostrarTodosLosProductosCategoria(ArrayList<productosVo> productos) {
+		ventanaListaCategorias.mostrarTodosLosProductosCategoria(productos);
+	}
+	
+	public void mostrarCategoriaPorNombre(ArrayList<categoriasVo> categorias) {
+		ventanaListaCategorias.mostrarCategoriaPorNombre(categorias);
 	}
 }
