@@ -25,6 +25,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JButton botonLogout;
 	private JButton botonVerCarrito;
 	private JLabel labelTituloCabecera;
+	public static String[] listaCarrito;
 
 
 	public ventanaProductosCategoria() {
@@ -57,6 +58,22 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
+		listaCarrito = new String [10];
+		JButton btnNewButton = new JButton("+");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaCarrito[0]=listaProductosCategoria.getSelectedValue().toString();
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton.setBounds(811, 189, 45, 42);
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("-");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnNewButton_1.setBounds(811, 254, 45, 42);
+		panel.add(btnNewButton_1);
 		setResizable(false);
 	    setLocationRelativeTo(null);
 	    setVisible(false);
@@ -89,7 +106,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonCarrito.addActionListener(this); 
 		
 		listaProductosCategoria = new JList();
-		listaProductosCategoria.setBounds(204, 199, 548, 399);
+		listaProductosCategoria.setBounds(199, 192, 548, 399);
 		panel.add(listaProductosCategoria);
 	}
 	
@@ -100,6 +117,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==botonCarrito) {
 			coordinador.mostrarVentanaCarrito();
+			ventanaCarrito.setlistaCarrito(listaCarrito);
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVolver) {

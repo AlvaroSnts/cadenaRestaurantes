@@ -21,7 +21,9 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
-	private JList <String> list;
+	private JList <String> carrito;
+	private static DefaultListModel<String> modelo;
+	public static String listaCarrito[] = new String[10];;
 	public ventanaCarrito() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,12 +38,13 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		btnVolver.setBounds(10, 599, 119, 51);
 		panel.add(btnVolver);
 		btnVolver.addActionListener(this);
-		list = new JList<String>();
-		list.setBounds(154, 226, 636, 356);
-		panel.add(list);
+		carrito = new JList<String>();
+		carrito.setBounds(154, 226, 636, 356);
+		panel.add(carrito);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
-		list.setModel(modelo);
-		
+		carrito.setModel(modelo);
+		modelo.add(0, listaCarrito[0]);
+		System.out.println(listaCarrito [0]);
 		JPanel panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
 		panelCabecera.setForeground(Color.BLACK);
@@ -95,5 +98,9 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			coordinador.mostrarVentanaProductosCategoria();
 			this.setVisible(false);
 		}
+	}
+	public static void setlistaCarrito(String [] listaCarritoVentanaProdCat) {
+		
+		listaCarrito=listaCarritoVentanaProdCat;
 	}
 }
