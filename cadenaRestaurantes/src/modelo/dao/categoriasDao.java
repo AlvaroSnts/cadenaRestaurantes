@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,14 +20,13 @@ public ArrayList<categoriasVo> mostrarTodasLasCategorias(ArrayList<categoriasVo>
 		
 		boolean existe=false;
 		try {
-			Statement estatuto = conexionBD.conectarBD().createStatement();
-			ResultSet res = estatuto.executeQuery("SELECT * FROM categorias");
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM categorias");
+			ResultSet res = prepState1.executeQuery();
 			while(res.next()){
 				existe=true;
 				categoriasVo categoria= new categoriasVo();
 				categoria.setCodCat(res.getInt("codCat"));
 				categoria.setNombre(res.getString("nombre"));
-				categoria.setDescripcion(res.getString("descripcion"));
 				categorias.add(categoria);
 			 }
 			res.close();
@@ -49,14 +49,13 @@ public ArrayList<categoriasVo> mostrarCategoriaPorNombre(ArrayList<categoriasVo>
 	
 	boolean existe=false;
 	try {
-		Statement estatuto = conexionBD.conectarBD().createStatement();
-		ResultSet res = estatuto.executeQuery("SELECT * FROM categorias WHERE nombre='"+ventanaListaCategorias.categoriaString+"';");
+		PreparedStatement prepState2 = conexionBD.conectarBD().prepareStatement("SELECT * FROM categorias WHERE nombre='"+ventanaListaCategorias.categoriaString+"';");
+		ResultSet res = prepState2.executeQuery();
 		while(res.next()){
 			existe=true;
 			categoriasVo categoria= new categoriasVo();
 			categoria.setCodCat(res.getInt("codCat"));
 			categoria.setNombre(res.getString("nombre"));
-			categoria.setDescripcion(res.getString("descripcion"));
 			categorias.add(categoria);
 		 }
 		res.close();

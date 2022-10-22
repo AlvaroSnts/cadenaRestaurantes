@@ -1,6 +1,7 @@
 package modelo.dao;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,8 +21,8 @@ public class productosDao {
 		
 		boolean existe=false;
 		try {
-			Statement estatuto = conexionBD.conectarBD().createStatement();
-			ResultSet res = estatuto.executeQuery("SELECT * FROM productos WHERE categoria='"+ventanaListaCategorias.categoriaInt+"';");
+			PreparedStatement prepaState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM productos WHERE categoria='"+ventanaListaCategorias.categoriaInt+"';");
+			ResultSet res = prepaState1.executeQuery();
 			while(res.next()){
 				existe=true;
 				productosVo producto= new productosVo();

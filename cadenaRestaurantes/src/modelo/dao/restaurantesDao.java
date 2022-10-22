@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -14,12 +15,10 @@ public class restaurantesDao {
 		conexion conexionBD= new conexion();
 		
 		try {
-			Statement estatuto = conexionBD.conectarBD().createStatement();
-			estatuto.executeUpdate("INSERT INTO categorias VALUES ('"+categoria.getCodCat()+"'"
+			PreparedStatement prepaState1 = conexionBD.conectarBD().prepareStatement("INSERT INTO categorias VALUES ('"+categoria.getCodCat()+"'"
 					+ ", '"+categoria.getNombre()+"', '"+categoria.getDescripcion()+"');");
-			
-			System.out.println("Datos añadidos correctamente.");
-			estatuto.close();
+			System.out.println("Datos anadidos correctamente.");
+			prepaState1.close();
 			conexionBD.desconectarBD();
 			
 		}catch(SQLException e) {
