@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class ventanaCerrarSesion extends JFrame implements ActionListener {
 
@@ -23,7 +24,7 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 	public ventanaCerrarSesion() {
 		setSize(450, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Cerrar sesión");
+		setTitle("Cerrar sesion");
 		construirPanel();
 		setContentPane(panel);
 	    setLocationRelativeTo(null);
@@ -37,9 +38,10 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(26, 146, 185));
 	    panel.setLayout(null);
 	    
-	    labelTexto = new JLabel("¿Esta seguro de que desea cerrar sesion?");
+	    labelTexto = new JLabel("�Esta seguro de que desea cerrar sesion?");
 	    labelTexto.setHorizontalAlignment(SwingConstants.CENTER);
 	    labelTexto.setBounds(0, 89, 434, 14);
 	    panel.add(labelTexto);

@@ -21,6 +21,8 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
+	private JButton botonVerCarrito;
+	private JButton botonLogout;
 	private JList <String> carrito;
 	private static DefaultListModel<String> modelo;
 	public static String listaCarrito[] = new String[10];;
@@ -52,15 +54,15 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
 		
-		JButton botonLogout = new JButton("Cerrar sesion");
+		botonLogout = new JButton("Cerrar sesion");
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
 		panelCabecera.add(botonLogout);
-		
-		JButton botonVerCarrito = new JButton("Carrito");
+		botonLogout.addActionListener(this);
+		botonVerCarrito = new JButton("Carrito");
 		botonVerCarrito.setBounds(97, 0, 97, 42);
 		panelCabecera.add(botonVerCarrito);
-		
+		botonVerCarrito.addActionListener(this);
 		JLabel labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(Color.WHITE);
@@ -96,6 +98,14 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==btnVolver) {
 			coordinador.mostrarVentanaProductosCategoria();
+			this.setVisible(false);
+		}
+		if(e.getSource()==botonVerCarrito) {
+			coordinador.mostrarVentanaCarrito();
+			this.setVisible(false);
+		}
+		if(e.getSource()==botonLogout) {
+			coordinador.mostrarVentanaCerrarSesion();
 			this.setVisible(false);
 		}
 	}

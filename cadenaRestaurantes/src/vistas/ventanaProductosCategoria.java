@@ -31,7 +31,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Categoria");
+		setTitle("Productos de la categoria");
 		construirPanel();
 		setContentPane(panel);
 		
@@ -46,11 +46,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
 		panelCabecera.add(botonLogout);
-		
+		botonLogout.addActionListener(this);
 		botonVerCarrito = new JButton("Carrito");
 		botonVerCarrito.setBounds(97, 0, 97, 42);
+		botonCarrito.addActionListener(this);
 		panelCabecera.add(botonVerCarrito);
-		
+		botonVerCarrito.addActionListener(this);
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(Color.WHITE);
@@ -122,6 +123,14 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		}
 		if(e.getSource()==botonVolver) {
 			coordinador.mostrarVentanaListaCategorias();
+			this.setVisible(false);
+		}
+		if(e.getSource()==botonVerCarrito) {
+			coordinador.mostrarVentanaCarrito();
+			this.setVisible(false);
+		}
+		if(e.getSource()==botonLogout) {
+			coordinador.mostrarVentanaCerrarSesion();
 			this.setVisible(false);
 		}
 		
