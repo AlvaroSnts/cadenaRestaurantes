@@ -47,6 +47,8 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		setContentPane(panel);
 	    setLocationRelativeTo(null);
 		setVisible(true);
+		setResizable(false);
+
 	}
 
 	

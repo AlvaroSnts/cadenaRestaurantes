@@ -29,6 +29,7 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 		setContentPane(panel);
 	    setLocationRelativeTo(null);
 		setVisible(false);
+		setResizable(false);
 	}
 
 	
