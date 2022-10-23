@@ -142,4 +142,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			this.setVisible(false);
 		}
 	}
+	public static int getIndexCat() {
+		return listaCategorias.getSelectedIndex();
+	}
 }
