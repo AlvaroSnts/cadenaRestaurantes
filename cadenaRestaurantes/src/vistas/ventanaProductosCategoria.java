@@ -62,7 +62,18 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		JButton botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaCarrito.add(listaProductosCategoria.getSelectedValue().toString());
+				int indexProducto=listaCarrito.indexOf(listaProductosCategoria.getSelectedValue().toString());
+				if(listaCarrito.indexOf(listaProductosCategoria.getSelectedValue().toString())!=-1) {
+					//Conectar con la base de datos y mirar cuantos productos hay de esa categoria, crear un array de ese tamaño
+					//e introducir la cantidad de productos que se quieren añadir al carrito
+					String producto = listaProductosCategoria.getSelectedValue().toString() + " 2";
+					listaCarrito.remove(indexProducto);
+					listaCarrito.add(producto);
+				}
+				else {
+					listaCarrito.add(listaProductosCategoria.getSelectedValue().toString());
+				}
+				
 			}
 		});
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
