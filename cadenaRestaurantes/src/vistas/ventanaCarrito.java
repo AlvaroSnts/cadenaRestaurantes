@@ -3,6 +3,10 @@ package vistas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,7 +31,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JButton botonLogout;
 	private JList <String> carrito;
 	private static DefaultListModel<String> modelo;
-	public static ArrayList<String> listaCarrito = new ArrayList<String>();
+	public static Map<String, String> arrayAsociativo = new HashMap<>();
 	public ventanaCarrito() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -47,8 +51,10 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel.add(carrito);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		carrito.setModel(modelo);
-		for(int i=0;i<listaCarrito.size();i++) {
-			modelo.add(i, listaCarrito.get(i));
+		Set<Map.Entry<String ,String> > set = arrayAsociativo.entrySet();
+		List<Map.Entry<String ,String>> list=new ArrayList<>(set);
+		for(int i=0;i<arrayAsociativo.size();i++) {
+			modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
 		}
 		JPanel panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
@@ -113,7 +119,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			this.setVisible(false);
 		}
 	}
-	public static void setlistaCarrito(ArrayList<String> listaCarritoVentanaProdCat) {
-		listaCarrito=listaCarritoVentanaProdCat;
+	public static void setlistaCarrito(Map<String, String> arrayAsoc) {
+		arrayAsociativo=arrayAsoc;
 	}
 }

@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
 
@@ -26,7 +28,9 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JButton botonLogout;
 	private JButton botonVerCarrito;
 	private JLabel labelTituloCabecera;
-	public static ArrayList<String> listaCarrito = new ArrayList<>();
+	public static Map<String, String> arrayAsociativo = new HashMap<String, String>();
+	private int [][] cantidadProducto = new int [5][5];
+
 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
@@ -62,18 +66,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		JButton botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int indexProducto=listaCarrito.indexOf(listaProductosCategoria.getSelectedValue().toString());
-				if(listaCarrito.indexOf(listaProductosCategoria.getSelectedValue().toString())!=-1) {
-					//Conectar con la base de datos y mirar cuantos productos hay de esa categoria, crear un array de ese tamaño
-					//e introducir la cantidad de productos que se quieren añadir al carrito
-					String producto = listaProductosCategoria.getSelectedValue().toString() + " 2";
-					listaCarrito.remove(indexProducto);
-					listaCarrito.add(producto);
-				}
-				else {
-					listaCarrito.add(listaProductosCategoria.getSelectedValue().toString());
-				}
-				
+				cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]++;
+				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),""+cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()] );
 			}
 		});
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -86,13 +80,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(int i=0;i<listaCarrito.size();i++) {
-					if(listaCarrito.indexOf(listaProductosCategoria.getSelectedValue().toString())!=-1) {
-						listaCarrito.remove(listaProductosCategoria.getSelectedValue().toString());
-					}
-				}
-				
-				
 				
 			}
 		});
@@ -141,7 +128,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		if(e.getSource()==botonCarrito) {
 			//coordinador.mostrarVentanaCarrito();
 			ventanaCarrito V = new ventanaCarrito();
-			ventanaCarrito.setlistaCarrito(listaCarrito);
+			ventanaCarrito.setlistaCarrito(arrayAsociativo);
 			V.setVisible(true);
 			this.setVisible(false);
 		}
