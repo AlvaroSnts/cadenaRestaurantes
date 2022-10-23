@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
 
@@ -25,14 +26,9 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JButton botonLogout;
 	private JButton botonVerCarrito;
 	private JLabel labelTituloCabecera;
-	public static String[] listaCarrito = new String [10];
-	private int numeroProductos=0;
-
+	public static ArrayList<String> listaCarrito = new ArrayList<>();
 
 	public ventanaProductosCategoria() {
-		for(int i=0;i<listaCarrito.length;i++) {
-			listaCarrito[i]="";
-		}
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Productos de la categoria");
@@ -66,12 +62,10 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		JButton botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaCarrito[numeroProductos]=listaProductosCategoria.getSelectedValue().toString();
-				numeroProductos++;
-				
+				listaCarrito.add(listaProductosCategoria.getSelectedValue().toString());
 			}
 		});
-		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		botonAnadirProducto.setBounds(811, 189, 45, 42);
 		panel.add(botonAnadirProducto);
 		
@@ -81,15 +75,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(numeroProductos>0) {
-					for(int i=0;i<listaCarrito.length;i++) {
-						if(listaCarrito[i].equals(listaProductosCategoria.getSelectedValue().toString())) {
-							listaCarrito[i]="";
-							numeroProductos--;
-						}
+				for(int i=0;i<listaCarrito.size();i++) {
+					if(listaCarrito.indexOf(listaProductosCategoria.getSelectedValue().toString())!=-1) {
+						listaCarrito.remove(listaProductosCategoria.getSelectedValue().toString());
 					}
-					
 				}
+				
 				
 				
 			}

@@ -2,6 +2,8 @@ package vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controlador.coordinador;
@@ -25,7 +27,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JButton botonLogout;
 	private JList <String> carrito;
 	private static DefaultListModel<String> modelo;
-	public static String listaCarrito[] = new String[10];;
+	public static ArrayList<String> listaCarrito = new ArrayList<String>();
 	public ventanaCarrito() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,8 +47,8 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel.add(carrito);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		carrito.setModel(modelo);
-		for(int i=0;i<listaCarrito.length;i++) {
-			modelo.add(i,listaCarrito[i]);
+		for(int i=0;i<listaCarrito.size();i++) {
+			modelo.add(i, listaCarrito.get(i));
 		}
 		JPanel panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
@@ -111,7 +113,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			this.setVisible(false);
 		}
 	}
-	public static void setlistaCarrito(String [] listaCarritoVentanaProdCat) {
+	public static void setlistaCarrito(ArrayList<String> listaCarritoVentanaProdCat) {
 		listaCarrito=listaCarritoVentanaProdCat;
 	}
 }
