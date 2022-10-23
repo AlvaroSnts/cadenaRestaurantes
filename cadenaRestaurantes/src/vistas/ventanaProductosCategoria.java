@@ -25,10 +25,14 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JButton botonLogout;
 	private JButton botonVerCarrito;
 	private JLabel labelTituloCabecera;
-	public static String[] listaCarrito;
+	public static String[] listaCarrito = new String [10];
+	private int numeroProductos=0;
 
 
 	public ventanaProductosCategoria() {
+		for(int i=0;i<listaCarrito.length;i++) {
+			listaCarrito[i]="";
+		}
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Productos de la categoria");
@@ -59,25 +63,41 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
-		listaCarrito = new String [10];
-		JButton btnNewButton = new JButton("+");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton botonAnadirProducto = new JButton("+");
+		botonAnadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaCarrito[0]=listaProductosCategoria.getSelectedValue().toString();
+				listaCarrito[numeroProductos]=listaProductosCategoria.getSelectedValue().toString();
+				numeroProductos++;
 				
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(811, 189, 45, 42);
-		panel.add(btnNewButton);
+		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		botonAnadirProducto.setBounds(811, 189, 45, 42);
+		panel.add(botonAnadirProducto);
 		
-		JButton btnNewButton_1 = new JButton("-");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnNewButton_1.setBounds(811, 254, 45, 42);
-		panel.add(btnNewButton_1);
+		JButton botonQuitarProducto = new JButton("-");
+		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		botonQuitarProducto.setBounds(811, 254, 45, 42);
+		panel.add(botonQuitarProducto);
+		botonQuitarProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(numeroProductos>0) {
+					for(int i=0;i<listaCarrito.length;i++) {
+						if(listaCarrito[i].equals(listaProductosCategoria.getSelectedValue().toString())) {
+							listaCarrito[i]="";
+							numeroProductos--;
+						}
+					}
+					
+				}
+				
+				
+			}
+		});
 		setResizable(false);
 	    setLocationRelativeTo(null);
 	    setVisible(false);
+	    
 	}
 
 	private void construirPanel() {
@@ -117,8 +137,10 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==botonCarrito) {
-			coordinador.mostrarVentanaCarrito();
+			//coordinador.mostrarVentanaCarrito();
+			ventanaCarrito V = new ventanaCarrito();
 			ventanaCarrito.setlistaCarrito(listaCarrito);
+			V.setVisible(true);
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVolver) {

@@ -45,8 +45,9 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel.add(carrito);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		carrito.setModel(modelo);
-		modelo.add(0, listaCarrito[0]);
-		System.out.println(listaCarrito [0]);
+		for(int i=0;i<listaCarrito.length;i++) {
+			modelo.add(i,listaCarrito[i]);
+		}
 		JPanel panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
 		panelCabecera.setForeground(Color.BLACK);
@@ -72,6 +73,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panelCabecera.add(labelTituloCabecera);
 	    setLocationRelativeTo(null);
 		setVisible(false);
+		setResizable(false);
 	}
 	private void construirPanel() {
 		frame = new JFrame();
@@ -110,7 +112,6 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 	}
 	public static void setlistaCarrito(String [] listaCarritoVentanaProdCat) {
-		
 		listaCarrito=listaCarritoVentanaProdCat;
 	}
 }
