@@ -31,7 +31,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JButton botonLogout;
 	public static JList <String> carrito;
 	private static DefaultListModel<String> modelo;
-	public static Map<String, String> arrayAsociativo = new HashMap<>();
+	public static Map<String, Integer> arrayAsociativo = new HashMap<>();
 	public ventanaCarrito() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -119,14 +119,14 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			this.setVisible(false);
 		}
 	}
-	public static void setlistaCarrito(Map<String, String> arrayAsoc) {
+	public static void setlistaCarrito(Map<String, Integer> arrayAsoc) {
 		arrayAsociativo=arrayAsoc;
 	}
 	public static void mostrarArrayAsociativo() {
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		carrito.setModel(modelo);
-		Set<Map.Entry<String ,String> > set = arrayAsociativo.entrySet();
-		List<Map.Entry<String ,String>> list=new ArrayList<>(set);
+		Set<Map.Entry<String ,Integer> > set = arrayAsociativo.entrySet();
+		List<Map.Entry<String ,Integer>> list=new ArrayList<>(set);
 		for(int i=0;i<arrayAsociativo.size();i++) {
 			modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
 		}

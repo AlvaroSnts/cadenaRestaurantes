@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
+import modelo.dao.categoriasDao;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -26,8 +27,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
 	private JLabel labelTituloCabecera;
-	public static Map<String, String> arrayAsociativo = new HashMap<String, String>();
-	private int [][] cantidadProducto = new int [200][200];
+	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
+	private int [][] cantidadProducto ;
 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
@@ -111,7 +112,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
-	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==botonCarrito) {
 			ventanaCarrito.setlistaCarrito(arrayAsociativo);
@@ -134,16 +134,21 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonAnadirProducto) {
-			cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]++;
-			arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),""+cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()] );
+			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
+				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
+			}
+			if(!arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
+				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
+			}
 		}
 		if(e.getSource()==botonQuitarProducto) {
-			if(cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]!=0) {
-				cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]--;
-				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),""+cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()] );
-			}
-			if(cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]==0) {
-				arrayAsociativo.remove(listaProductosCategoria.getSelectedValue().toString());
+			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
+				if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())>0) {
+					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())-1);
+					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())==0) {
+						arrayAsociativo.remove(listaProductosCategoria.getSelectedValue().toString());
+					}
+				}
 			}
 		}
 	}

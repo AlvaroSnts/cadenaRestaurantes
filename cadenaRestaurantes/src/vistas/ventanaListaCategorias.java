@@ -116,7 +116,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	public void mostrarTodosLosProductosCategoria() {
 		ArrayList<productosVo> productos=new ArrayList<productosVo>();
 		productos=productosDao.mostrarTodosLosProductosCategoria(productos);
-		DefaultListModel modelo = new DefaultListModel();
+		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		
 		if (productos!=null) {
 			for (int i=0; i<productos.size(); i++) {
