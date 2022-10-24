@@ -15,7 +15,7 @@ import vistas.ventanaListaCategorias;
 
 public class productosDao {
 
-	public ArrayList<productosVo> mostrarTodosLosProductosCategoria(ArrayList<productosVo> productos){
+	public static ArrayList<productosVo> mostrarTodosLosProductosCategoria(ArrayList<productosVo> productos){
 		
 		conexion conexionBD= new conexion();
 		

@@ -5,10 +5,6 @@ import vistas.ventanaCarrito;
 import vistas.ventanaListaCategorias;
 import vistas.ventanaProductosCategoria;
 import vistas.ventanaCerrarSesion;
-import java.util.ArrayList;
-import modelo.logica;
-import modelo.vo.categoriasVo;
-import modelo.vo.productosVo;
 
 public class coordinador {
 
@@ -17,8 +13,6 @@ public class coordinador {
 	private ventanaListaCategorias ventanaListaCategorias;
 	private ventanaProductosCategoria ventanaProductosCategoria;
 	private ventanaCerrarSesion ventanaCerrarSesion;
-	
-	private logica logica;
 	
 	//Ventana de login
 	public void mostrarVentanaLogin() {
@@ -74,26 +68,5 @@ public class coordinador {
 	}
 	public void setVentanaCerrarSesion(ventanaCerrarSesion ventanaCerrarSesion) {
 		this.ventanaCerrarSesion=ventanaCerrarSesion;
-	}
-	
-	//Parte logica
-	public logica getLogica() {
-		return logica;
-	}
-	public void setLogica(logica logica) {
-		this.logica=logica;
-	}
-	
-	
-	public void mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias) {
-		ventanaLogin.mostrarTodasLasCategorias(categorias);
-	}
-	
-	public void mostrarTodosLosProductosCategoria(ArrayList<productosVo> productos) {
-		ventanaListaCategorias.mostrarTodosLosProductosCategoria(productos);
-	}
-	
-	public void mostrarCategoriaPorNombre(ArrayList<categoriasVo> categorias) {
-		ventanaListaCategorias.mostrarCategoriaPorNombre(categorias);
 	}
 }

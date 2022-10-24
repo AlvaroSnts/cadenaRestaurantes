@@ -14,7 +14,7 @@ import vistas.ventanaListaCategorias;
 public class categoriasDao {
 
 	
-public ArrayList<categoriasVo> mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias){
+public static ArrayList<categoriasVo> mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias){
 		
 		conexion conexionBD= new conexion();
 		
@@ -43,7 +43,7 @@ public ArrayList<categoriasVo> mostrarTodasLasCategorias(ArrayList<categoriasVo>
 		else return null;				
 	}
 
-public ArrayList<categoriasVo> mostrarCategoriaPorNombre(ArrayList<categoriasVo> categorias){
+public static ArrayList<categoriasVo> mostrarCategoriaPorNombre(ArrayList<categoriasVo> categorias){
 	
 	conexion conexionBD= new conexion();
 	

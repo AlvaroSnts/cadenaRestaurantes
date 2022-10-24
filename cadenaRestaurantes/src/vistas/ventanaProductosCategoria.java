@@ -22,15 +22,14 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JFrame frame;
 	private JLabel labelTitulo;
 	private coordinador coordinador;
-	private JButton botonVolver,botonCarrito;
+	private JButton botonVolver,botonCarrito, botonQuitarProducto;
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
-	private JButton botonLogout;
+	private JButton botonLogout, botonAnadirProducto;
 	private JButton botonVerCarrito;
 	private JLabel labelTituloCabecera;
 	public static Map<String, String> arrayAsociativo = new HashMap<String, String>();
 	private int [][] cantidadProducto = new int [5][5];
-
 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
@@ -38,6 +37,41 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		setTitle("Productos de la categoria");
 		construirPanel();
 		setContentPane(panel);
+		setResizable(false);
+	    setLocationRelativeTo(null);
+	    setVisible(false);
+	    
+	}
+
+	private void construirPanel() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(26, 146, 185));
+		panel.setLayout(null);
+		
+		labelTitulo = new JLabel("Productos de la categoria:");
+		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		labelTitulo.setForeground(new Color(0, 0, 0));
+		labelTitulo.setBounds(252, 100, 431, 100);
+		panel.add(labelTitulo);
+		
+		botonVolver = new JButton("Volver");
+		botonVolver.setBounds(10, 599, 119, 51);
+		panel.add(botonVolver);
+		botonVolver.addActionListener(this);
+		
+		botonCarrito = new JButton("Carrito");
+		botonCarrito.setBounds(805, 599, 119, 51);
+		panel.add(botonCarrito);
+		botonCarrito.addActionListener(this); 
+		
+		listaProductosCategoria = new JList();
+		listaProductosCategoria.setBounds(199, 192, 548, 399);
+		panel.add(listaProductosCategoria);
 		
 		panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
@@ -83,41 +117,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 				
 			}
 		});
-		setResizable(false);
-	    setLocationRelativeTo(null);
-	    setVisible(false);
-	    
-	}
-
-	private void construirPanel() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		panel = new JPanel();
-		panel.setBackground(new Color(26, 146, 185));
-		panel.setLayout(null);
-		
-		labelTitulo = new JLabel("Productos de la categoria:");
-		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		labelTitulo.setForeground(new Color(0, 0, 0));
-		labelTitulo.setBounds(252, 100, 431, 100);
-		panel.add(labelTitulo);
-		
-		botonVolver = new JButton("Volver");
-		botonVolver.setBounds(10, 599, 119, 51);
-		panel.add(botonVolver);
-		botonVolver.addActionListener(this);
-		
-		botonCarrito = new JButton("Carrito");
-		botonCarrito.setBounds(805, 599, 119, 51);
-		panel.add(botonCarrito);
-		botonCarrito.addActionListener(this); 
-		
-		listaProductosCategoria = new JList();
-		listaProductosCategoria.setBounds(199, 192, 548, 399);
-		panel.add(listaProductosCategoria);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
@@ -126,10 +125,9 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==botonCarrito) {
-			//coordinador.mostrarVentanaCarrito();
-			ventanaCarrito V = new ventanaCarrito();
 			ventanaCarrito.setlistaCarrito(arrayAsociativo);
-			V.setVisible(true);
+			ventanaCarrito.mostrarArrayAsociativo();
+			coordinador.mostrarVentanaCarrito();
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVolver) {
@@ -137,6 +135,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVerCarrito) {
+			ventanaCarrito.setlistaCarrito(arrayAsociativo);
+			ventanaCarrito.mostrarArrayAsociativo();
 			coordinador.mostrarVentanaCarrito();
 			this.setVisible(false);
 		}
@@ -144,7 +144,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			coordinador.mostrarVentanaCerrarSesion();
 			this.setVisible(false);
 		}
-		
+		if(e.getSource()==botonAnadirProducto) {
+			
+		}
+		if(e.getSource()==botonQuitarProducto) {
+			
+		}
 	}
 }
 

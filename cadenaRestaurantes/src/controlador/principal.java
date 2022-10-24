@@ -5,11 +5,9 @@ import vistas.ventanaCerrarSesion;
 import vistas.ventanaListaCategorias;
 import vistas.ventanaLogin;
 import vistas.ventanaProductosCategoria;
-import modelo.logica;
 
 public class principal {
 	
-	static logica logica;
 	static coordinador coordinador;
 
 	static ventanaLogin login;
@@ -22,7 +20,6 @@ public class principal {
 		
 		//Se instancian las clases
 		coordinador=new coordinador();
-		logica=new logica();
 		
 		login=new ventanaLogin();
 		listaCategorias=new ventanaListaCategorias();
@@ -42,11 +39,7 @@ public class principal {
 		coordinador.setVentanaListaCategorias(listaCategorias);
 		coordinador.setVentanaProductosCategoria(productosCategoria);
 		coordinador.setVentanaCarrito(carrito);
-		coordinador.setVentanaCerrarSesion(cerrarSesion);
-		
-		coordinador.setLogica(logica);
-		logica.setCoordinador(coordinador);
-		
+		coordinador.setVentanaCerrarSesion(cerrarSesion);	
 	}
 
 }

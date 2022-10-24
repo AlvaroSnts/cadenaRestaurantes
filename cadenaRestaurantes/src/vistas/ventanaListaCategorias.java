@@ -13,8 +13,11 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 
+import modelo.dao.categoriasDao;
+import modelo.dao.productosDao;
 import modelo.vo.categoriasVo;
 import modelo.vo.productosVo;
 
@@ -38,7 +41,6 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setVisible(false);
 		setResizable(false);
-
 	}
 
 	
@@ -95,7 +97,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panel.add(botonSeleccionar);
 		
 		labelLogo = new JLabel("");
-		labelLogo.setIcon(new ImageIcon("C:\\Users\\javie\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoGrande.png"));
+		labelLogo.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoGrande.png"));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
 		
@@ -105,22 +107,26 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		this.coordinador=coordinador;
 	}
 	
-	public void mostrarCategoriaPorNombre(ArrayList<categoriasVo> categorias) {
+	public void mostrarCategoriaPorNombre() {
+		ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
+		categorias=categoriasDao.mostrarCategoriaPorNombre(categorias);
 		categoriaInt=categorias.get(0).getCodCat();
 	}
 	
-	public void mostrarTodosLosProductosCategoria(ArrayList<productosVo> productos) {
-		String[] categoriasArray=new String[500];
+	public void mostrarTodosLosProductosCategoria() {
+		ArrayList<productosVo> productos=new ArrayList<productosVo>();
+		productos=productosDao.mostrarTodosLosProductosCategoria(productos);
+		DefaultListModel modelo = new DefaultListModel();
 		
 		if (productos!=null) {
 			for (int i=0; i<productos.size(); i++) {
-				categoriasArray[i]=productos.get(i).getNombre();
+				modelo.addElement(productos.get(i).getNombre());
 			}
-			ventanaProductosCategoria.listaProductosCategoria.setListData(categoriasArray);
+			ventanaProductosCategoria.listaProductosCategoria.setModel(modelo);
 		}
 		else {
-			categoriasArray[0]="Esta vacío";
-			ventanaProductosCategoria.listaProductosCategoria.setListData(categoriasArray);
+			modelo.addElement("Está vacío");
+			ventanaProductosCategoria.listaProductosCategoria.setModel(modelo);
 		}
 	}
 	
@@ -131,17 +137,19 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			coordinador.mostrarVentanaCerrarSesion();
 		}
 		if (e.getSource()==botonVerCarrito) {
+			ventanaCarrito.mostrarArrayAsociativo();
 			coordinador.mostrarVentanaCarrito();
 			this.setVisible(false);
 		}
 		if (e.getSource()==botonSeleccionar) {
 			categoriaString=listaCategorias.getSelectedValue().toString();
-			coordinador.getLogica().validarMostrarCategoriaPorNombre();
-			coordinador.getLogica().validarMostrarTodosLosProductosCategoria();
+			mostrarCategoriaPorNombre();
+			mostrarTodosLosProductosCategoria();
 			coordinador.mostrarVentanaProductosCategoria();
 			this.setVisible(false);
 		}
 	}
+	
 	public static int getIndexCat() {
 		return listaCategorias.getSelectedIndex();
 	}

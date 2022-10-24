@@ -2,7 +2,6 @@ package vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.awt.Font;
-import java.awt.Image;
+
 
 public class ventanaLogin extends JFrame implements ActionListener {
 
@@ -87,7 +86,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		panel.add(botonEntrar);
 		
 		labelImagen=new JLabel("");
-		labelImagen.setIcon(new ImageIcon("C:\\Users\\javie\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoPequeno.png"));
+		labelImagen.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoPequeno.png"));
 		labelImagen.setBounds(69, 0, 65, 88);
 		panel.add(labelImagen);
 		
@@ -100,7 +99,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		labelSusFring = new JLabel("");
-		labelSusFring.setIcon(new ImageIcon("C:\\Users\\javie\\eclipse-workspace\\ABP3\\fotos\\SusFring.png"));
+		labelSusFring.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\SusFring.png"));
 		labelSusFring.setBounds(223, 130, 383, 361);
 		panel.add(labelSusFring);
 	}
@@ -108,18 +107,20 @@ public class ventanaLogin extends JFrame implements ActionListener {
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
-	public void mostrarTodasLasCategorias(ArrayList<categoriasVo> categorias) {
-		String[] categoriasArray=new String[500];
-		
+	public void mostrarTodasLasCategorias() {
+		ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
+		DefaultListModel modelo = new DefaultListModel();
+		categorias=categoriasDao.mostrarTodasLasCategorias(categorias);
+;		
 		if (categorias!=null) {
 			for (int i=0; i<categorias.size(); i++) {
-				categoriasArray[i]=categorias.get(i).getNombre();
+				modelo.addElement(categorias.get(i).getNombre());
 			}
-			ventanaListaCategorias.listaCategorias.setListData(categoriasArray);
+			ventanaListaCategorias.listaCategorias.setModel(modelo);
 		}
 		else {
-			categoriasArray[0]="Esta vacío";
-			ventanaListaCategorias.listaCategorias.setListData(categoriasArray);
+			modelo.addElement("Esta vacío");
+			ventanaListaCategorias.listaCategorias.setModel(modelo);
 		}
 	}
 	
@@ -156,8 +157,8 @@ public class ventanaLogin extends JFrame implements ActionListener {
 						passwordField.setText("");
 					}
 					else {
+						mostrarTodasLasCategorias();
 						coordinador.mostrarVentanaListaCategorias();
-						coordinador.getLogica().validarMostrarTodasLasCategorias();
 						this.setVisible(false);
 						textFieldUsuario.setText("");
 						passwordField.setText("");

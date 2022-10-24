@@ -21,15 +21,15 @@ import javax.swing.JList;
 
 public class ventanaCarrito extends JFrame implements ActionListener {
 
-	private JPanel panel;
+	private JPanel panel, panelCabecera;
 	private JFrame frame;
-	private JLabel labelTitulo;
+	private JLabel labelTitulo, labelTituloCabecera;
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
 	private JButton botonVerCarrito;
 	private JButton botonLogout;
-	private JList <String> carrito;
+	public static JList <String> carrito;
 	private static DefaultListModel<String> modelo;
 	public static Map<String, String> arrayAsociativo = new HashMap<>();
 	public ventanaCarrito() {
@@ -38,47 +38,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		setTitle("Carrito");
 		construirPanel();
 		setContentPane(panel);
-		btnConfirmaPedido = new JButton("Confirma pedido");
-		btnConfirmaPedido.setBounds(805, 599, 119, 51);
-		panel.add(btnConfirmaPedido);
-		btnConfirmaPedido.addActionListener(this);
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(10, 599, 119, 51);
-		panel.add(btnVolver);
-		btnVolver.addActionListener(this);
-		carrito = new JList<String>();
-		carrito.setBounds(154, 226, 636, 356);
-		panel.add(carrito);
-		DefaultListModel<String> modelo = new DefaultListModel<String>();
-		carrito.setModel(modelo);
-		Set<Map.Entry<String ,String> > set = arrayAsociativo.entrySet();
-		List<Map.Entry<String ,String>> list=new ArrayList<>(set);
-		for(int i=0;i<arrayAsociativo.size();i++) {
-			modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
-		}
-		JPanel panelCabecera = new JPanel();
-		panelCabecera.setLayout(null);
-		panelCabecera.setForeground(Color.BLACK);
-		panelCabecera.setBackground(Color.BLACK);
-		panelCabecera.setBounds(0, 0, 934, 42);
-		panel.add(panelCabecera);
 		
-		botonLogout = new JButton("Cerrar sesion");
-		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		botonLogout.setBounds(0, 0, 97, 42);
-		panelCabecera.add(botonLogout);
-		botonLogout.addActionListener(this);
-		botonVerCarrito = new JButton("Carrito");
-		botonVerCarrito.setBounds(97, 0, 97, 42);
-		panelCabecera.add(botonVerCarrito);
-		botonVerCarrito.addActionListener(this);
-		JLabel labelTituloCabecera = new JLabel("Los Pollos Hermanos");
-		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTituloCabecera.setForeground(Color.WHITE);
-		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		labelTituloCabecera.setBackground(Color.BLACK);
-		labelTituloCabecera.setBounds(98, 8, 739, 21);
-		panelCabecera.add(labelTituloCabecera);
 	    setLocationRelativeTo(null);
 		setVisible(false);
 		setResizable(false);
@@ -98,6 +58,46 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setBounds(290, 119, 345, 81);
 		panel.add(labelTitulo);
+		
+		btnConfirmaPedido = new JButton("Confirma pedido");
+		btnConfirmaPedido.setBounds(805, 599, 119, 51);
+		panel.add(btnConfirmaPedido);
+		btnConfirmaPedido.addActionListener(this);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 599, 119, 51);
+		panel.add(btnVolver);
+		btnVolver.addActionListener(this);
+		
+		carrito = new JList<String>();
+		carrito.setBounds(154, 226, 636, 356);
+		panel.add(carrito);
+		
+		panelCabecera = new JPanel();
+		panelCabecera.setLayout(null);
+		panelCabecera.setForeground(Color.BLACK);
+		panelCabecera.setBackground(Color.BLACK);
+		panelCabecera.setBounds(0, 0, 934, 42);
+		panel.add(panelCabecera);
+		
+		botonLogout = new JButton("Cerrar sesion");
+		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		botonLogout.setBounds(0, 0, 97, 42);
+		panelCabecera.add(botonLogout);
+		botonLogout.addActionListener(this);
+		
+		botonVerCarrito = new JButton("Carrito");
+		botonVerCarrito.setBounds(97, 0, 97, 42);
+		panelCabecera.add(botonVerCarrito);
+		botonVerCarrito.addActionListener(this);
+		
+		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
+		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTituloCabecera.setForeground(Color.WHITE);
+		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		labelTituloCabecera.setBackground(Color.BLACK);
+		labelTituloCabecera.setBounds(98, 8, 739, 21);
+		panelCabecera.add(labelTituloCabecera);
 	}
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
@@ -121,5 +121,14 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	}
 	public static void setlistaCarrito(Map<String, String> arrayAsoc) {
 		arrayAsociativo=arrayAsoc;
+	}
+	public static void mostrarArrayAsociativo() {
+		DefaultListModel<String> modelo = new DefaultListModel<String>();
+		carrito.setModel(modelo);
+		Set<Map.Entry<String ,String> > set = arrayAsociativo.entrySet();
+		List<Map.Entry<String ,String>> list=new ArrayList<>(set);
+		for(int i=0;i<arrayAsociativo.size();i++) {
+			modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+		}
 	}
 }
