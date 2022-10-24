@@ -22,14 +22,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JFrame frame;
 	private JLabel labelTitulo;
 	private coordinador coordinador;
-	private JButton botonVolver,botonCarrito, botonQuitarProducto;
+	private JButton botonVolver,botonCarrito,botonVerCarrito, botonQuitarProducto,botonAnadirProducto,botonLogout;
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
-	private JButton botonLogout, botonAnadirProducto;
-	private JButton botonVerCarrito;
 	private JLabel labelTituloCabecera;
 	public static Map<String, String> arrayAsociativo = new HashMap<String, String>();
-	private int [][] cantidadProducto = new int [5][5];
+	private int [][] cantidadProducto = new int [200][200];
 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
@@ -97,26 +95,17 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
-		JButton botonAnadirProducto = new JButton("+");
-		botonAnadirProducto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]++;
-				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),""+cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()] );
-			}
-		});
+		botonAnadirProducto = new JButton("+");
+		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		botonAnadirProducto.setBounds(811, 189, 45, 42);
 		panel.add(botonAnadirProducto);
 		
-		JButton botonQuitarProducto = new JButton("-");
+		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		botonQuitarProducto.setBounds(811, 254, 45, 42);
 		panel.add(botonQuitarProducto);
-		botonQuitarProducto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		botonQuitarProducto.addActionListener(this);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
@@ -145,10 +134,17 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonAnadirProducto) {
-			
+			cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]++;
+			arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),""+cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()] );
 		}
 		if(e.getSource()==botonQuitarProducto) {
-			
+			if(cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]!=0) {
+				cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]--;
+				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),""+cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()] );
+			}
+			if(cantidadProducto[ventanaListaCategorias.getIndexCat()] [listaProductosCategoria.getSelectedIndex()]==0) {
+				arrayAsociativo.remove(listaProductosCategoria.getSelectedValue().toString());
+			}
 		}
 	}
 }
