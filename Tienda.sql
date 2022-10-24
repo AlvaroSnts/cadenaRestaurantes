@@ -38,3 +38,22 @@ create table pedidosProductos (
     foreign key (producto) references productos (codProd),
     unidades int
 );
+
+insert into categorias values(1, "Pasta", "Si");
+insert into categorias values(2, "Vegetariano", "No");
+insert into categorias values(3, "Guiso", "No");
+insert into categorias values(4, "Mexicano", "No");
+select * from productos;
+
+insert into productos values(1, "Macarrones", "Si", 2.00, 5, 1);
+insert into productos values(2, "Espaguetis", "Si", 2.00, 5, 1);
+insert into productos values(3, "Espinacas", "Si", 2.00, 5, 2);
+insert into productos values(4, "Acelgas", "Si", 2.00, 5, 2);
+
+/*Vistas*/
+create view vista_lista_categorias as select * from categorias;
+select * from vista_lista_categorias;
+
+/*Usuarios*/
+create user 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
+GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
