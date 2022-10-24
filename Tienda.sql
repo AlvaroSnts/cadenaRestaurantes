@@ -55,5 +55,8 @@ create view vista_lista_categorias as select * from categorias;
 select * from vista_lista_categorias;
 
 /*Usuarios*/
-create user 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
+CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
 GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
