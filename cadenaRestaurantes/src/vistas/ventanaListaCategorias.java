@@ -124,10 +124,6 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			}
 			ventanaProductosCategoria.listaProductosCategoria.setModel(modelo);
 		}
-		else {
-			modelo.addElement("Está vacío");
-			ventanaProductosCategoria.listaProductosCategoria.setModel(modelo);
-		}
 	}
 	
 	
