@@ -107,19 +107,23 @@ public class ventanaLogin extends JFrame implements ActionListener {
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
+	//Conecta con categoriasDao para mostrar todas las categorias
 	public void mostrarTodasLasCategorias() {
 		ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
 		DefaultListModel modelo = new DefaultListModel();
 		categorias=categoriasDao.mostrarTodasLasCategorias(categorias);
 ;		
+		//Tras guardar las categorias en un ArrayList, las añadimos una a una en un modelo, 
+		//para despues asignarlo al JList. 
 		if (categorias!=null) {
 			for (int i=0; i<categorias.size(); i++) {
 				modelo.addElement(categorias.get(i).getNombre());
 			}
 			ventanaListaCategorias.listaCategorias.setModel(modelo);
 		}
+		//Si no hay categorias en la BD el JList aparecera vacio.
 		else {
-			modelo.addElement("Esta vacío");
+			modelo.clear();
 			ventanaListaCategorias.listaCategorias.setModel(modelo);
 		}
 	}

@@ -3,14 +3,13 @@ package vistas;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
-import modelo.dao.categoriasDao;
 import modelo.dao.productosDao;
 
 import java.awt.Color;
@@ -22,14 +21,13 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 
 	private JPanel panel;
 	private JFrame frame;
-	private JLabel labelTitulo;
+	private JLabel labelTitulo, labelLogo;
 	private coordinador coordinador;
 	private JButton botonVolver,botonCarrito,botonVerCarrito, botonQuitarProducto,botonAnadirProducto,botonLogout;
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
 	private JLabel labelTituloCabecera;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
-	private int [][] cantidadProducto ;
 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
@@ -85,11 +83,13 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonLogout.setBounds(0, 0, 97, 42);
 		panelCabecera.add(botonLogout);
 		botonLogout.addActionListener(this);
+		
 		botonVerCarrito = new JButton("Carrito");
 		botonVerCarrito.setBounds(97, 0, 97, 42);
 		botonCarrito.addActionListener(this);
 		panelCabecera.add(botonVerCarrito);
 		botonVerCarrito.addActionListener(this);
+		
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(Color.WHITE);
@@ -97,6 +97,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
+		
 		botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -108,6 +109,11 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonQuitarProducto.setBounds(811, 254, 45, 42);
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(this);
+		
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
+		labelLogo.setBounds(0, 162, 205, 298);
+		panel.add(labelLogo);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

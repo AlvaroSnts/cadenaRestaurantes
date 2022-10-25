@@ -23,7 +23,7 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 	
 	public ventanaCerrarSesion() {
 		setSize(450, 400);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle("Cerrar sesion");
 		construirPanel();
 		setContentPane(panel);
@@ -42,12 +42,12 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 		panel.setBackground(new Color(26, 146, 185));
 	    panel.setLayout(null);
 	    
-	    labelTexto = new JLabel("�Esta seguro de que desea cerrar sesion?");
+	    labelTexto = new JLabel("¿Está seguro de que desea cerrar sesión?");
 	    labelTexto.setHorizontalAlignment(SwingConstants.CENTER);
 	    labelTexto.setBounds(0, 89, 434, 14);
 	    panel.add(labelTexto);
 	    
-	    botonSi = new JButton("Si");
+	    botonSi = new JButton("Sí");
 	    botonSi.setBounds(103, 124, 89, 23);
 	    botonSi.addActionListener(this);
 	    panel.add(botonSi);
