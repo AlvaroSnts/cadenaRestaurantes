@@ -116,7 +116,6 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==botonLogout) {
 			coordinador.mostrarVentanaCerrarSesion();
-			this.setVisible(false);
 		}
 	}
 	public static void setlistaCarrito(Map<String, Integer> arrayAsoc) {

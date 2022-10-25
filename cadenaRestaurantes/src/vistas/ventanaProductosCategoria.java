@@ -138,7 +138,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		}
 		if(e.getSource()==botonLogout) {
 			coordinador.mostrarVentanaCerrarSesion();
-			this.setVisible(false);
 		}
 		if(e.getSource()==botonAnadirProducto) {
 			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
