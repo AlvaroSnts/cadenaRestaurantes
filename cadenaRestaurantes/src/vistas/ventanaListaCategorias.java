@@ -97,7 +97,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panel.add(botonSeleccionar);
 		
 		labelLogo = new JLabel("");
-		labelLogo.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoGrande.png"));
+		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
 		

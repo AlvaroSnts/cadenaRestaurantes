@@ -86,7 +86,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		panel.add(botonEntrar);
 		
 		labelImagen=new JLabel("");
-		labelImagen.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\PollosHermanosLogoPequeno.png"));
+		labelImagen.setIcon(new ImageIcon(getClass().getResource("/fotos/PollosHermanosLogoPequeno.png")));
 		labelImagen.setBounds(69, 0, 65, 88);
 		panel.add(labelImagen);
 		
@@ -99,7 +99,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		labelSusFring = new JLabel("");
-		labelSusFring.setIcon(new ImageIcon("D:\\Users\\dam211\\eclipse-workspace\\ABP3\\fotos\\SusFring.png"));
+		labelSusFring.setIcon(new ImageIcon(getClass().getResource("/fotos/SusFring.png")));
 		labelSusFring.setBounds(223, 130, 383, 361);
 		panel.add(labelSusFring);
 	}
