@@ -54,6 +54,22 @@ insert into productos values(4, "Acelgas", "Si", 2.00, 5, 2);
 create view vista_lista_categorias as select * from categorias;
 select * from vista_lista_categorias;
 
+/*Procedimientos*/
+DELIMITER $
+CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
+BEGIN
+	SELECT * FROM categorias WHERE nombre = categoria;
+END $
+DELIMITER ;
+
+DELIMITER $
+CREATE PROCEDURE mostrarTodosLosProductosCategoria(numCategoria int)
+BEGIN
+	SELECT * FROM productos WHERE categoria = numCategoria;
+END $
+DELIMITER ;
+
+
 /*Usuarios*/
 CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
 GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
