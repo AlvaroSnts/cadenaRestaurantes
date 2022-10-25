@@ -1,6 +1,7 @@
 package modelo.dao;
 
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +22,11 @@ public class productosDao {
 		
 		boolean existe=false;
 		try {
-			PreparedStatement prepaState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM productos WHERE categoria='"+ventanaListaCategorias.categoriaInt+"';");
-			ResultSet res = prepaState1.executeQuery();
+			CallableStatement prepState2 = conexionBD.conectarBD().prepareCall("CALL mostrarTodosLosProductosCategoria(?);");
+			
+			prepState2.setInt(1, ventanaListaCategorias.categoriaInt);
+			
+			ResultSet res = prepState2.executeQuery();
 			while(res.next()){
 				existe=true;
 				productosVo producto= new productosVo();

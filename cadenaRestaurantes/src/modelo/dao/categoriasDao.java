@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ public static ArrayList<categoriasVo> mostrarTodasLasCategorias(ArrayList<catego
 		
 		boolean existe=false;
 		try {
-			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM categorias");
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM vista_lista_categorias");
 			ResultSet res = prepState1.executeQuery();
 			while(res.next()){
 				existe=true;
@@ -49,13 +50,17 @@ public static ArrayList<categoriasVo> mostrarCategoriaPorNombre(ArrayList<catego
 	
 	boolean existe=false;
 	try {
-		PreparedStatement prepState2 = conexionBD.conectarBD().prepareStatement("SELECT * FROM categorias WHERE nombre='"+ventanaListaCategorias.categoriaString+"';");
+		CallableStatement prepState2 = conexionBD.conectarBD().prepareCall("CALL mostrarCategoriaPorNombre(?);");
+		
+		prepState2.setString(1, ventanaListaCategorias.categoriaString);
+		
 		ResultSet res = prepState2.executeQuery();
 		while(res.next()){
 			existe=true;
 			categoriasVo categoria= new categoriasVo();
 			categoria.setCodCat(res.getInt("codCat"));
 			categoria.setNombre(res.getString("nombre"));
+			categoria.setDescripcion(res.getString("descripcion"));
 			categorias.add(categoria);
 		 }
 		res.close();
