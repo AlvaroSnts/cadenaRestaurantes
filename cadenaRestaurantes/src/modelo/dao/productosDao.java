@@ -51,4 +51,18 @@ public class productosDao {
 		}
 		else return null;				
 	}
+	public static int comprobarStock(String nombreProducto) {
+		conexion conex = new conexion();
+		int cantidadStock=0;
+		try {
+			PreparedStatement recogerStock = conex.conectarBD().prepareStatement("SELECT stock FROM productos where nombre like '"+nombreProducto+"';");
+			ResultSet res = recogerStock.executeQuery();
+			while(res.next()){
+				cantidadStock=res.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return cantidadStock;
+	}
 }

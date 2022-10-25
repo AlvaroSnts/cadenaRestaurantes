@@ -11,6 +11,7 @@ import java.util.Map;
 import java.awt.event.ActionEvent;
 import controlador.coordinador;
 import modelo.dao.categoriasDao;
+import modelo.dao.productosDao;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -134,17 +135,25 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonAnadirProducto) {
+			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
 			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
 				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
 			}
+			//Busca el producto en el arrayDelCarrito y si no lo encuentra añade el producto con value 1
 			if(!arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
-				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
+				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>0) {
+					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
+				}
 			}
 		}
 		if(e.getSource()==botonQuitarProducto) {
+			//Busca si lo tiene
 			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
+				//Si lo tiene y la cantidad es mayor que 0
 				if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())>0) {
+					//Si encuentra el producto quita una unidad
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())-1);
+					//Si la cantidad es igual a 0 elimina el producto del array
 					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())==0) {
 						arrayAsociativo.remove(listaProductosCategoria.getSelectedValue().toString());
 					}
