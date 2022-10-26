@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class ventanaProductosCategoria extends JFrame implements ActionListener {
 
@@ -156,7 +157,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		if(e.getSource()==botonAnadirProducto) {
 			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
 			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
-				arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
+				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>=arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1) {
+					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			//Busca el producto en el arrayDelCarrito y si no lo encuentra añade el producto con value 1
 			if(!arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
