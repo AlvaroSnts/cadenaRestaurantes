@@ -31,7 +31,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 
 	private JPanel panel;
 	private JFrame frame;
-	private JLabel labelTitulo, labelUsuario, labelPassword, labelImagen, labelSusFring;
+	private JLabel labelTitulo, labelUsuario, labelPassword, labelImagen, labelSusFring, labelMike;
 	private JTextField textFieldUsuario;
 	private JPasswordField passwordField;
 	private JButton botonEntrar;
@@ -41,7 +41,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 	public ventanaLogin() {
 		setSize(450, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Login");
+		setTitle("Iniciar sesión");
 		construirPanel();
 		setContentPane(panel);
 	    setLocationRelativeTo(null);
@@ -71,7 +71,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		labelUsuario.setBounds(0, 62, 434, 14);
 		panel.add(labelUsuario);
 		
-		labelPassword = new JLabel("Password:");
+		labelPassword = new JLabel("Contraseña:");
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		labelPassword.setBounds(0, 124, 434, 14);
 		panel.add(labelPassword);
@@ -102,6 +102,11 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		labelSusFring.setIcon(new ImageIcon(getClass().getResource("/fotos/SusFring.png")));
 		labelSusFring.setBounds(223, 130, 383, 361);
 		panel.add(labelSusFring);
+		
+		labelMike = new JLabel("");
+		labelMike.setIcon(new ImageIcon(getClass().getResource("/fotos/waltermeme.jpg")));
+		labelMike.setBounds(0, 263, 161, 108);
+		panel.add(labelMike);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

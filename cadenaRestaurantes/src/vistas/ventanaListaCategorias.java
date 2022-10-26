@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import controlador.coordinador;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -31,11 +33,13 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	public static JList listaCategorias;
 	public static String categoriaString;
 	public static int categoriaInt;
+	private JLabel labelGifSaul;
+	private JLabel labelImagenSaul;
 	
 	public ventanaListaCategorias() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Lista de categorias");
+		setTitle("Lista de categorías");
 		construirPanel();
 		setContentPane(panel);
 		setLocationRelativeTo(null);
@@ -58,37 +62,46 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panelCabecera.setForeground(Color.BLACK);
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
-		panelCabecera.setLayout(null);
 		
-		botonLogout = new JButton("Cerrar sesion");
-		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		botonLogout = new JButton("");
 		botonLogout.setBounds(0, 0, 97, 42);
+		botonLogout.setIcon(new ImageIcon(getClass().getResource("/Fotos/LogoutImagen.png")));
+		botonLogout.setFocusPainted(false);
+		botonLogout.setBorderPainted(false);
+		botonLogout.setContentAreaFilled(false);
 		botonLogout.addActionListener(this);
+		panelCabecera.setLayout(null);
 		panelCabecera.add(botonLogout);
 		
-		botonVerCarrito = new JButton("Carrito");
-		botonVerCarrito.setBounds(97, 0, 97, 42);
-		botonVerCarrito.addActionListener(this);
-		panelCabecera.add(botonVerCarrito);
-		
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
+		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(new Color(255, 255, 255));
 		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelTituloCabecera.setBackground(Color.BLACK);
-		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
 		
-		labelTitulo = new JLabel("Lista de categorias:");
-		labelTitulo.setBounds(0, 44, 934, 22);
-		panel.add(labelTitulo);
-		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		botonVerCarrito = new JButton("");
+		botonVerCarrito.setBounds(97, 0, 97, 42);
+		panelCabecera.add(botonVerCarrito);
+		botonVerCarrito.setForeground(new Color(255, 255, 255));
+		botonVerCarrito.setIcon(new ImageIcon(getClass().getResource("/Fotos/CarritoImagen.png")));
+		botonVerCarrito.setFocusPainted(false);
+		botonVerCarrito.setBorderPainted(false);
+		botonVerCarrito.setContentAreaFilled(false);
+		botonVerCarrito.addActionListener(this);
+		
+		labelTitulo = new JLabel("Lista de categorías:");
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(0, 0, 0));
+		labelTitulo.setBounds(252, 100, 431, 100);
+		panel.add(labelTitulo);
+		
 		
 		
 		listaCategorias = new JList();
-		listaCategorias.setBounds(204, 77, 548, 521);
+		listaCategorias.setBounds(199, 192, 548, 399);
 		panel.add(listaCategorias);
 		
 		botonSeleccionar = new JButton("Seleccionar");
@@ -100,6 +113,16 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
+		
+		labelImagenSaul = new JLabel("");
+		labelImagenSaul.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulPose.png")));
+		labelImagenSaul.setBounds(623, 192, 396, 469);
+		panel.add(labelImagenSaul);
+		
+		labelGifSaul = new JLabel("");
+		labelGifSaul.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulGifTerm.gif")));
+		labelGifSaul.setBounds(781, 32, 153, 168);
+		panel.add(labelGifSaul);
 		
 	}
 	

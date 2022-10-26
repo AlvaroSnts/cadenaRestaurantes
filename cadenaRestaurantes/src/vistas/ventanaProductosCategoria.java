@@ -21,7 +21,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 
 	private JPanel panel;
 	private JFrame frame;
-	private JLabel labelTitulo, labelLogo;
+	private JLabel labelTitulo, labelLogo, labelGusFringPosando;
 	private coordinador coordinador;
 	private JButton botonVolver,botonCarrito,botonVerCarrito, botonQuitarProducto,botonAnadirProducto,botonLogout;
 	public static JList listaProductosCategoria;
@@ -32,7 +32,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Productos de la categoria");
+		setTitle("Productos de la categoría");
 		construirPanel();
 		setContentPane(panel);
 		setResizable(false);
@@ -50,7 +50,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
 		
-		labelTitulo = new JLabel("Productos de la categoria:");
+		labelTitulo = new JLabel("Productos de la categoría:");
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(0, 0, 0));
@@ -78,14 +78,23 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
 		
-		botonLogout = new JButton("Cerrar sesion");
+		botonLogout = new JButton("");
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
+		botonLogout.setIcon(new ImageIcon(getClass().getResource("/Fotos/LogoutImagen.png")));
+		botonLogout.setFocusPainted(false);
+		botonLogout.setBorderPainted(false);
+		botonLogout.setContentAreaFilled(false);
+		botonLogout.addActionListener(this);
 		panelCabecera.add(botonLogout);
 		botonLogout.addActionListener(this);
 		
-		botonVerCarrito = new JButton("Carrito");
+		botonVerCarrito = new JButton("");
 		botonVerCarrito.setBounds(97, 0, 97, 42);
+		botonVerCarrito.setIcon(new ImageIcon(getClass().getResource("/Fotos/CarritoImagen.png")));
+		botonVerCarrito.setFocusPainted(false);
+		botonVerCarrito.setBorderPainted(false);
+		botonVerCarrito.setContentAreaFilled(false);
 		botonCarrito.addActionListener(this);
 		panelCabecera.add(botonVerCarrito);
 		botonVerCarrito.addActionListener(this);
@@ -114,6 +123,11 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
+		
+		labelGusFringPosando = new JLabel("");
+		labelGusFringPosando.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringPosando.jpg")));
+		labelGusFringPosando.setBounds(747, 311, 187, 277);
+		panel.add(labelGusFringPosando);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -23,22 +24,21 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
 	private JFrame frame;
-	private JLabel labelTitulo, labelTituloCabecera;
+	private JLabel labelTitulo, labelTituloCabecera, labelLogo, labelHusseinberg;
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
-	private JButton botonVerCarrito;
 	private JButton botonLogout;
 	public static JList <String> carrito;
 	private static DefaultListModel<String> modelo;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<>();
+
 	public ventanaCarrito() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Carrito");
 		construirPanel();
 		setContentPane(panel);
-		
 	    setLocationRelativeTo(null);
 		setVisible(false);
 		setResizable(false);
@@ -52,15 +52,14 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel.setLayout(null);
 		
 		labelTitulo = new JLabel("Carrito:");
-		labelTitulo.setForeground(new Color(0, 0, 0));
-		labelTitulo.setBackground(new Color(255, 255, 255));
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		labelTitulo.setBounds(290, 119, 345, 81);
+		labelTitulo.setForeground(new Color(0, 0, 0));
+		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
 		
 		btnConfirmaPedido = new JButton("Confirma pedido");
-		btnConfirmaPedido.setBounds(805, 599, 119, 51);
+		btnConfirmaPedido.setBounds(789, 599, 135, 51);
 		panel.add(btnConfirmaPedido);
 		btnConfirmaPedido.addActionListener(this);
 		
@@ -70,7 +69,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		btnVolver.addActionListener(this);
 		
 		carrito = new JList<String>();
-		carrito.setBounds(154, 226, 636, 356);
+		carrito.setBounds(199, 192, 548, 399);
 		panel.add(carrito);
 		
 		panelCabecera = new JPanel();
@@ -80,16 +79,20 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
 		
-		botonLogout = new JButton("Cerrar sesion");
+		labelLogo = new JLabel("");
+		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
+		labelLogo.setBounds(0, 162, 205, 298);
+		panel.add(labelLogo);
+		
+		botonLogout = new JButton("");
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
+		botonLogout.setIcon(new ImageIcon(getClass().getResource("/Fotos/LogoutImagen.png")));
+		botonLogout.setFocusPainted(false);
+		botonLogout.setBorderPainted(false);
+		botonLogout.setContentAreaFilled(false);
 		panelCabecera.add(botonLogout);
 		botonLogout.addActionListener(this);
-		
-		botonVerCarrito = new JButton("Carrito");
-		botonVerCarrito.setBounds(97, 0, 97, 42);
-		panelCabecera.add(botonVerCarrito);
-		botonVerCarrito.addActionListener(this);
 		
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,6 +101,11 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
+		
+		labelHusseinberg = new JLabel("");
+		labelHusseinberg.setIcon(new ImageIcon(getClass().getResource("/Fotos/husseinberg.gif")));
+		labelHusseinberg.setBounds(645, 192, 371, 399);
+		panel.add(labelHusseinberg);
 	}
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
@@ -108,10 +116,6 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==btnVolver) {
 			coordinador.mostrarVentanaProductosCategoria();
-			this.setVisible(false);
-		}
-		if(e.getSource()==botonVerCarrito) {
-			coordinador.mostrarVentanaCarrito();
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonLogout) {
