@@ -37,48 +37,48 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		construirPanel();
 		setContentPane(panel);
 		setResizable(false);
-	    setLocationRelativeTo(null);
-	    setVisible(false);
-	    
+		setLocationRelativeTo(null);
+		setVisible(false);
+
 	}
 
 	private void construirPanel() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		panel = new JPanel();
 		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
-		
+
 		labelTitulo = new JLabel("Productos de la categoría:");
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(0, 0, 0));
 		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
-		
+
 		botonVolver = new JButton("Volver");
 		botonVolver.setBounds(10, 599, 119, 51);
 		panel.add(botonVolver);
 		botonVolver.addActionListener(this);
-		
+
 		botonCarrito = new JButton("Carrito");
 		botonCarrito.setBounds(805, 599, 119, 51);
 		panel.add(botonCarrito);
 		botonCarrito.addActionListener(this); 
-		
+
 		listaProductosCategoria = new JList();
 		listaProductosCategoria.setBounds(199, 192, 548, 399);
 		panel.add(listaProductosCategoria);
-		
+
 		panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
 		panelCabecera.setForeground(Color.BLACK);
 		panelCabecera.setBackground(Color.BLACK);
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
-		
+
 		botonLogout = new JButton("");
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
@@ -89,7 +89,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonLogout.addActionListener(this);
 		panelCabecera.add(botonLogout);
 		botonLogout.addActionListener(this);
-		
+
 		botonVerCarrito = new JButton("");
 		botonVerCarrito.setBounds(97, 0, 97, 42);
 		botonVerCarrito.setIcon(new ImageIcon(getClass().getResource("/Fotos/CarritoImagen.png")));
@@ -99,7 +99,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonCarrito.addActionListener(this);
 		panelCabecera.add(botonVerCarrito);
 		botonVerCarrito.addActionListener(this);
-		
+
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(Color.WHITE);
@@ -107,30 +107,30 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
-		
+
 		botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		botonAnadirProducto.setBounds(811, 189, 45, 42);
 		panel.add(botonAnadirProducto);
-		
+
 		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		botonQuitarProducto.setBounds(811, 254, 45, 42);
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(this);
-		
+
 		labelLogo = new JLabel("");
 		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
-		
+
 		labelGusFringPosando = new JLabel("");
 		labelGusFringPosando.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringPosando.jpg")));
 		labelGusFringPosando.setBounds(747, 311, 187, 277);
 		panel.add(labelGusFringPosando);
 	}
-	
+
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
@@ -173,8 +173,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
 				}
 			}
-			
-			
+
+
 		}
 		if(e.getSource()==botonQuitarProducto) {
 			//Busca si lo tiene
