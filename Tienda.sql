@@ -40,20 +40,28 @@ create table pedidosProductos (
 );
 
 insert into categorias values(1, "Pasta", "Si");
-insert into categorias values(2, "Vegetariano", "No");
-insert into categorias values(3, "Guiso", "No");
-insert into categorias values(4, "Mexicano", "No");
+insert into categorias values(2, "Vegetales", "No");
+insert into categorias values(3, "Legumbres", "No");
+insert into categorias values(4, "Carnes", "No");
 select * from productos;
+select stock from productos where nombre like 'macarrones';
+SELECT * FROM productos where nombre like 'Macarrones';
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Si", 2.00, 0, 1);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Si", 2.00, 5, 1);
+insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Si", 2.00, 5, 2);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Acelgas", "Si", 2.00, 10, 2);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Garbanzos", "Si", 2.00, 4, 3);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Judias", "Si", 2.00, 7, 3);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de ternera", "Si", 2.00, 8, 4);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de Pollo", "Si", 2.00, 6, 4);
 
-insert into productos values(1, "Macarrones", "Si", 2.00, 5, 1);
-insert into productos values(2, "Espaguetis", "Si", 2.00, 5, 1);
-insert into productos values(3, "Espinacas", "Si", 2.00, 5, 2);
-insert into productos values(4, "Acelgas", "Si", 2.00, 5, 2);
+
 
 /*Vistas*/
 create view vista_lista_categorias as select * from categorias;
+create view vista_stocks as select nombre,stock from productos;
 select * from vista_lista_categorias;
-
+select * from productos;
 /*Procedimientos*/
 DELIMITER $
 CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
