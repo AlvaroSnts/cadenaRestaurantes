@@ -155,8 +155,11 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			coordinador.mostrarVentanaCerrarSesion();
 		}
 		if(e.getSource()==botonAnadirProducto) {
+			if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())==0) {
+				JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+			}
 			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
-			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
+			else if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
 				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>=arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1) {
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
 				}
@@ -170,6 +173,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
 				}
 			}
+			
+			
 		}
 		if(e.getSource()==botonQuitarProducto) {
 			//Busca si lo tiene
