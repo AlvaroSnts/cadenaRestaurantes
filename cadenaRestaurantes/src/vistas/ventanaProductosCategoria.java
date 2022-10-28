@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 public class ventanaProductosCategoria extends JFrame implements ActionListener {
 
@@ -31,7 +32,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
 	private JLabel labelTituloCabecera;
-	private JLabel panelPropiedadesProducto;
+	JTextPane panelPropiedadesProducto;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
 
 	public ventanaProductosCategoria() {
@@ -39,10 +40,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Productos de la categoría");
 		construirPanel();
-		setContentPane(panel);
-		
-		
-	    
+		setContentPane(panel);  
 	}
 
 	private void construirPanel() {
@@ -72,7 +70,8 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonCarrito.addActionListener(this); 
 		
 		listaProductosCategoria = new JList();
-		listaProductosCategoria.setBounds(221, 189, 505, 145);
+		listaProductosCategoria.setValueIsAdjusting(true);
+		listaProductosCategoria.setBounds(221, 189, 505, 160);
 		panel.add(listaProductosCategoria);
 		
 		panelCabecera = new JPanel();
@@ -81,12 +80,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panelCabecera.setBackground(Color.BLACK);
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
-		
-		panelPropiedadesProducto = new JLabel("");
-		panelPropiedadesProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panelPropiedadesProducto.setBackground(new Color(255, 255, 255));
-		panelPropiedadesProducto.setBounds(221, 413, 505, 145);
-		panel.add(panelPropiedadesProducto);
 		setResizable(false);
 	    setLocationRelativeTo(null);
 	    setVisible(false);
@@ -142,10 +135,19 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelGusFringPosando.setBounds(747, 311, 187, 277);
 		panel.add(labelGusFringPosando);
 		
+		panelPropiedadesProducto = new JTextPane();
+		panelPropiedadesProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panelPropiedadesProducto.setEditable(false);
+		panelPropiedadesProducto.setBounds(221, 428, 505, 160);
+		panel.add(panelPropiedadesProducto);
+		
 		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				try {
-					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString()));
+					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),1)+"\r\n"+
+							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),2)+"\r\n"+
+							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),3)+"\r\n"+
+							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),4));
 				} catch (Exception e2) {
 					
 				}

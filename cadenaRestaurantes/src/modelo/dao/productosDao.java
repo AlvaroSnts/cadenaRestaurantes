@@ -96,7 +96,7 @@ public class productosDao {
 	public static Connection getConnection() {
 		return connection;
 	}
-	public static String stringCaracteristicasProducto(String nombreProducto) {
+	public static String stringCaracteristicasProducto(String nombreProducto,int opcion) {
 		conexionBD= new conexion();
 		String caracteristicasProducto="";
 		try {
@@ -104,10 +104,19 @@ public class productosDao {
 			recogerStock.setString(1, nombreProducto);
 			ResultSet res = recogerStock.executeQuery();
 			while(res.next()) {
-				caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
-				caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
-				caracteristicasProducto=caracteristicasProducto+" Peso: "+res.getString("peso");
+				if(opcion==1) {
+					caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
+				}
+				if(opcion==2) {
+					caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
+				}
+				if(opcion==3) {
+					caracteristicasProducto=caracteristicasProducto+" Peso: "+res.getString("peso");
+
+				}
+				if(opcion==4) {
 				caracteristicasProducto=caracteristicasProducto+" Stock: "+res.getString("stock");
+				}
 			}
 			
 		} catch (Exception e) {
