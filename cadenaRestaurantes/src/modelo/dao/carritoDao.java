@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import modelo.conexion.conexion;
 
 public class carritoDao {
@@ -30,10 +32,12 @@ public class carritoDao {
 				quitarStock.executeUpdate();
 			}
 			connection.commit();
+			JOptionPane.showMessageDialog(null, "Se ha relizado el pedido","Pedido realizado",JOptionPane.INFORMATION_MESSAGE);
 			connection.close();
 		} catch (SQLException e1) {
 			try {
 				connection.rollback();
+				JOptionPane.showMessageDialog(null, "No ha podido realizarse el pedido","Error",JOptionPane.ERROR_MESSAGE);
 				connection.close();
 			} catch (SQLException e2) {
 				e2.printStackTrace();

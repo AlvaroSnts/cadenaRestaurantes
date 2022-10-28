@@ -31,7 +31,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
 	private JFrame frame;
-	private JLabel labelTitulo, labelTituloCabecera, labelLogo, labelHusseinberg;
+	private JLabel labelTitulo, labelTituloCabecera, labelLogo;
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
@@ -108,7 +108,6 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		botonAnadirProducto.setBounds(811, 189, 45, 42);
 		panel.add(botonAnadirProducto);
-		botonAnadirProducto.addActionListener(this);
 		
 		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -130,6 +129,8 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmaPedido) {
 			carritoDao.eliminarStockCarrito(list);
+			modelo.clear();
+			arrayAsociativo.clear();
 		}
 		if(e.getSource()==btnVolver) {
 			coordinador.mostrarVentanaProductosCategoria();
@@ -139,17 +140,42 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			coordinador.mostrarVentanaCerrarSesion();
 		}
 		if(e.getSource()==botonAnadirProducto) {
-			
+			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
+			int valorProducto =list.get(carrito.getSelectedIndex()).getValue();
+			if(arrayAsociativo.containsKey(nombreProducto)) {
+				if(productosDao.comprobarStock(nombreProducto)>valorProducto) {
+					arrayAsociativo.put(nombreProducto, valorProducto+1);
+				}
+				else
+					JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+			}
+			modelo.clear();
+			for(int i=0;i<arrayAsociativo.size();i++) {
+				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+			}
 		}
 		if(e.getSource()==botonQuitarProducto) {
-			
+			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
+			int valorProducto =list.get(carrito.getSelectedIndex()).getValue();
+			if(arrayAsociativo.containsKey(nombreProducto)) {
+				if(valorProducto>0) {
+					arrayAsociativo.put(nombreProducto,valorProducto-1);
+				}
+				if(valorProducto==0) {
+					arrayAsociativo.remove(nombreProducto);
+				}
+			}
+			modelo.clear();
+			for(int i=0;i<arrayAsociativo.size();i++) {
+				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+			}
 		}
 	}
 	public static void setlistaCarrito(Map<String, Integer> arrayAsoc) {
 		arrayAsociativo=arrayAsoc;
 	}
 	public static void mostrarArrayAsociativo() {
-		DefaultListModel<String> modelo = new DefaultListModel<String>();
+		modelo = new DefaultListModel<String>();
 		carrito.setModel(modelo);
 		Set<Map.Entry<String ,Integer> > set = arrayAsociativo.entrySet();
 		list=new ArrayList<>(set);
