@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,18 +12,20 @@ import modelo.vo.categoriasVo;
 
 
 public class categoriasDao {
+	
+	public static conexion conexionBD ;
+	public static Connection connection ;
 
 	public static void registrarCategoria(String nombre, String descripcion) {
 		
-		conexion conexionBD=new conexion();
+		conexionBD=new conexion();
+		connection=conexionBD.conectarBD();
 		
 		try {
+			connection.setAutoCommit(false);
 			PreparedStatement estatuto=conexionBD.conectarBD().prepareStatement
 					("INSERT INTO categorias(nombre, descripcion) VALUES ('"+nombre+"', '"+descripcion+"');");
 			estatuto.execute();
-			System.out.println("Datos añadidos correctamente.");
-			estatuto.close();
-			conexionBD.desconectarBD();
 		}catch(SQLException e) {
 			 System.out.println(e.getMessage());
 		}
@@ -55,5 +58,9 @@ public class categoriasDao {
 			return categorias;
 		}
 		else return null;				
+	}
+	
+	public static Connection getConnection() {
+		return connection;
 	}
 }

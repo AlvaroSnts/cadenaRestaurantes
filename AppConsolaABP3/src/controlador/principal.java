@@ -1,5 +1,7 @@
 package controlador;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class principal {
 		
 		Scanner in=new Scanner(System.in);
 		int menuElige1=0;
+		int eligeAceptar=0;
 		boolean haConectado=false;
 		
 		System.out.println("Introduzca su nombre de usuario:");
@@ -68,6 +71,45 @@ public class principal {
 					System.out.println("Introduzca su descripcion:");
 					String descripcionCategoria=in.nextLine();
 					categoriasDao.registrarCategoria(nombreCategoria, descripcionCategoria);
+					do {
+						Connection connection = categoriasDao.getConnection();
+						System.out.println("¿Estás seguro de que desea registrar la categorías?");
+						System.out.println("1.- Si");
+						System.out.println("2.- No");
+						while (in.hasNextInt()==false) {
+							System.out.println("Error. Introduzca un número:");
+							in.next();
+						}
+						eligeAceptar=in.nextInt();
+						
+						if (eligeAceptar==1) {
+							try {
+								connection.commit();
+								connection.close();
+								System.out.println("Datos añadidos correctamente.");
+							}
+							catch(SQLException e) {
+								try {
+									connection.rollback();
+									connection.close();
+									System.out.println("Los datos no han sido añadidos.");
+								}
+								catch(SQLException ee) {
+									ee.printStackTrace();
+								}
+							}
+						}
+						if (eligeAceptar==2) {
+							try {
+								connection.rollback();
+								connection.close();
+							}
+							catch(SQLException ee) {
+								ee.printStackTrace();
+							}
+						}
+					}while((eligeAceptar!=1)&&(eligeAceptar!=2));
+					break;
 				case 2:
 					ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
 					int numCategorias=0;
@@ -121,9 +163,46 @@ public class principal {
 							productosDao.registrarProducto(nombreProducto, descripcionProducto, pesoProducto, stockProducto, categoriaProducto);
 						}while(productosDao.categoriaExistente==false);
 					}
+					do {
+						Connection connection = productosDao.getConnection();
+						System.out.println("¿Estás seguro de que desea registrar el producto?");
+						System.out.println("1.- Si");
+						System.out.println("2.- No");
+						while (in.hasNextInt()==false) {
+							System.out.println("Error. Introduzca un número:");
+							in.next();
+						}
+						eligeAceptar=in.nextInt();
+						
+						if (eligeAceptar==1) {
+							try {
+								connection.commit();
+								connection.close();
+								System.out.println("Datos añadidos correctamente.");
+							}
+							catch(SQLException e) {
+								try {
+									connection.rollback();
+									connection.close();
+									System.out.println("Los datos no han sido añadidos.");
+								}
+								catch(SQLException ee) {
+									ee.printStackTrace();
+								}
+							}
+						}
+						if (eligeAceptar==2) {
+							try {
+								connection.rollback();
+								connection.close();
+							}
+							catch(SQLException ee) {
+								ee.printStackTrace();
+							}
+						}
+					}while((eligeAceptar!=1)&&(eligeAceptar!=2));
+				break;
 			}
-				
-			
 		}while(menuElige1!=3);
 
 	}
