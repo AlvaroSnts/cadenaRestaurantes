@@ -25,6 +25,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class ventanaCarrito extends JFrame implements ActionListener {
 
@@ -35,6 +36,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
 	private JButton botonLogout;
+	private JButton botonQuitarProducto,botonAnadirProducto;
 	public static JList <String> carrito;
 	private static DefaultListModel<String> modelo;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<>();
@@ -101,6 +103,19 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panelCabecera.add(botonLogout);
 		botonLogout.addActionListener(this);
 		
+		botonAnadirProducto = new JButton("+");
+		botonAnadirProducto.addActionListener(this);
+		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		botonAnadirProducto.setBounds(811, 189, 45, 42);
+		panel.add(botonAnadirProducto);
+		botonAnadirProducto.addActionListener(this);
+		
+		botonQuitarProducto = new JButton("-");
+		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		botonQuitarProducto.setBounds(811, 254, 45, 42);
+		panel.add(botonQuitarProducto);
+		botonQuitarProducto.addActionListener(this);
+		
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(Color.WHITE);
@@ -122,6 +137,12 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==botonLogout) {
 			coordinador.mostrarVentanaCerrarSesion();
+		}
+		if(e.getSource()==botonAnadirProducto) {
+			
+		}
+		if(e.getSource()==botonQuitarProducto) {
+			
 		}
 	}
 	public static void setlistaCarrito(Map<String, Integer> arrayAsoc) {
