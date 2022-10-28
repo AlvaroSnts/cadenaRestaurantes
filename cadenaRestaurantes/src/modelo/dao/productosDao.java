@@ -67,35 +67,7 @@ public class productosDao {
 		}
 		return cantidadStock;
 	}
-	public static void reducirStock(String nombreProducto) {
-		conexionBD= new conexion();
-		connection = conexionBD.conectarBD();
-		try {
-			connection.setAutoCommit(false);
-			PreparedStatement anadirProductoCarrito = conexionBD.conectarBD().prepareStatement("UPDATE productos SET stock = ? where nombre like ?");
-			anadirProductoCarrito.setInt(1, comprobarStock(nombreProducto)-1);
-			anadirProductoCarrito.setString(2, nombreProducto);
-			anadirProductoCarrito.executeUpdate();
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-	}
-	public static void anadirStock(String nombreProducto) {
-		conexionBD= new conexion();
-		connection = conexionBD.conectarBD();
-		try {
-			connection.setAutoCommit(false);
-			PreparedStatement anadirProductoCarrito = conexionBD.conectarBD().prepareStatement("UPDATE productos SET stock = ? where nombre like ?");
-			anadirProductoCarrito.setInt(1, comprobarStock(nombreProducto)+1);
-			anadirProductoCarrito.setString(2, nombreProducto);
-			anadirProductoCarrito.executeUpdate();
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-	}
-	public static Connection getConnection() {
-		return connection;
-	}
+
 	public static String stringCaracteristicasProducto(String nombreProducto,int opcion) {
 		conexionBD= new conexion();
 		String caracteristicasProducto="";

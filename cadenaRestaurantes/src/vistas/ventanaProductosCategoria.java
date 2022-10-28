@@ -185,7 +185,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
 			else if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
 				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>=arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1) {
-					productosDao.reducirStock(listaProductosCategoria.getSelectedValue().toString());
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
 				}
 				else {
@@ -195,7 +194,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			//Busca el producto en el arrayDelCarrito y si no lo encuentra añade el producto con value 1
 			if(!arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
 				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>0) {
-					productosDao.reducirStock(listaProductosCategoria.getSelectedValue().toString());
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
 				}
 			}
@@ -207,7 +205,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 				if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())>0) {
 					//Si encuentra el producto quita una unidad
 					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())-1);
-					productosDao.anadirStock(listaProductosCategoria.getSelectedValue().toString());
 					//Si la cantidad es igual a 0 elimina el producto del array
 					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())==0) {
 						arrayAsociativo.remove(listaProductosCategoria.getSelectedValue().toString());

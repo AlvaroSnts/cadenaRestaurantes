@@ -13,6 +13,8 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controlador.coordinador;
+import modelo.conexion.conexion;
+import modelo.dao.carritoDao;
 import modelo.dao.productosDao;
 
 import javax.swing.JLabel;
@@ -36,6 +38,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	public static JList <String> carrito;
 	private static DefaultListModel<String> modelo;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<>();
+	public static List<Map.Entry<String ,Integer>> list;
 
 	public ventanaCarrito() {
 		setSize(950, 700);
@@ -111,19 +114,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmaPedido) {
-			Connection connection = productosDao.getConnection();
-			try {
-				connection.commit();
-				
-			} catch (SQLException e1) {
-				try {
-					connection.rollback();
-					connection.close();
-				} catch (SQLException e2) {
-					e2.printStackTrace();
-				}
-				e1.printStackTrace();
-			}
+			carritoDao.eliminarStockCarrito(list);
 		}
 		if(e.getSource()==btnVolver) {
 			coordinador.mostrarVentanaProductosCategoria();
@@ -140,7 +131,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
 		carrito.setModel(modelo);
 		Set<Map.Entry<String ,Integer> > set = arrayAsociativo.entrySet();
-		List<Map.Entry<String ,Integer>> list=new ArrayList<>(set);
+		list=new ArrayList<>(set);
 		for(int i=0;i<arrayAsociativo.size();i++) {
 			modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
 		}
