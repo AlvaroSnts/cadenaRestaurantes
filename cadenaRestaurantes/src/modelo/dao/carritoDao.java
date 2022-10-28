@@ -25,8 +25,8 @@ public class carritoDao {
 					stockActual=res.getInt("stock");
 				}
 				quitarStock.setInt(1, stockActual);
-				quitarStock.setString(2, list.get(i).getKey());
-				quitarStock.setInt(3, list.get(i).getValue());
+				quitarStock.setString(3, list.get(i).getKey());
+				quitarStock.setInt(2, list.get(i).getValue());
 				quitarStock.executeUpdate();
 			}
 			connection.commit();
