@@ -2,6 +2,8 @@ package vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controlador.coordinador;
+import modelo.dao.productosDao;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -101,18 +105,25 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
-		
-		labelHusseinberg = new JLabel("");
-		labelHusseinberg.setIcon(new ImageIcon(getClass().getResource("/Fotos/husseinberg.gif")));
-		labelHusseinberg.setBounds(645, 192, 371, 399);
-		panel.add(labelHusseinberg);
 	}
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmaPedido) {
-			
+			Connection connection = productosDao.getConnection();
+			try {
+				connection.commit();
+				
+			} catch (SQLException e1) {
+				try {
+					connection.rollback();
+					connection.close();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+				e1.printStackTrace();
+			}
 		}
 		if(e.getSource()==btnVolver) {
 			coordinador.mostrarVentanaProductosCategoria();

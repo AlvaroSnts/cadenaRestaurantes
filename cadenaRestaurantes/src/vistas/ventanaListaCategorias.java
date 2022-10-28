@@ -31,7 +31,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	private JButton botonLogout, botonVerCarrito, botonSeleccionar;
 	private coordinador coordinador;
 	public static JList listaCategorias;
-	public static String categoriaString;
+	public static String categoriaString,detallesCategoria;
 	public static int categoriaInt;
 	private JLabel labelGifSaul;
 	private JLabel labelImagenSaul;
@@ -134,6 +134,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
 		categorias=categoriasDao.mostrarCategoriaPorNombre(categorias);
 		categoriaInt=categorias.get(0).getCodCat();
+		
 	}
 	
 	public void mostrarTodosLosProductosCategoria() {

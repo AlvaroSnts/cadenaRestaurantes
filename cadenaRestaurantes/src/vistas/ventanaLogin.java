@@ -102,11 +102,6 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		labelSusFring.setIcon(new ImageIcon(getClass().getResource("/fotos/SusFring.png")));
 		labelSusFring.setBounds(223, 130, 383, 361);
 		panel.add(labelSusFring);
-		
-		labelMike = new JLabel("");
-		labelMike.setIcon(new ImageIcon(getClass().getResource("/fotos/waltermeme.jpg")));
-		labelMike.setBounds(0, 263, 161, 108);
-		panel.add(labelMike);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
