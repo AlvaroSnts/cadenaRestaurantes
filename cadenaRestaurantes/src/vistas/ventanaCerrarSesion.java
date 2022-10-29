@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -19,6 +20,7 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 	private JLabel labelTexto;
 	private JButton botonSi, botonNo;
 	private coordinador coordinador;
+	private JLabel labelSaul3D;
 
 	
 	public ventanaCerrarSesion() {
@@ -56,6 +58,11 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 	    botonNo.setBounds(242, 124, 89, 23);
 	    botonNo.addActionListener(this);
 	    panel.add(botonNo);
+	    
+		labelSaul3D = new JLabel("");
+		labelSaul3D.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulGifTerm.gif")));
+		labelSaul3D.setBounds(124, 158, 192, 206);
+		panel.add(labelSaul3D);
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

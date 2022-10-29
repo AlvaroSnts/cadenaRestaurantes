@@ -27,14 +27,13 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
 	private JFrame frame;
-	private JLabel labelTitulo, labelLogo, labelTituloCabecera;
+	private JLabel labelTitulo, labelLogo, labelTituloCabecera, labelImagenSaul;
 	private JButton botonLogout, botonVerCarrito, botonSeleccionar;
 	private coordinador coordinador;
 	public static JList listaCategorias;
 	public static String categoriaString,detallesCategoria;
 	public static int categoriaInt;
-	private JLabel labelGifSaul;
-	private JLabel labelImagenSaul;
+
 	
 	public ventanaListaCategorias() {
 		setSize(950, 700);
@@ -118,12 +117,6 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelImagenSaul.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulPose.png")));
 		labelImagenSaul.setBounds(623, 192, 396, 469);
 		panel.add(labelImagenSaul);
-		
-		labelGifSaul = new JLabel("");
-		labelGifSaul.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulGifTerm.gif")));
-		labelGifSaul.setBounds(781, 32, 153, 168);
-		panel.add(labelGifSaul);
-		
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

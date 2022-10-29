@@ -26,12 +26,11 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 
 	private JPanel panel;
 	private JFrame frame;
-	private JLabel labelTitulo, labelLogo, labelGusFringPosando;
+	private JLabel labelTitulo, labelLogo, labelSusFringRecortado, labelTituloCabecera;
 	private coordinador coordinador;
 	private JButton botonVolver,botonCarrito,botonVerCarrito, botonQuitarProducto,botonAnadirProducto,botonLogout;
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
-	private JLabel labelTituloCabecera;
 	JTextPane panelPropiedadesProducto;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
 
@@ -40,7 +39,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Productos de la categoría");
 		construirPanel();
-		setContentPane(panel);  
+		setContentPane(panel);
 	}
 
 	private void construirPanel() {
@@ -130,16 +129,16 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
 		
-		labelGusFringPosando = new JLabel("");
-		labelGusFringPosando.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringPosando.jpg")));
-		labelGusFringPosando.setBounds(747, 311, 187, 277);
-		panel.add(labelGusFringPosando);
-		
 		panelPropiedadesProducto = new JTextPane();
 		panelPropiedadesProducto.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panelPropiedadesProducto.setEditable(false);
 		panelPropiedadesProducto.setBounds(221, 428, 505, 160);
 		panel.add(panelPropiedadesProducto);
+		
+		labelSusFringRecortado = new JLabel("");
+		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
+		labelSusFringRecortado.setBounds(613, 115, 393, 546);
+		panel.add(labelSusFringRecortado);
 		
 		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
