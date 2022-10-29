@@ -43,9 +43,7 @@ insert into categorias values(1, "Pasta", "Si");
 insert into categorias values(2, "Vegetales", "No");
 insert into categorias values(3, "Legumbres", "No");
 insert into categorias values(4, "Carnes", "No");
-select * from productos;
-select stock from productos where nombre like 'macarrones';
-SELECT * FROM productos where nombre like 'Macarrones';
+insert into categorias values(5,"Especias", null);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Si", 2.00, 0, 1);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Si", 2.00, 5, 1);
 insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Si", 2.00, 5, 2);
@@ -60,8 +58,9 @@ insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de
 /*Vistas*/
 create view vista_lista_categorias as select * from categorias;
 create view vista_stocks as select nombre,stock from productos;
-select * from vista_lista_categorias;
+create view lista_caracteristicas_producto as select nombre,descripcion,peso,stock from productos;
 select * from productos;
+
 /*Procedimientos*/
 DELIMITER $
 CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
