@@ -88,10 +88,11 @@ public static String stringCaracteristicasCategorias(String nombreCategoria,int 
 				caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
 			}
 			if(opcion==2) {
-				if(res.getString("descripcion").equals(null)) {
-					
+				if(res.getString("descripcion")==null) {
+					caracteristicasProducto=caracteristicasProducto+" Descripcion: Sin descripcion especificada";
 				}
-				caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
+				else
+					caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
 			}
 		}
 		

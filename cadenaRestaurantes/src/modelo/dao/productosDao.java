@@ -80,9 +80,17 @@ public class productosDao {
 					caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
 				}
 				if(opcion==2) {
+					if(res.getString("descripcion")==null) {
+						caracteristicasProducto=caracteristicasProducto+" Descripcion: Sin descripcion especificada";
+					}
+					else
 					caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
 				}
 				if(opcion==3) {
+					if(res.getString("peso")==null) {
+						caracteristicasProducto=caracteristicasProducto+" Descripcion: Sin peso especificado";
+					}
+					else
 					caracteristicasProducto=caracteristicasProducto+" Peso: "+res.getString("peso");
 
 				}
