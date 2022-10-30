@@ -25,6 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.awt.Font;
+import java.awt.Image;
 
 
 public class ventanaLogin extends JFrame implements ActionListener {
@@ -42,6 +43,8 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		setSize(450, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Iniciar sesión");
+		Image icon = new ImageIcon(getClass().getResource("/fotos/finger.png")).getImage();
+        setIconImage(icon);
 		construirPanel();
 		setContentPane(panel);
 	    setLocationRelativeTo(null);

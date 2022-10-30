@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Image;
 
 public class ventanaCerrarSesion extends JFrame implements ActionListener {
 
@@ -26,7 +27,9 @@ public class ventanaCerrarSesion extends JFrame implements ActionListener {
 	public ventanaCerrarSesion() {
 		setSize(450, 400);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setTitle("Cerrar sesion");
+		setTitle("Cerrar sesión");
+		Image icon = new ImageIcon(getClass().getResource("/fotos/finger.png")).getImage();
+        setIconImage(icon);
 		construirPanel();
 		setContentPane(panel);
 	    setLocationRelativeTo(null);

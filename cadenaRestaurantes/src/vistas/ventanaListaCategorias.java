@@ -16,6 +16,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
@@ -43,6 +45,8 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Lista de categorías");
+		Image icon = new ImageIcon(getClass().getResource("/fotos/finger.png")).getImage();
+        setIconImage(icon);
 		construirPanel();
 		setContentPane(panel);
 		setLocationRelativeTo(null);

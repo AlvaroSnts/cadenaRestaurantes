@@ -19,6 +19,8 @@ import modelo.dao.productosDao;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.DefaultListModel;
@@ -31,7 +33,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 
 	private JPanel panel, panelCabecera;
 	private JFrame frame;
-	private JLabel labelTitulo, labelTituloCabecera, labelLogo;
+	private JLabel labelTitulo, labelTituloCabecera, labelLogo, labelWalter;
 	private coordinador coordinador;
 	private JButton btnConfirmaPedido;
 	private JButton btnVolver;
@@ -46,6 +48,8 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Carrito");
+		Image icon = new ImageIcon(getClass().getResource("/fotos/finger.png")).getImage();
+        setIconImage(icon);
 		construirPanel();
 		setContentPane(panel);
 		setLocationRelativeTo(null);
@@ -68,12 +72,12 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel.add(labelTitulo);
 
 		btnConfirmaPedido = new JButton("Confirma pedido");
-		btnConfirmaPedido.setBounds(789, 599, 135, 51);
+		btnConfirmaPedido.setBounds(789, 610, 135, 40);
 		panel.add(btnConfirmaPedido);
 		btnConfirmaPedido.addActionListener(this);
 
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(10, 599, 119, 51);
+		btnVolver.setBounds(10, 610, 119, 40);
 		panel.add(btnVolver);
 		btnVolver.addActionListener(this);
 
@@ -106,12 +110,12 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		botonAnadirProducto.setBounds(811, 189, 45, 42);
+		botonAnadirProducto.setBounds(805, 76, 45, 42);
 		panel.add(botonAnadirProducto);
 
 		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		botonQuitarProducto.setBounds(811, 254, 45, 42);
+		botonQuitarProducto.setBounds(805, 141, 45, 42);
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(this);
 
@@ -122,6 +126,11 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
+		
+		labelWalter = new JLabel("");
+		labelWalter.setIcon(new ImageIcon(getClass().getResource("/Fotos/waltersiu.png")));
+		labelWalter.setBounds(714, 162, 244, 521);
+		panel.add(labelWalter);
 	}
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;

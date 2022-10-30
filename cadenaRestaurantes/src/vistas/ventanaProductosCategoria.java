@@ -15,6 +15,8 @@ import modelo.vo.productosVo;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -39,15 +41,10 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Productos de la categoría");
+		Image icon = new ImageIcon(getClass().getResource("/fotos/finger.png")).getImage();
+        setIconImage(icon);
 		construirPanel();
 		setContentPane(panel);
-		
-		
-		
-		labelSusFringRecortado = new JLabel("");
-		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
-		labelSusFringRecortado.setBounds(622, 115, 393, 546);
-		panel.add(labelSusFringRecortado);
 	}
 
 	private void construirPanel() {
@@ -149,6 +146,11 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panelPropiedadesProducto.setBounds(221, 428, 505, 160);
 		panel.add(panelPropiedadesProducto);
 		panelPropiedadesProducto.setVisible(false) ;
+		
+		labelSusFringRecortado = new JLabel("");
+		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
+		labelSusFringRecortado.setBounds(622, 115, 393, 546);
+		panel.add(labelSusFringRecortado);
 		
 		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
