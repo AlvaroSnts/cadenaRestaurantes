@@ -31,7 +31,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JButton botonVolver,botonCarrito,botonVerCarrito, botonQuitarProducto,botonAnadirProducto,botonLogout;
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
-	JTextPane panelPropiedadesProducto;
+	public static JTextPane panelPropiedadesProducto;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
 
 	public ventanaProductosCategoria() {
@@ -134,6 +134,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panelPropiedadesProducto.setEditable(false);
 		panelPropiedadesProducto.setBounds(221, 428, 505, 160);
 		panel.add(panelPropiedadesProducto);
+		panelPropiedadesProducto.setVisible(false);
 		
 		labelSusFringRecortado = new JLabel("");
 		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
@@ -142,6 +143,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		
 		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
+				panelPropiedadesProducto.setVisible(true);
 				try {
 					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),1)+"\r\n"+
 							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),2)+"\r\n"+
@@ -215,6 +217,9 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 				}
 			}
 		}
+	}
+	public static void setPanelCategoriasProductosInvisible() {
+		panelPropiedadesProducto.setVisible(false);
 	}
 }
 

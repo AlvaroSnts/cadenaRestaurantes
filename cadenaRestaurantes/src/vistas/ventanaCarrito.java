@@ -140,8 +140,9 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			coordinador.mostrarVentanaCerrarSesion();
 		}
 		if(e.getSource()==botonAnadirProducto) {
-			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
-			int valorProducto =list.get(carrito.getSelectedIndex()).getValue();
+			int posicionMarcada=carrito.getSelectedIndex();
+			String nombreProducto=list.get(posicionMarcada).getKey();
+			int valorProducto =list.get(posicionMarcada).getValue();
 			if(arrayAsociativo.containsKey(nombreProducto)) {
 				if(productosDao.comprobarStock(nombreProducto)>valorProducto) {
 					arrayAsociativo.put(nombreProducto, valorProducto+1);
@@ -153,22 +154,27 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 			for(int i=0;i<arrayAsociativo.size();i++) {
 				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
 			}
+			carrito.setSelectedIndex(posicionMarcada);
 		}
 		if(e.getSource()==botonQuitarProducto) {
+			int posicionMarcada=carrito.getSelectedIndex();
+
 			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
 			int valorProducto =list.get(carrito.getSelectedIndex()).getValue();
 			if(arrayAsociativo.containsKey(nombreProducto)) {
-				if(valorProducto>0) {
+				if(valorProducto>0 && valorProducto!=1) {
 					arrayAsociativo.put(nombreProducto,valorProducto-1);
 				}
 				if(valorProducto==1) {
 					arrayAsociativo.remove(nombreProducto);
+					list.remove(carrito.getSelectedIndex());
 				}
 			}
 			modelo.clear();
 			for(int i=0;i<arrayAsociativo.size();i++) {
 				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
 			}
+			carrito.setSelectedIndex(posicionMarcada);
 		}
 	}
 	public static void setlistaCarrito(Map<String, Integer> arrayAsoc) {

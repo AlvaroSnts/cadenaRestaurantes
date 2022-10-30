@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import controlador.coordinador;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -33,6 +36,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	public static JList listaCategorias;
 	public static String categoriaString,detallesCategoria;
 	public static int categoriaInt;
+	public static JTextPane panelPropiedadesCategorias;
 
 	
 	public ventanaListaCategorias() {
@@ -100,7 +104,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		
 		
 		listaCategorias = new JList();
-		listaCategorias.setBounds(199, 192, 548, 399);
+		listaCategorias.setBounds(221, 192, 505, 160);
 		panel.add(listaCategorias);
 		
 		botonSeleccionar = new JButton("Seleccionar");
@@ -117,6 +121,26 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelImagenSaul.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulPose.png")));
 		labelImagenSaul.setBounds(623, 192, 396, 469);
 		panel.add(labelImagenSaul);
+		
+		panelPropiedadesCategorias = new JTextPane();
+		panelPropiedadesCategorias.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panelPropiedadesCategorias.setEditable(false);
+		panelPropiedadesCategorias.setBounds(221, 428, 505, 160);
+		panel.add(panelPropiedadesCategorias);
+		panelPropiedadesCategorias.setVisible(false);
+		listaCategorias.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				panelPropiedadesCategorias.setVisible(true);
+				try {
+					System.out.println(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1)+"\r\n"
+							+categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),2));
+					panelPropiedadesCategorias.setText(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1)+"\r\n"
+							+categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),2));
+				} catch (Exception e2) {
+					
+				}
+			}
+		});
 	}
 	
 	public void setCoordinador(coordinador coordinador) {
@@ -163,6 +187,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			mostrarCategoriaPorNombre();
 			mostrarTodosLosProductosCategoria();
 			coordinador.mostrarVentanaProductosCategoria();
+			ventanaProductosCategoria.setPanelCategoriasProductosInvisible();
 			this.setVisible(false);
 		}
 	}

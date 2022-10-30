@@ -76,4 +76,28 @@ public static ArrayList<categoriasVo> mostrarCategoriaPorNombre(ArrayList<catego
 	}
 	else return null;				
 }
+public static String stringCaracteristicasCategorias(String nombreCategoria,int opcion) {
+	conexion conexionBD= new conexion();
+	String caracteristicasProducto="";
+	try {
+		PreparedStatement recogerStock = conexionBD.conectarBD().prepareStatement("SELECT * FROM lista_caracteristicas_categoria where nombre like ?");
+		recogerStock.setString(1, nombreCategoria);
+		ResultSet res = recogerStock.executeQuery();
+		while(res.next()) {
+			if(opcion==1) {
+				caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
+			}
+			if(opcion==2) {
+				if(res.getString("descripcion").equals(null)) {
+					
+				}
+				caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
+			}
+		}
+		
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+	return caracteristicasProducto;
+}
 }
