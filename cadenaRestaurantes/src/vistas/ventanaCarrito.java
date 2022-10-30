@@ -161,7 +161,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 				if(valorProducto>0) {
 					arrayAsociativo.put(nombreProducto,valorProducto-1);
 				}
-				if(valorProducto==0) {
+				if(valorProducto==1) {
 					arrayAsociativo.remove(nombreProducto);
 				}
 			}

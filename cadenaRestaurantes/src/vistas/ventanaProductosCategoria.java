@@ -178,35 +178,39 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			coordinador.mostrarVentanaCerrarSesion();
 		}
 		if(e.getSource()==botonAnadirProducto) {
-			if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())==0) {
+			String nombreProducto=listaProductosCategoria.getSelectedValue().toString();
+			if(productosDao.comprobarStock(nombreProducto)==0) {
 				JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
 			}
 			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
-			else if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
-				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>=arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1) {
-					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())+1);
+			else if(arrayAsociativo.containsKey(nombreProducto)) {
+				int valorProducto=arrayAsociativo.get(nombreProducto);
+				if(productosDao.comprobarStock(nombreProducto)>=valorProducto+1) {
+					arrayAsociativo.put(nombreProducto,valorProducto+1);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			//Busca el producto en el arrayDelCarrito y si no lo encuentra añade el producto con value 1
-			if(!arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
-				if(productosDao.comprobarStock(listaProductosCategoria.getSelectedValue().toString())>0) {
-					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),1);
+			if(!arrayAsociativo.containsKey(nombreProducto)) {
+				if(productosDao.comprobarStock(nombreProducto)>0) {
+					arrayAsociativo.put(nombreProducto,1);
 				}
 			}
 		}
 		if(e.getSource()==botonQuitarProducto) {
+			String nombreProducto=listaProductosCategoria.getSelectedValue().toString();
 			//Busca si lo tiene
-			if(arrayAsociativo.containsKey(listaProductosCategoria.getSelectedValue().toString())) {
+			if(arrayAsociativo.containsKey(nombreProducto)) {
+				int valorProducto=arrayAsociativo.get(nombreProducto);
 				//Si lo tiene y la cantidad es mayor que 0
-				if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())>0) {
+				if(arrayAsociativo.get(nombreProducto)>0) {
 					//Si encuentra el producto quita una unidad
-					arrayAsociativo.put(listaProductosCategoria.getSelectedValue().toString(),arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())-1);
+					arrayAsociativo.put(nombreProducto,valorProducto-1);
 					//Si la cantidad es igual a 0 elimina el producto del array
-					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())==0) {
-						arrayAsociativo.remove(listaProductosCategoria.getSelectedValue().toString());
+					if(arrayAsociativo.get(nombreProducto)==0) {
+						arrayAsociativo.remove(nombreProducto);
 					}
 				}
 			}
