@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
+import java.awt.Component;
 
 public class ventanaProductosCategoria extends JFrame implements ActionListener {
 
@@ -31,7 +32,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JButton botonVolver,botonCarrito,botonVerCarrito, botonQuitarProducto,botonAnadirProducto,botonLogout;
 	public static JList listaProductosCategoria;
 	private JPanel panelCabecera;
-	public static JTextPane panelPropiedadesProducto;
+	public static JTextPane panelPropiedadesProducto,panelCantidad;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
 
 	public ventanaProductosCategoria() {
@@ -40,6 +41,13 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		setTitle("Productos de la categoría");
 		construirPanel();
 		setContentPane(panel);
+		
+		
+		
+		labelSusFringRecortado = new JLabel("");
+		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
+		labelSusFringRecortado.setBounds(622, 115, 393, 546);
+		panel.add(labelSusFringRecortado);
 	}
 
 	private void construirPanel() {
@@ -83,6 +91,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	    setLocationRelativeTo(null);
 	    setVisible(false);
 		
+	    panelCantidad = new JTextPane();
+	    panelCantidad.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		panelCantidad.setEditable(false);
+		panelCantidad.setBounds(753, 189, 79, 69);
+		panel.add(panelCantidad);
+	    
 		botonLogout = new JButton("");
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
@@ -115,12 +129,12 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		botonAnadirProducto.setBounds(811, 189, 45, 42);
+		botonAnadirProducto.setBounds(858, 189, 45, 42);
 		panel.add(botonAnadirProducto);
 		
 		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		botonQuitarProducto.setBounds(811, 254, 45, 42);
+		botonQuitarProducto.setBounds(858, 255, 45, 42);
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(this);
 		
@@ -134,12 +148,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panelPropiedadesProducto.setEditable(false);
 		panelPropiedadesProducto.setBounds(221, 428, 505, 160);
 		panel.add(panelPropiedadesProducto);
-		panelPropiedadesProducto.setVisible(false);
-		
-		labelSusFringRecortado = new JLabel("");
-		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
-		labelSusFringRecortado.setBounds(613, 115, 393, 546);
-		panel.add(labelSusFringRecortado);
+		panelPropiedadesProducto.setVisible(false) ;
 		
 		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -166,6 +175,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			this.setVisible(false);
 		}
 		if(e.getSource()==botonVolver) {
+			panelCantidad.setText("");
 			coordinador.mostrarVentanaListaCategorias();
 			this.setVisible(false);
 		}
@@ -180,14 +190,16 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		}
 		if(e.getSource()==botonAnadirProducto) {
 			String nombreProducto=listaProductosCategoria.getSelectedValue().toString();
+			int valorProducto=0;
 			if(productosDao.comprobarStock(nombreProducto)==0) {
 				JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
 			}
 			//Busca el producto en el arrayDelCarrito y si lo tiene le suma uno a su Value
 			else if(arrayAsociativo.containsKey(nombreProducto)) {
-				int valorProducto=arrayAsociativo.get(nombreProducto);
+				valorProducto=arrayAsociativo.get(nombreProducto);
 				if(productosDao.comprobarStock(nombreProducto)>=valorProducto+1) {
 					arrayAsociativo.put(nombreProducto,valorProducto+1);
+					valorProducto++;
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
@@ -197,8 +209,10 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			if(!arrayAsociativo.containsKey(nombreProducto)) {
 				if(productosDao.comprobarStock(nombreProducto)>0) {
 					arrayAsociativo.put(nombreProducto,1);
+					valorProducto++;
 				}
 			}
+			panelCantidad.setText(""+valorProducto);
 		}
 		if(e.getSource()==botonQuitarProducto) {
 			String nombreProducto=listaProductosCategoria.getSelectedValue().toString();
@@ -221,4 +235,3 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panelPropiedadesProducto.setVisible(false);
 	}
 }
-

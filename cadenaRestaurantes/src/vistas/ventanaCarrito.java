@@ -48,7 +48,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		setTitle("Carrito");
 		construirPanel();
 		setContentPane(panel);
-	    setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		setVisible(false);
 		setResizable(false);
 	}
@@ -59,40 +59,40 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		panel = new JPanel();
 		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
-		
+
 		labelTitulo = new JLabel("Carrito:");
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(0, 0, 0));
 		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
-		
+
 		btnConfirmaPedido = new JButton("Confirma pedido");
 		btnConfirmaPedido.setBounds(789, 599, 135, 51);
 		panel.add(btnConfirmaPedido);
 		btnConfirmaPedido.addActionListener(this);
-		
+
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 599, 119, 51);
 		panel.add(btnVolver);
 		btnVolver.addActionListener(this);
-		
+
 		carrito = new JList<String>();
 		carrito.setBounds(199, 192, 548, 399);
 		panel.add(carrito);
-		
+
 		panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
 		panelCabecera.setForeground(Color.BLACK);
 		panelCabecera.setBackground(Color.BLACK);
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
-		
+
 		labelLogo = new JLabel("");
 		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
-		
+
 		botonLogout = new JButton("");
 		botonLogout.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		botonLogout.setBounds(0, 0, 97, 42);
@@ -102,19 +102,19 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		botonLogout.setContentAreaFilled(false);
 		panelCabecera.add(botonLogout);
 		botonLogout.addActionListener(this);
-		
+
 		botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		botonAnadirProducto.setBounds(811, 189, 45, 42);
 		panel.add(botonAnadirProducto);
-		
+
 		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		botonQuitarProducto.setBounds(811, 254, 45, 42);
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(this);
-		
+
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTituloCabecera.setForeground(Color.WHITE);
@@ -141,40 +141,44 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==botonAnadirProducto) {
 			int posicionMarcada=carrito.getSelectedIndex();
-			String nombreProducto=list.get(posicionMarcada).getKey();
-			int valorProducto =list.get(posicionMarcada).getValue();
-			if(arrayAsociativo.containsKey(nombreProducto)) {
-				if(productosDao.comprobarStock(nombreProducto)>valorProducto) {
-					arrayAsociativo.put(nombreProducto, valorProducto+1);
+			if(posicionMarcada>-1) {
+				String nombreProducto=list.get(posicionMarcada).getKey();
+				int valorProducto =list.get(posicionMarcada).getValue();
+				if(arrayAsociativo.containsKey(nombreProducto)) {
+					if(productosDao.comprobarStock(nombreProducto)>valorProducto) {
+						arrayAsociativo.put(nombreProducto, valorProducto+1);
+					}
+					else
+						JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
 				}
-				else
-					JOptionPane.showMessageDialog(null, "No hay esa cantidad en stock para el producto seleccionado","Error",JOptionPane.ERROR_MESSAGE);
+				modelo.clear();
+				for(int i=0;i<arrayAsociativo.size();i++) {
+					modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+				}
+				carrito.setSelectedIndex(posicionMarcada);
 			}
-			modelo.clear();
-			for(int i=0;i<arrayAsociativo.size();i++) {
-				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
-			}
-			carrito.setSelectedIndex(posicionMarcada);
+
 		}
 		if(e.getSource()==botonQuitarProducto) {
 			int posicionMarcada=carrito.getSelectedIndex();
-
-			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
-			int valorProducto =list.get(carrito.getSelectedIndex()).getValue();
-			if(arrayAsociativo.containsKey(nombreProducto)) {
-				if(valorProducto>0 && valorProducto!=1) {
-					arrayAsociativo.put(nombreProducto,valorProducto-1);
+			if(posicionMarcada>-1) {
+				String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
+				int valorProducto =list.get(carrito.getSelectedIndex()).getValue();
+				if(arrayAsociativo.containsKey(nombreProducto)) {
+					if(valorProducto>0 && valorProducto!=1) {
+						arrayAsociativo.put(nombreProducto,valorProducto-1);
+					}
+					if(valorProducto==1) {
+						arrayAsociativo.remove(nombreProducto);
+						list.remove(carrito.getSelectedIndex());
+					}
 				}
-				if(valorProducto==1) {
-					arrayAsociativo.remove(nombreProducto);
-					list.remove(carrito.getSelectedIndex());
+				modelo.clear();
+				for(int i=0;i<arrayAsociativo.size();i++) {
+					modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
 				}
+				carrito.setSelectedIndex(posicionMarcada);
 			}
-			modelo.clear();
-			for(int i=0;i<arrayAsociativo.size();i++) {
-				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
-			}
-			carrito.setSelectedIndex(posicionMarcada);
 		}
 	}
 	public static void setlistaCarrito(Map<String, Integer> arrayAsoc) {

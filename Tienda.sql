@@ -59,7 +59,6 @@ insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de
 create view vista_lista_categorias as select * from categorias;
 create view vista_stocks as select nombre,stock from productos;
 create view lista_caracteristicas_producto as select nombre,descripcion,peso,stock from productos;
-create view lista_caracteristicas_categoria as select nombre,descripcion from categorias;
 select * from productos;
 
 /*Procedimientos*/

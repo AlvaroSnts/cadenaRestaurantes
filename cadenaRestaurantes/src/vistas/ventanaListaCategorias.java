@@ -38,7 +38,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	public static int categoriaInt;
 	public static JTextPane panelPropiedadesCategorias;
 
-	
+
 	public ventanaListaCategorias() {
 		setSize(950, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,22 +50,22 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		setResizable(false);
 	}
 
-	
+
 	private void construirPanel() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		panel = new JPanel();
 		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
-		
+
 		panelCabecera = new JPanel();
 		panelCabecera.setBackground(new Color(0, 0, 0));
 		panelCabecera.setForeground(Color.BLACK);
 		panelCabecera.setBounds(0, 0, 934, 42);
 		panel.add(panelCabecera);
-		
+
 		botonLogout = new JButton("");
 		botonLogout.setBounds(0, 0, 97, 42);
 		botonLogout.setIcon(new ImageIcon(getClass().getResource("/Fotos/LogoutImagen.png")));
@@ -75,7 +75,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		botonLogout.addActionListener(this);
 		panelCabecera.setLayout(null);
 		panelCabecera.add(botonLogout);
-		
+
 		labelTituloCabecera = new JLabel("Los Pollos Hermanos");
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		labelTituloCabecera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,7 +83,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelTituloCabecera.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelTituloCabecera.setBackground(Color.BLACK);
 		panelCabecera.add(labelTituloCabecera);
-		
+
 		botonVerCarrito = new JButton("");
 		botonVerCarrito.setBounds(97, 0, 97, 42);
 		panelCabecera.add(botonVerCarrito);
@@ -93,35 +93,35 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		botonVerCarrito.setBorderPainted(false);
 		botonVerCarrito.setContentAreaFilled(false);
 		botonVerCarrito.addActionListener(this);
-		
+
 		labelTitulo = new JLabel("Lista de categorías:");
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(0, 0, 0));
 		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
-		
-		
-		
+
+
+
 		listaCategorias = new JList();
 		listaCategorias.setBounds(221, 192, 505, 160);
 		panel.add(listaCategorias);
-		
+
 		botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(this);
 		botonSeleccionar.setBounds(806, 599, 119, 51);
 		panel.add(botonSeleccionar);
-		
+
 		labelLogo = new JLabel("");
 		labelLogo.setIcon(new ImageIcon(getClass().getResource("/Fotos/PollosHermanosLogoGrande.png")));
 		labelLogo.setBounds(0, 162, 205, 298);
 		panel.add(labelLogo);
-		
+
 		labelImagenSaul = new JLabel("");
 		labelImagenSaul.setIcon(new ImageIcon(getClass().getResource("/Fotos/saulPose.png")));
 		labelImagenSaul.setBounds(623, 192, 396, 469);
 		panel.add(labelImagenSaul);
-		
+
 		panelPropiedadesCategorias = new JTextPane();
 		panelPropiedadesCategorias.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panelPropiedadesCategorias.setEditable(false);
@@ -134,28 +134,28 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 				try {
 					panelPropiedadesCategorias.setText(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1));
 				} catch (Exception e2) {
-					
+
 				}
 			}
 		});
 	}
-	
+
 	public void setCoordinador(coordinador coordinador) {
 		this.coordinador=coordinador;
 	}
-	
+
 	public void mostrarCategoriaPorNombre() {
 		ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
 		categorias=categoriasDao.mostrarCategoriaPorNombre(categorias);
 		categoriaInt=categorias.get(0).getCodCat();
-		
+
 	}
-	
+
 	public void mostrarTodosLosProductosCategoria() {
 		ArrayList<productosVo> productos=new ArrayList<productosVo>();
 		productos=productosDao.mostrarTodosLosProductosCategoria(productos);
 		DefaultListModel<String> modelo = new DefaultListModel<String>();
-		
+
 		if (productos!=null) {
 			for (int i=0; i<productos.size(); i++) {
 				modelo.addElement(productos.get(i).getNombre());
@@ -167,9 +167,9 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			ventanaProductosCategoria.listaProductosCategoria.setModel(modelo);
 		}
 	}
-	
-	
-	
+
+
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==botonLogout) {
 			coordinador.mostrarVentanaCerrarSesion();
@@ -188,7 +188,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			this.setVisible(false);
 		}
 	}
-	
+
 	public static int getIndexCat() {
 		return listaCategorias.getSelectedIndex();
 	}
