@@ -77,16 +77,13 @@ public class productosDao {
 			ResultSet res = recogerStock.executeQuery();
 			while(res.next()) {
 				if(opcion==1) {
-					caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
-				}
-				if(opcion==2) {
 					if(res.getString("descripcion")==null) {
 						caracteristicasProducto=caracteristicasProducto+" Descripcion: Sin descripcion especificada";
 					}
 					else
 					caracteristicasProducto=caracteristicasProducto+" Descripcion: "+res.getString("descripcion");
 				}
-				if(opcion==3) {
+				if(opcion==2) {
 					if(res.getString("peso")==null) {
 						caracteristicasProducto=caracteristicasProducto+" Descripcion: Sin peso especificado";
 					}
@@ -94,7 +91,7 @@ public class productosDao {
 					caracteristicasProducto=caracteristicasProducto+" Peso: "+res.getString("peso");
 
 				}
-				if(opcion==4) {
+				if(opcion==3) {
 				caracteristicasProducto=caracteristicasProducto+" Stock: "+res.getString("stock");
 				}
 			}

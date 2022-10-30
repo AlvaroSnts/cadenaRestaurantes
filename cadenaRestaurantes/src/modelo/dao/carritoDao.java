@@ -35,14 +35,14 @@ public class carritoDao {
 			JOptionPane.showMessageDialog(null, "Se ha relizado el pedido","Pedido realizado",JOptionPane.INFORMATION_MESSAGE);
 			connection.close();
 		} catch (SQLException e1) {
+			
 			try {
 				connection.rollback();
 				JOptionPane.showMessageDialog(null, "No ha podido realizarse el pedido","Error",JOptionPane.ERROR_MESSAGE);
 				connection.close();
 			} catch (SQLException e2) {
-				e2.printStackTrace();
+				
 			}
-			e1.printStackTrace();
 		}
 	}
 

@@ -132,10 +132,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 			public void valueChanged(ListSelectionEvent e) {
 				panelPropiedadesCategorias.setVisible(true);
 				try {
-					System.out.println(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1)+"\r\n"
-							+categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),2));
-					panelPropiedadesCategorias.setText(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1)+"\r\n"
-							+categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),2));
+					panelPropiedadesCategorias.setText(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1));
 				} catch (Exception e2) {
 					
 				}

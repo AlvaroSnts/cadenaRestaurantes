@@ -147,8 +147,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 				try {
 					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),1)+"\r\n"+
 							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),2)+"\r\n"+
-							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),3)+"\r\n"+
-							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),4));
+							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),3));
 				} catch (Exception e2) {
 					
 				}

@@ -85,9 +85,6 @@ public static String stringCaracteristicasCategorias(String nombreCategoria,int 
 		ResultSet res = recogerStock.executeQuery();
 		while(res.next()) {
 			if(opcion==1) {
-				caracteristicasProducto=caracteristicasProducto+" Nombre: "+res.getString("nombre");
-			}
-			if(opcion==2) {
 				if(res.getString("descripcion")==null) {
 					caracteristicasProducto=caracteristicasProducto+" Descripcion: Sin descripcion especificada";
 				}
