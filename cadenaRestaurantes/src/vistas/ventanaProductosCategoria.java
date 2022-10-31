@@ -154,6 +154,16 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		
 		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
+				try {
+					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())!=null) {
+						panelCantidad.setText(""+arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString()));
+					}
+					else {
+						panelCantidad.setText(""+0);
+					}
+				} catch (Exception e2) {
+				
+				}
 				panelPropiedadesProducto.setVisible(true);
 				try {
 					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),1)+"\r\n"+
