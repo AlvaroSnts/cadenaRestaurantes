@@ -9,6 +9,7 @@ import modelo.conexion.conexion;
 import modelo.dao.categoriasDao;
 import modelo.dao.productosDao;
 import modelo.vo.categoriasVo;
+import modelo.vo.productosVo;
 
 public class principal {
 
@@ -112,12 +113,35 @@ public class principal {
 					break;
 				case 2:
 					ArrayList<categoriasVo> categorias=new ArrayList<categoriasVo>();
+					ArrayList<productosVo> productos=new ArrayList<productosVo>();
+					boolean nombreIgual=false;
 					int numCategorias=0;
-					
+					String nombreProducto="";
 					in.nextLine();
 					
-					System.out.println("Introduzca su nombre:");
-					String nombreProducto=in.nextLine();
+					//Primero el nombre. Comprueba que no se repita con otro y que se introduzca algo.
+					do {
+						nombreIgual=false;
+						System.out.println("Introduzca su nombre:");
+						nombreProducto=in.nextLine();
+						
+						productos=productosDao.mostrarNombresDeProducto(productos);
+						
+						for (int i=0; i<productos.size(); i++) {
+							if (productos.get(i)!=null) {
+								if (productos.get(i).getNombre().equals(nombreProducto)) {
+									nombreIgual=true;
+								}
+							}
+						}
+						if (nombreIgual==true) {
+							System.out.println("Error. Ya hay un producto con ese nombre. Introduzca otro nombre:");
+						}
+						if (nombreProducto.equals("")) {
+							nombreIgual=true;
+							System.out.println("Error. No ha introducido ningún nombre. Introduzca uno: ");
+						}
+					}while(nombreIgual==true);
 					
 					System.out.println("Introduzca su descripcion:");
 					String descripcionProducto=in.nextLine();
@@ -129,12 +153,18 @@ public class principal {
 					}
 					double pesoProducto=in.nextDouble();
 					
-					System.out.println("Introduzca su stock:");
-					while (in.hasNextInt()==false) {
-						System.out.println("Error. Introduzca un número:");
-						in.next();
-					}
-					int stockProducto=in.nextInt();
+					String stockString="";
+					in.nextLine();
+					do {
+						System.out.println("Introduzca su stock:");
+						stockString=in.nextLine();
+						
+						if (comprobarStock(stockString)==false) {
+							System.out.println("Error. Debes escribir un número.");
+						}
+					}while(comprobarStock(stockString)==false);
+					
+					int stockProducto=Integer.parseInt(stockString);
 					
 					categorias=categoriasDao.mostrarTodasLasCategorias(categorias);
 					
@@ -143,7 +173,7 @@ public class principal {
 					}
 					numCategorias++;
 					System.out.println("Introduzca su categoria:");
-					while (in.hasNextInt()==false) {
+					while ((in.hasNextInt()==false)||(in.nextInt()==' ')) {
 						System.out.println("Error. Introduzca un número:");
 						in.next();
 					}
@@ -212,5 +242,17 @@ public class principal {
 		System.out.println("1.- Insertar categoría");
 		System.out.println("2.- Insertar producto");
 		System.out.println("3.- Salir");
+	}
+	
+	public static boolean comprobarStock(String stock) {
+		if (stock.equals("")||(stock.equals(" "))) {
+			return false;
+		}
+		for (int i=0; i<stock.length(); i++) {
+			if (((int)stock.charAt(i)<48)||((int)stock.charAt(i)>57)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

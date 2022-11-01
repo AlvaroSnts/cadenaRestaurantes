@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import modelo.conexion.conexion;
+import modelo.vo.categoriasVo;
 import modelo.vo.productosVo;
 
 
@@ -38,5 +39,32 @@ public class productosDao {
 	
 	public static Connection getConnection() {
 		return connection;
+	}
+	
+	public static ArrayList<productosVo> mostrarNombresDeProducto(ArrayList<productosVo> productos) {
+		
+		conexionBD= new conexion();
+		boolean existe=false;
+		try {
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM vista_nombres_producto");
+			ResultSet res = prepState1.executeQuery();
+			while(res.next()){
+				existe=true;
+				productosVo producto= new productosVo();
+				producto.setNombre(res.getString("nombre"));
+				productos.add(producto);
+			 }
+			res.close();
+			conexionBD.desconectarBD();
+								
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha podido conectar");
+			System.out.println(e);
+		}
+		
+		if (existe) {
+			return productos;
+		}
+		else return null;				
 	}
 }
