@@ -11,7 +11,7 @@ create table restaurantes(
 );
 create table pedidos (
 	codPed int auto_increment primary key,
-    fecha varchar(10),
+    fecha varchar(21),
     enviado boolean,
     restaurante int not null,
 	foreign key(restaurante) references restaurantes (codRes)
@@ -28,6 +28,7 @@ create table productos (
     peso double,
     stock int,
     categoria int,
+    foto Blob ,
     foreign key (categoria) references categorias (codCat)
 );
 create table pedidosProductos (
@@ -44,6 +45,7 @@ insert into categorias values(2, "Vegetales", "No");
 insert into categorias values(3, "Legumbres", "No");
 insert into categorias values(4, "Carnes", "No");
 insert into categorias values(5,"Especias", null);
+insert into restaurantes (clave) values ('123');
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Si", 2.00, 0, 1);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Si", 2.00, 5, 1);
 insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Si", 2.00, 5, 2);
@@ -52,14 +54,16 @@ insert into productos (nombre,descripcion,peso,stock,categoria)values("Garbanzos
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Judias", "Si", 2.00, 7, 3);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de ternera", "Si", 2.00, 8, 4);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de Pollo", "Si", 2.00, 6, 4);
-
-
-
 /*Vistas*/
 create view vista_lista_categorias as select * from categorias;
 create view vista_stocks as select nombre,stock from productos;
 create view lista_caracteristicas_producto as select nombre,descripcion,peso,stock from productos;
+create view lista_caracteristicas_categoria as select nombre,descripcion from categorias;
+create view lista_fotos as select nombre,foto from productos;
 select * from productos;
+select * from restaurantes;
+select * from pedidos;
+select * from pedidosProductos;
 
 /*Procedimientos*/
 DELIMITER $
