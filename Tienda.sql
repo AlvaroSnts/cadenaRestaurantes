@@ -54,17 +54,41 @@ insert into productos (nombre,descripcion,peso,stock,categoria)values("Garbanzos
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Judias", "Si", 2.00, 7, 3);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de ternera", "Si", 2.00, 8, 4);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de Pollo", "Si", 2.00, 6, 4);
+
 /*Vistas*/
 create view vista_lista_categorias as select * from categorias;
 create view vista_stocks as select nombre,stock from productos;
 create view lista_caracteristicas_producto as select nombre,descripcion,peso,stock from productos;
 create view lista_caracteristicas_categoria as select nombre,descripcion from categorias;
 create view lista_fotos as select nombre,foto from productos;
+create view vista_nombres_producto as select * from productos;
 select * from productos;
 select * from restaurantes;
 select * from pedidos;
 select * from pedidosProductos;
 
+/*Procedimientos*/
+DELIMITER $
+CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
+BEGIN
+	SELECT * FROM categorias WHERE nombre = categoria;
+END $
+DELIMITER ;
+
+DELIMITER $
+CREATE PROCEDURE mostrarTodosLosProductosCategoria(numCategoria int)
+BEGIN
+	SELECT * FROM productos WHERE categoria = numCategoria;
+END $
+DELIMITER ;
+
+
+/*Usuarios*/
+CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
+GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
 /*Procedimientos*/
 DELIMITER $
 CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
