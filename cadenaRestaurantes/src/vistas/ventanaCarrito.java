@@ -35,10 +35,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private JFrame frame;
 	private JLabel labelTitulo, labelTituloCabecera, labelLogo, labelWalter;
 	private coordinador coordinador;
-	private JButton btnConfirmaPedido;
-	private JButton btnVolver;
-	private JButton botonLogout;
-	private JButton botonQuitarProducto,botonAnadirProducto;
+	private JButton botonQuitarProducto,botonAnadirProducto,botonLogout,btnVolver,btnConfirmaPedido,botonEliminar;
 	public static JList <String> carrito;
 	private static DefaultListModel<String> modelo;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<>();
@@ -68,7 +65,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTitulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelTitulo.setForeground(new Color(0, 0, 0));
-		labelTitulo.setBounds(252, 100, 431, 100);
+		labelTitulo.setBounds(273, 71, 431, 100);
 		panel.add(labelTitulo);
 
 		btnConfirmaPedido = new JButton("Confirma pedido");
@@ -82,7 +79,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		btnVolver.addActionListener(this);
 
 		carrito = new JList<String>();
-		carrito.setBounds(199, 192, 548, 399);
+		carrito.setBounds(215, 160, 548, 232);
 		panel.add(carrito);
 
 		panelCabecera = new JPanel();
@@ -110,12 +107,12 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		botonAnadirProducto = new JButton("+");
 		botonAnadirProducto.addActionListener(this);
 		botonAnadirProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		botonAnadirProducto.setBounds(805, 76, 45, 42);
+		botonAnadirProducto.setBounds(353, 452, 45, 42);
 		panel.add(botonAnadirProducto);
 
 		botonQuitarProducto = new JButton("-");
 		botonQuitarProducto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		botonQuitarProducto.setBounds(805, 141, 45, 42);
+		botonQuitarProducto.setBounds(441, 452, 45, 42);
 		panel.add(botonQuitarProducto);
 		botonQuitarProducto.addActionListener(this);
 
@@ -126,6 +123,12 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		labelTituloCabecera.setBackground(Color.BLACK);
 		labelTituloCabecera.setBounds(98, 8, 739, 21);
 		panelCabecera.add(labelTituloCabecera);
+		
+		botonEliminar= new JButton("Eliminar");
+		botonEliminar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		botonEliminar.setBounds(526, 452, 119, 42);
+		panel.add(botonEliminar);
+		botonEliminar.addActionListener(this);
 		
 		labelWalter = new JLabel("");
 		labelWalter.setIcon(new ImageIcon(getClass().getResource("/Fotos/waltersiu.png")));
@@ -146,6 +149,17 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		if(e.getSource()==btnVolver) {
 			coordinador.mostrarVentanaProductosCategoria();
 			this.setVisible(false);
+		}
+		if(e.getSource()==botonEliminar) {
+			int posicionMarcada=carrito.getSelectedIndex();
+			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
+			arrayAsociativo.remove(nombreProducto);
+			list.remove(carrito.getSelectedIndex());
+			modelo.clear();
+			for(int i=0;i<arrayAsociativo.size();i++) {
+				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+			}
+			carrito.setSelectedIndex(posicionMarcada);
 		}
 		if(e.getSource()==botonLogout) {
 			coordinador.mostrarVentanaCerrarSesion();

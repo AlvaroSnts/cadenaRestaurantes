@@ -227,10 +227,11 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 			panelCantidad.setText(""+valorProducto);
 		}
 		if(e.getSource()==botonQuitarProducto) {
+			int valorProducto=0;
 			String nombreProducto=listaProductosCategoria.getSelectedValue().toString();
 			//Busca si lo tiene
 			if(arrayAsociativo.containsKey(nombreProducto)) {
-				int valorProducto=arrayAsociativo.get(nombreProducto);
+				valorProducto=arrayAsociativo.get(nombreProducto);
 				//Si lo tiene y la cantidad es mayor que 0
 				if(arrayAsociativo.get(nombreProducto)>0) {
 					//Si encuentra el producto quita una unidad
@@ -241,6 +242,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 					}
 				}
 			}
+			panelCantidad.setText(""+valorProducto);
 		}
 	}
 	public static void setPanelCategoriasProductosInvisible() {
