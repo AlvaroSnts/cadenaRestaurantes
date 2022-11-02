@@ -236,6 +236,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 				if(arrayAsociativo.get(nombreProducto)>0) {
 					//Si encuentra el producto quita una unidad
 					arrayAsociativo.put(nombreProducto,valorProducto-1);
+					valorProducto--;
 					//Si la cantidad es igual a 0 elimina el producto del array
 					if(arrayAsociativo.get(nombreProducto)==0) {
 						arrayAsociativo.remove(nombreProducto);
