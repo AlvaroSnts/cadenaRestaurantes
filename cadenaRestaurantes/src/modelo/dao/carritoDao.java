@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import modelo.conexion.conexion;
+import vistas.ventanaLogin;
 
 public class carritoDao {
 	public static void eliminarStockCarrito(List<Map.Entry<String ,Integer>> list) {
@@ -47,7 +48,7 @@ public class carritoDao {
 			}
 		}
 	}
-	public static String procesarPedido(int codRestaurante) {
+	public static String procesarPedido() {
 		conexion conexion = new conexion();
 		Connection connection = conexion.conectarBD();
 		LocalDateTime fechaActual = LocalDateTime.now();
@@ -57,7 +58,7 @@ public class carritoDao {
 			connection.setAutoCommit(false);
 			PreparedStatement realizarPedido = connection.prepareStatement("INSERT INTO pedidos (fecha,restaurante) VALUES (?,?)");
 			realizarPedido.setString(1, fechaConFormato);
-			realizarPedido.setInt(2, 1);
+			realizarPedido.setInt(2, ventanaLogin.codigoRestaurante);
 			realizarPedido.executeUpdate();
 			connection.commit();
 			connection.close();
@@ -73,7 +74,7 @@ public class carritoDao {
 		}
 		return null;
 	}
-	public static void insertarPedidosProductos(String fecha,int codRestaurante,List<Map.Entry<String ,Integer>> list) {
+	public static void insertarPedidosProductos(String fecha,List<Map.Entry<String ,Integer>> list) {
 		conexion conexion = new conexion();
 		Connection connection = conexion.conectarBD();
 		try {
@@ -82,7 +83,7 @@ public class carritoDao {
 			int codProducto = 0;
 			PreparedStatement seleccionarCodPedido = connection.prepareStatement("SELECT codPed FROM pedidos WHERE fecha LIKE ? and restaurante LIKE ?");
 			seleccionarCodPedido.setString(1, fecha);
-			seleccionarCodPedido.setInt(2, codRestaurante);
+			seleccionarCodPedido.setInt(2, ventanaLogin.codigoRestaurante);
 			ResultSet res = seleccionarCodPedido.executeQuery();
 			while(res.next()) {
 				codPedido=res.getInt("codPed");

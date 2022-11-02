@@ -1,8 +1,12 @@
 package modelo.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import modelo.conexion.conexion;
 import modelo.vo.categoriasVo;
