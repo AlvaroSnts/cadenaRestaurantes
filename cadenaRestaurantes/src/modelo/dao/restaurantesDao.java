@@ -7,6 +7,7 @@ import java.sql.Statement;
 import modelo.conexion.conexion;
 import modelo.vo.categoriasVo;
 import modelo.vo.productosVo;
+import modelo.vo.restaurantesVo;
 
 
 public class restaurantesDao {
@@ -40,5 +41,32 @@ public class restaurantesDao {
 		}catch(SQLException e) {
 			
 		}
+	}
+	public static ArrayList<restaurantesVo> verTodosLosCodRestaurante(ArrayList<restaurantesVo> restaurantes) {
+		
+		conexion conexionBD= new conexion();
+		
+		boolean existe=false;
+		try {
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM restaurantes");
+			ResultSet res = prepState1.executeQuery();
+			while(res.next()){
+				existe=true;
+				restaurantesVo restaurante= new restaurantesVo();
+				restaurante.setCodRes(res.getInt("codRes"));
+				restaurantes.add(restaurante);
+			 }
+			res.close();
+			conexionBD.desconectarBD();
+								
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha podido conectar");
+			System.out.println(e);
+		}
+		
+		if (existe) {
+			return restaurantes;
+		}
+		else return null;
 	}
 }
