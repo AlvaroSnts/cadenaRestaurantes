@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import java.awt.Component;
 
-public class ventanaProductosCategoria extends JFrame implements ActionListener {
+public class ventanaProductosCategoria extends JFrame implements ActionListener  {
 
 	private JPanel panel;
 	private JFrame frame;
