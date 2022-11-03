@@ -45,7 +45,8 @@ insert into categorias values(2, "Vegetales", "No");
 insert into categorias values(3, "Legumbres", "No");
 insert into categorias values(4, "Carnes", "No");
 insert into categorias values(5,"Especias", null);
-insert into restaurantes (clave) values ('123');
+insert into restaurantes values(1, "hola@gmail.com", "123", "España", 28900, "Getafe", "Calle hola");
+insert into restaurantes values(2, "adios@gmail.com", "abc", "España", 28900, "Getafe", "Calle adios");
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Si", 2.00, 0, 1);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Si", 2.00, 5, 1);
 insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Si", 2.00, 5, 2);
@@ -83,12 +84,6 @@ END $
 DELIMITER ;
 
 
-/*Usuarios*/
-CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
-GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
-
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
 /*Procedimientos*/
 DELIMITER $
 CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
@@ -109,5 +104,5 @@ DELIMITER ;
 CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
 GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
 
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
+CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'administrador';
+GRANT ALL PRIVILEGES ON * . * TO 'administrador'@'localhost';
