@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class conexion {
 	   static String bd = "cadenaRestaurantes";
-	   private static String login;
-	   private static String password;
+	   private static String login="administrador";
+	   private static String password="administrador";
 	   static String url = "jdbc:mysql://localhost/"+bd;
 
 	   Connection conn = null;
