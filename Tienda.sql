@@ -45,8 +45,8 @@ insert into categorias values(2, "Vegetales", "No");
 insert into categorias values(3, "Legumbres", "No");
 insert into categorias values(4, "Carnes", "No");
 insert into categorias values(5,"Especias", null);
-insert into restaurantes values(1, "hola@gmail.com", "123", "España", 28900, "Getafe", "Calle hola");
-insert into restaurantes values(2, "adios@gmail.com", "abc", "España", 28900, "Getafe", "Calle adios");
+insert into restaurantes values(1, "hola@gmail.com", md5("123"), "España", 28900, "Getafe", "Calle hola");
+insert into restaurantes values(2, "adios@gmail.com", md5("abc"), "España", 28900, "Getafe", "Calle adios");
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Si", 2.00, 0, 1);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Si", 2.00, 5, 1);
 insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Si", 2.00, 5, 2);
@@ -68,20 +68,6 @@ select * from restaurantes;
 select * from pedidos;
 select * from pedidosProductos;
 
-/*Procedimientos*/
-DELIMITER $
-CREATE PROCEDURE mostrarCategoriaPorNombre(categoria varchar(15))
-BEGIN
-	SELECT * FROM categorias WHERE nombre = categoria;
-END $
-DELIMITER ;
-
-DELIMITER $
-CREATE PROCEDURE mostrarTodosLosProductosCategoria(numCategoria int)
-BEGIN
-	SELECT * FROM productos WHERE categoria = numCategoria;
-END $
-DELIMITER ;
 
 
 /*Procedimientos*/
