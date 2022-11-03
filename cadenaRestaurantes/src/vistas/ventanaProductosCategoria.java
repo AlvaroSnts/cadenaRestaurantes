@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import controlador.coordinador;
 import modelo.dao.productosDao;
 import modelo.vo.productosVo;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
