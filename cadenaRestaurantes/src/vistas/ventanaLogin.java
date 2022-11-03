@@ -34,8 +34,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 
 	private JPanel panel;
 	private JFrame frame;
-	private JLabel labelTitulo, labelUsuario, labelPassword, labelImagen, labelSusFring, labelCodRes;
-	private JTextField textFieldUsuario;
+	private JLabel labelTitulo, labelPassword, labelImagen, labelSusFring, labelCodRes;
 	private JPasswordField passwordField;
 	private JButton botonEntrar;
 	private coordinador coordinador;
@@ -66,27 +65,17 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		panel.setBackground(new Color(26, 146, 185));
 		panel.setLayout(null);
 		
-		textFieldUsuario = new JTextField();
-		textFieldUsuario.setBounds(157, 92, 115, 20);
-		panel.add(textFieldUsuario);
-		textFieldUsuario.setColumns(10);
-		
-		labelUsuario = new JLabel("Usuario:");
-		labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		labelUsuario.setBounds(0, 67, 434, 14);
-		panel.add(labelUsuario);
-		
 		labelPassword = new JLabel("Contraseña:");
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		labelPassword.setBounds(0, 182, 434, 14);
+		labelPassword.setBounds(0, 137, 434, 14);
 		panel.add(labelPassword);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(157, 207, 115, 20);
+		passwordField.setBounds(157, 162, 115, 20);
 		panel.add(passwordField);
 		
 		botonEntrar = new JButton("Entrar");
-		botonEntrar.setBounds(171, 250, 89, 23);
+		botonEntrar.setBounds(171, 205, 89, 23);
 		botonEntrar.addActionListener(this);
 		panel.add(botonEntrar);
 		
@@ -110,12 +99,12 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		
 		textFieldCodRes = new JTextField();
 		textFieldCodRes.setColumns(10);
-		textFieldCodRes.setBounds(157, 151, 115, 20);
+		textFieldCodRes.setBounds(157, 106, 115, 20);
 		panel.add(textFieldCodRes);
 		
 		labelCodRes = new JLabel("Código de restaurante:");
 		labelCodRes.setHorizontalAlignment(SwingConstants.CENTER);
-		labelCodRes.setBounds(0, 126, 434, 14);
+		labelCodRes.setBounds(0, 81, 434, 14);
 		panel.add(labelCodRes);
 	}
 	
@@ -144,58 +133,53 @@ public class ventanaLogin extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		boolean codResCorrecto=false;
+		boolean entradaDatos=false;
+		boolean codNumerico=false;
 		int codRestaurante=-1;
 		ArrayList<restaurantesVo> restaurantes=new ArrayList<restaurantesVo>();
 		if (e.getSource()==botonEntrar) {
 			
-			conexion.setLogin(textFieldUsuario.getText());
-			conexion.setPassword(String.valueOf(passwordField.getPassword()));
+			conexion conexion=new conexion();
 			String codRes=textFieldCodRes.getText();
+			String password=String.valueOf(passwordField.getPassword());
 			
 			
 			if (comprobarCodRes(codRes)==false) {
 				JOptionPane.showMessageDialog(null, "Introduzca un código numérico en la casilla de código de restaurante.","Error",JOptionPane.ERROR_MESSAGE);
 				textFieldCodRes.setText("");
+				passwordField.setText("");
+				codNumerico=false;
 			}
 			else {
 				codRestaurante=Integer.parseInt(codRes);
+				codNumerico=true;
 			}
 			
-			conexion conexion=new conexion();
-			
-			
-			if (conexion.conectarBD()!=null) {
+		
+
+			restaurantes=restaurantesDao.verTodosLosCodRestaurante(restaurantes);	
 				
-				restaurantes=restaurantesDao.verTodosLosCodRestaurante(restaurantes);	
-				
-				for (int i=0; i<restaurantes.size(); i++) {
-					if(codRestaurante==restaurantes.get(i).getCodRes()) {
-						codResCorrecto=true;
-					}
+			for (int i=0; i<restaurantes.size(); i++) {
+				if(codRestaurante==restaurantes.get(i).getCodRes()) {
+					if (password.equals(restaurantes.get(i).getClave())) {
+						entradaDatos=true;
+					}	
 				}
 				
-				if (codResCorrecto==true) {
-					mostrarTodasLasCategorias();
-					coordinador.mostrarVentanaListaCategorias();
-					this.setVisible(false);
-					codigoRestaurante=codRestaurante;
-					textFieldUsuario.setText("");
-					passwordField.setText("");
-					textFieldCodRes.setText("");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "El código de restaurante no es correcto","Error",JOptionPane.ERROR_MESSAGE);
-					textFieldUsuario.setText("");
-					passwordField.setText("");
-					textFieldCodRes.setText("");
-				}
 			}
-			else {
-				JOptionPane.showMessageDialog(null, "Error en la introducción de datos. Intentelo de nuevo","Error",JOptionPane.ERROR_MESSAGE);
-				textFieldUsuario.setText("");
-				passwordField.setText("");
+				
+			if ((entradaDatos==true)&&(codNumerico==true)) {
+				mostrarTodasLasCategorias();
+				coordinador.mostrarVentanaListaCategorias();
+				this.setVisible(false);
+				codigoRestaurante=codRestaurante;
 				textFieldCodRes.setText("");
+				passwordField.setText("");
+			}
+			if ((entradaDatos==false)&&(codNumerico==true)) {
+				JOptionPane.showMessageDialog(null, "Datos mal introducidos.","Error",JOptionPane.ERROR_MESSAGE);
+				textFieldCodRes.setText("");
+				passwordField.setText("");
 			}
 		}
 			
