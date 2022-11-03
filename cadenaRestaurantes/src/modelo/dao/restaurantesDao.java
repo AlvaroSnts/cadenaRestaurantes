@@ -58,6 +58,7 @@ public class restaurantesDao {
 				existe=true;
 				restaurantesVo restaurante= new restaurantesVo();
 				restaurante.setCodRes(res.getInt("codRes"));
+				restaurante.setClave(res.getString("clave"));
 				restaurantes.add(restaurante);
 			 }
 			res.close();
