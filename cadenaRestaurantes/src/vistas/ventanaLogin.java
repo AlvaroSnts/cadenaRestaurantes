@@ -10,8 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.Color;
-import java.awt.Desktop;
-
 import javax.swing.SwingConstants;
 import controlador.coordinador;
 import modelo.conexion.conexion;
@@ -19,15 +17,15 @@ import modelo.dao.categoriasDao;
 import modelo.dao.restaurantesDao;
 import modelo.vo.categoriasVo;
 import modelo.vo.restaurantesVo;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.Font;
+import java.awt.Image;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class ventanaLogin extends JFrame implements ActionListener {
@@ -46,6 +44,8 @@ public class ventanaLogin extends JFrame implements ActionListener {
 		setSize(450, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Iniciar sesión");
+		Image icon = new ImageIcon(getClass().getResource("/fotos/finger.png")).getImage();
+        setIconImage(icon);
 		construirPanel();
 		setContentPane(panel);
 	    setLocationRelativeTo(null);
@@ -142,7 +142,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 			conexion conexion=new conexion();
 			String codRes=textFieldCodRes.getText();
 			String password=String.valueOf(passwordField.getPassword());
-			
+			String contraseñaCifrada=getMD5(password);
 			
 			if (comprobarCodRes(codRes)==false) {
 				JOptionPane.showMessageDialog(null, "Introduzca un código numérico en la casilla de código de restaurante.","Error",JOptionPane.ERROR_MESSAGE);
@@ -161,7 +161,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 				
 			for (int i=0; i<restaurantes.size(); i++) {
 				if(codRestaurante==restaurantes.get(i).getCodRes()) {
-					if (password.equals(restaurantes.get(i).getClave())) {
+					if (contraseñaCifrada.equals(restaurantes.get(i).getClave())) {
 						entradaDatos=true;
 					}	
 				}
@@ -181,10 +181,7 @@ public class ventanaLogin extends JFrame implements ActionListener {
 				textFieldCodRes.setText("");
 				passwordField.setText("");
 			}
-		}
-			
-			
-				
+		}			
 	}
 	
 	public boolean comprobarCodRes(String cod) {
@@ -194,5 +191,24 @@ public class ventanaLogin extends JFrame implements ActionListener {
 			}
 		}
 		return true;
+	}
+	
+	private static String getMD5(String input) {
+		 try {
+			 MessageDigest md = MessageDigest.getInstance("MD5");
+			 byte[] messageDigest = md.digest(input.getBytes());
+			 BigInteger number = new BigInteger(1, messageDigest);
+			 String hashtext = number.toString(16);
+
+		 while (hashtext.length() < 32) {
+			 hashtext = "0" + hashtext;
+		 }
+		 
+		 return hashtext;
+		 }
+		 catch (NoSuchAlgorithmException e) {
+			 
+			 throw new RuntimeException(e);
+		 }
 	}
 }
