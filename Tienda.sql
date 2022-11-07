@@ -18,16 +18,16 @@ create table pedidos (
 );
 create table categorias(
 	codCat int primary key auto_increment,
-    nombre varchar(40) unique,
+    nombre varchar(40) unique not null,
     descripcion varchar(40)
 );
 create table productos (
 	codProd int auto_increment primary key,
-    nombre varchar(40),
+    nombre varchar(40) not null,
     descripcion varchar(60),
     peso double,
-    stock int,
-    categoria int,
+    stock int not null,
+    categoria int not null,
     foto Blob ,
     foreign key (categoria) references categorias (codCat)
 );
@@ -40,21 +40,22 @@ create table pedidosProductos (
     unidades int
 );
 
-insert into categorias values(1, "Pasta", "Si");
-insert into categorias values(2, "Vegetales", "No");
-insert into categorias values(3, "Legumbres", "No");
-insert into categorias values(4, "Carnes", "No");
-insert into categorias values(5,"Especias", null);
+insert into categorias values(1, "Pasta", "Todo tipo de pasta desde espaguetis hasta raviolis");
+insert into categorias values(2, "Vegetales", "Todo tipo de vegetales desde acelgas hasta espinacas");
+insert into categorias values(3, "Legumbres", "Todo tipo de legumbres desde garbanzos hasta lentejas");
+insert into categorias values(4, "Carnes", "Todo tipo de carnes desde filetes de pollo hasta filetes de ternera");
+insert into categorias values(5,"Especias", "Todo tipo de especias desde anis hasta pimenton");
 insert into restaurantes values(1, "hola@gmail.com", md5("123"), "España", 28900, "Getafe", "Calle hola");
 insert into restaurantes values(2, "adios@gmail.com", md5("abc"), "España", 28900, "Getafe", "Calle adios");
-insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Si", 2.00, 0, 1);
-insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Si", 2.00, 5, 1);
-insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Si", 2.00, 5, 2);
-insert into productos (nombre,descripcion,peso,stock,categoria)values("Acelgas", "Si", 2.00, 10, 2);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Marca Soprano", 2.00, 0, 1);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Espaguetis", "Marca El Gallo", 5.67, 5, 1);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Raviolis", "Marca Soprano", 3.250, 7, 1);
+insert into productos(nombre,descripcion,peso,stock,categoria) values("Espinacas", "Procedentes de Zamora ", 1.20, 6, 2);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Acelgas", "Procedentes de Leon", 2.00, 10, 2);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Garbanzos", "Si", 2.00, 4, 3);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Judias", "Si", 2.00, 7, 3);
-insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de ternera", "Si", 2.00, 8, 4);
-insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de Pollo", "Si", 2.00, 6, 4);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de ternera", "Ganaderia Pi", 1.00, 8, 4);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de Pollo", "Granjas CAE", 0.50, 6, 4);
 
 /*Vistas*/
 create view vista_lista_categorias as select * from categorias;
@@ -63,10 +64,6 @@ create view lista_caracteristicas_producto as select nombre,descripcion,peso,sto
 create view lista_caracteristicas_categoria as select nombre,descripcion from categorias;
 create view lista_fotos as select nombre,foto from productos;
 create view vista_nombres_producto as select * from productos;
-select * from productos;
-select * from restaurantes;
-select * from pedidos;
-select * from pedidosProductos;
 
 
 
