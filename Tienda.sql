@@ -19,12 +19,12 @@ create table pedidos (
 create table categorias(
 	codCat int primary key auto_increment,
     nombre varchar(40) unique not null,
-    descripcion varchar(40)
+    descripcion varchar(200)
 );
 create table productos (
 	codProd int auto_increment primary key,
     nombre varchar(40) not null,
-    descripcion varchar(60),
+    descripcion varchar(200),
     peso double,
     stock int not null,
     categoria int not null,
@@ -85,7 +85,16 @@ DELIMITER ;
 
 /*Usuarios*/
 CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
-GRANT ALL PRIVILEGES ON * . * TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.vista_lista_categorias TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.vista_stocks TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_producto TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_categoria TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.lista_fotos TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.vista_nombres_producto TO 'restaurante'@'localhost';
+GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarCategoriaPorNombre to 'restaurante'@'localhost';
+GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarTodosLosProductosCategoria to 'restaurante'@'localhost';
+
+DROP USER 'restaurante'@'localhost';
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'administrador';
 GRANT ALL PRIVILEGES ON * . * TO 'administrador'@'localhost';
