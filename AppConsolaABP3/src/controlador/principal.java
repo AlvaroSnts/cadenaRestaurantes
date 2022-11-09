@@ -149,6 +149,21 @@ public class principal {
 					
 					productosDao.registrarProducto(nombreProducto, descripcionProducto, pesoProducto, stockProducto, categoriaProducto);
 					
+					if (productosDao.categoriaExistente==false) {
+						do {
+							for (int i=0; i<categorias.size(); i++) {
+								System.out.println(categorias.get(i).getCodCat()+".- "+categorias.get(i).getNombre());
+							}
+							System.out.println("Error. Ha introducido una categoria inexistente. Seleccione una existente:");
+							while (in.hasNextInt()==false) {
+								System.out.println("Error. Introduzca un número:");
+								in.next();
+							}
+							categoriaProducto=in.nextInt();
+							productosDao.registrarProducto(nombreProducto, descripcionProducto, pesoProducto, stockProducto, categoriaProducto);
+						}while(productosDao.categoriaExistente==false);
+					}
+					
 					break;
 			}
 		}while(menuElige1!=3);

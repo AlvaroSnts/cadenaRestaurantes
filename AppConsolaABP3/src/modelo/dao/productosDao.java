@@ -35,8 +35,7 @@ public class productosDao {
 			categoriaExistente=true;
 		}catch(SQLException e) {
 			categoriaExistente=false;
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			
 		}
 	}
 	
