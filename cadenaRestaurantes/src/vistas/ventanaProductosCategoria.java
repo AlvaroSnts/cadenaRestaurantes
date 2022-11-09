@@ -23,6 +23,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import java.awt.Component;
+import javax.swing.JScrollPane;
 
 public class ventanaProductosCategoria extends JFrame implements ActionListener  {
 
@@ -35,6 +36,7 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 	private JPanel panelCabecera;
 	public static JTextPane panelPropiedadesProducto,panelCantidad;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<String, Integer>();
+	private JScrollPane scrollPane;
 
 	public ventanaProductosCategoria() {
 		setSize(950, 700);
@@ -72,10 +74,36 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		panel.add(botonCarrito);
 		botonCarrito.addActionListener(this); 
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(221, 189, 505, 160);
+		panel.add(scrollPane);
+		
 		listaProductosCategoria = new JList();
+		scrollPane.setViewportView(listaProductosCategoria);
 		listaProductosCategoria.setValueIsAdjusting(true);
-		listaProductosCategoria.setBounds(221, 189, 505, 160);
-		panel.add(listaProductosCategoria);
+		
+		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				try {
+					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())!=null) {
+						panelCantidad.setText(""+arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString()));
+					}
+					else {
+						panelCantidad.setText(""+0);
+					}
+				} catch (Exception e2) {
+				
+				}
+				panelPropiedadesProducto.setVisible(true);
+				try {
+					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),1)+"\r\n"+
+							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),2)+"\r\n"+
+							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),3));
+				} catch (Exception e2) {
+					
+				}
+			}
+		});
 		
 		panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
@@ -150,29 +178,6 @@ public class ventanaProductosCategoria extends JFrame implements ActionListener 
 		labelSusFringRecortado.setIcon(new ImageIcon(getClass().getResource("/Fotos/gusFringRecortado.png")));
 		labelSusFringRecortado.setBounds(622, 115, 393, 546);
 		panel.add(labelSusFringRecortado);
-		
-		listaProductosCategoria.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				try {
-					if(arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString())!=null) {
-						panelCantidad.setText(""+arrayAsociativo.get(listaProductosCategoria.getSelectedValue().toString()));
-					}
-					else {
-						panelCantidad.setText(""+0);
-					}
-				} catch (Exception e2) {
-				
-				}
-				panelPropiedadesProducto.setVisible(true);
-				try {
-					panelPropiedadesProducto.setText(productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),1)+"\r\n"+
-							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),2)+"\r\n"+
-							productosDao.stringCaracteristicasProducto(listaProductosCategoria.getSelectedValue().toString(),3));
-				} catch (Exception e2) {
-					
-				}
-			}
-		});
 	}
 	
 	public void setCoordinador(coordinador coordinador) {

@@ -27,6 +27,7 @@ import modelo.dao.categoriasDao;
 import modelo.dao.productosDao;
 import modelo.vo.categoriasVo;
 import modelo.vo.productosVo;
+import javax.swing.JScrollPane;
 
 public class ventanaListaCategorias extends JFrame implements ActionListener {
 
@@ -39,6 +40,7 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 	public static String categoriaString,detallesCategoria;
 	public static int categoriaInt;
 	public static JTextPane panelPropiedadesCategorias;
+	private JScrollPane scrollPane;
 
 
 	public ventanaListaCategorias() {
@@ -104,12 +106,25 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		labelTitulo.setForeground(new Color(0, 0, 0));
 		labelTitulo.setBounds(252, 100, 431, 100);
 		panel.add(labelTitulo);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(221, 192, 505, 160);
+		panel.add(scrollPane);
 
 
 
 		listaCategorias = new JList();
-		listaCategorias.setBounds(221, 192, 505, 160);
-		panel.add(listaCategorias);
+		scrollPane.setViewportView(listaCategorias);
+		listaCategorias.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				panelPropiedadesCategorias.setVisible(true);
+				try {
+					panelPropiedadesCategorias.setText(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1));
+				} catch (Exception e2) {
+
+				}
+			}
+		});
 
 		botonSeleccionar = new JButton("Seleccionar");
 		botonSeleccionar.addActionListener(this);
@@ -132,16 +147,6 @@ public class ventanaListaCategorias extends JFrame implements ActionListener {
 		panelPropiedadesCategorias.setBounds(221, 428, 505, 160);
 		panel.add(panelPropiedadesCategorias);
 		panelPropiedadesCategorias.setVisible(false);
-		listaCategorias.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				panelPropiedadesCategorias.setVisible(true);
-				try {
-					panelPropiedadesCategorias.setText(categoriasDao.stringCaracteristicasCategorias(listaCategorias.getSelectedValue().toString(),1));
-				} catch (Exception e2) {
-
-				}
-			}
-		});
 	}
 
 	public void setCoordinador(coordinador coordinador) {
