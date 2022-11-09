@@ -21,8 +21,8 @@ public class carritoDao {
 		int stockActual=0;
 		try {
 			connection.setAutoCommit(false);
-			PreparedStatement quitarStock = conexion.conectarBD().prepareStatement("UPDATE productos set stock = (? - ?) where nombre like ?");
-			PreparedStatement conseguirStockActual = conexion.conectarBD().prepareStatement("Select stock from productos where nombre like ?");
+			PreparedStatement quitarStock = conexion.conectarBD().prepareStatement("CALL updateProductos(?,?,?)");
+			PreparedStatement conseguirStockActual = conexion.conectarBD().prepareStatement("Select stock from vista_stocks where nombre like ?");
 			for(int i=0;i<list.size();i++) {
 				conseguirStockActual.setString(1, list.get(i).getKey());
 				ResultSet res= conseguirStockActual.executeQuery();
@@ -30,8 +30,8 @@ public class carritoDao {
 					stockActual=res.getInt("stock");
 				}
 				quitarStock.setInt(1, stockActual);
-				quitarStock.setString(3, list.get(i).getKey());
-				quitarStock.setInt(2, list.get(i).getValue());
+				quitarStock.setString(2, list.get(i).getKey());
+				quitarStock.setInt(3, list.get(i).getValue());
 				quitarStock.executeUpdate();
 			}
 			connection.commit();
@@ -42,6 +42,7 @@ public class carritoDao {
 			try {
 				connection.rollback();
 				JOptionPane.showMessageDialog(null, "No ha podido realizarse el pedido","Error",JOptionPane.ERROR_MESSAGE);
+				e1.printStackTrace();
 				connection.close();
 			} catch (SQLException e2) {
 
@@ -56,10 +57,10 @@ public class carritoDao {
 		String fechaConFormato = fechaActual.format(formatoFecha);
 		try {
 			connection.setAutoCommit(false);
-			PreparedStatement realizarPedido = connection.prepareStatement("INSERT INTO pedidos (fecha,restaurante) VALUES (?,?)");
+			PreparedStatement realizarPedido = connection.prepareStatement("CALL realizarPedido(?,?)");
 			realizarPedido.setString(1, fechaConFormato);
 			realizarPedido.setInt(2, ventanaLogin.codigoRestaurante);
-			realizarPedido.executeUpdate();
+			realizarPedido.execute();
 			connection.commit();
 			connection.close();
 			return fechaConFormato;
@@ -81,7 +82,8 @@ public class carritoDao {
 			connection.setAutoCommit(false);
 			int codPedido = 0;
 			int codProducto = 0;
-			PreparedStatement seleccionarCodPedido = connection.prepareStatement("SELECT codPed FROM pedidos WHERE fecha LIKE ? and restaurante LIKE ?");
+			PreparedStatement seleccionarCodPedido = connection.prepareStatement("SELECT codPed FROM vista_codPed_fecha_restaurante"
+					+ " WHERE fecha LIKE ? and restaurante LIKE ?");
 			seleccionarCodPedido.setString(1, fecha);
 			seleccionarCodPedido.setInt(2, ventanaLogin.codigoRestaurante);
 			ResultSet res = seleccionarCodPedido.executeQuery();
@@ -89,14 +91,13 @@ public class carritoDao {
 				codPedido=res.getInt("codPed");
 			}
 			for(int i=0;i<list.size();i++) {
-				PreparedStatement seleccionarCodProducto = connection.prepareStatement("SELECT * FROM productos WHERE nombre like ?");
+				PreparedStatement seleccionarCodProducto = connection.prepareStatement("SELECT * FROM vista_nombres_producto WHERE nombre like ?");
 				seleccionarCodProducto.setString(1, list.get(i).getKey());
 				ResultSet res2 = seleccionarCodProducto.executeQuery();
 				while(res2.next()) {
 					codProducto=res2.getInt("codProd");
 				}
-				PreparedStatement anadirPedidosProductos = connection.prepareStatement("INSERT INTO pedidosProductos (pedido,producto,unidades) "
-						+ "VALUES (?,?,?)");
+				PreparedStatement anadirPedidosProductos = connection.prepareStatement("CALL anadirPedidosProductos(?,?,?)");
 				anadirPedidosProductos.setInt(1, codPedido);
 				anadirPedidosProductos.setInt(2, codProducto);
 				anadirPedidosProductos.setInt(3, list.get(i).getValue());
