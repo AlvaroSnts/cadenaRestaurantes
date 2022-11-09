@@ -110,8 +110,7 @@ GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_categoria TO 'restauran
 GRANT SELECT ON cadenarestaurantes.vista_nombres_producto TO 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarCategoriaPorNombre to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarTodosLosProductosCategoria to 'restaurante'@'localhost';
-
-DROP USER 'restaurante'@'localhost';
+-- DROP USER 'restaurante'@'localhost';
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'administrador';
 GRANT ALL PRIVILEGES ON * . * TO 'administrador'@'localhost';
