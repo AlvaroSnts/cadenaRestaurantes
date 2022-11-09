@@ -1,6 +1,6 @@
 package modelo.dao;
 
-import java.sql.Connection;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,19 +13,16 @@ import modelo.vo.categoriasVo;
 
 public class categoriasDao {
 	
-	public static conexion conexionBD ;
-	public static Connection connection ;
 
 	public static void registrarCategoria(String nombre, String descripcion) {
 		
-		conexionBD=new conexion();
-		connection=conexionBD.conectarBD();
+		conexion conexionBD=new conexion();
 		
 		try {
-			connection.setAutoCommit(false);
-			PreparedStatement estatuto=conexionBD.conectarBD().prepareStatement
-					("INSERT INTO categorias(nombre, descripcion) VALUES ('"+nombre+"', '"+descripcion+"');");
-			estatuto.execute();
+			CallableStatement estatuto=conexionBD.conectarBD().prepareCall("CALL registrarCategoria(?, ?);");
+			estatuto.setString(1, nombre);
+			estatuto.setString(2, descripcion);
+			estatuto.executeQuery();
 		}catch(SQLException e) {
 			 System.out.println(e.getMessage());
 		}
@@ -37,7 +34,7 @@ public class categoriasDao {
 		
 		boolean existe=false;
 		try {
-			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM categorias");
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM vista_mostrar_categorias");
 			ResultSet res = prepState1.executeQuery();
 			while(res.next()){
 				existe=true;
@@ -58,9 +55,5 @@ public class categoriasDao {
 			return categorias;
 		}
 		else return null;				
-	}
-	
-	public static Connection getConnection() {
-		return connection;
 	}
 }
