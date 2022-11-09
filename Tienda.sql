@@ -101,6 +101,20 @@ BEGIN
 END $
 DELIMITER ;
 
+DELIMITER $
+CREATE PROCEDURE registrarProducto(nombre1 varchar(40), descripcion1 varchar(200), peso1 double, stock1 int, categoria1 int)
+BEGIN
+	INSERT INTO productos(nombre, descripcion, peso, stock, categoria) VALUES (nombre1, descripcion1, peso1, stock1, categoria1);
+END $
+DELIMITER ;
+
+DELIMITER $
+CREATE PROCEDURE registrarCategoria(nombre1 varchar(40), descripcion1 varchar(200))
+BEGIN
+	INSERT INTO categorias(nombre, descripcion) VALUES (nombre1, descripcion1);
+END $
+DELIMITER ;
+
 /*Usuarios*/
 CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
 GRANT SELECT ON cadenarestaurantes.vista_lista_categorias TO 'restaurante'@'localhost';
@@ -110,7 +124,10 @@ GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_categoria TO 'restauran
 GRANT SELECT ON cadenarestaurantes.vista_nombres_producto TO 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarCategoriaPorNombre to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarTodosLosProductosCategoria to 'restaurante'@'localhost';
--- DROP USER 'restaurante'@'localhost';
+GRANT EXECUTE ON PROCEDURE cadenarestaurantes.updateProductos to 'restaurante'@'localhost';
+GRANT EXECUTE ON PROCEDURE cadenarestaurantes.realizarPedido to 'restaurante'@'localhost';
+GRANT EXECUTE ON PROCEDURE cadenarestaurantes.anadirPedidosProductos to 'restaurante'@'localhost';
+
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'administrador';
 GRANT ALL PRIVILEGES ON * . * TO 'administrador'@'localhost';
