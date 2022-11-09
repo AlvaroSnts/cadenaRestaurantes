@@ -141,7 +141,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmaPedido) {
 			carritoDao.eliminarStockCarrito(list);
-			String fecha=carritoDao.procesarPedido();
+			String fecha=carritoDao.procesarPedido(list);
 			carritoDao.insertarPedidosProductos(fecha,list);
 			modelo.clear();
 			arrayAsociativo.clear();
