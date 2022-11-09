@@ -26,9 +26,8 @@ create table productos (
     nombre varchar(40) not null,
     descripcion varchar(200),
     peso double,
-    stock int not null,
+    stock int not null check (stock > -1),
     categoria int not null,
-    foto Blob ,
     foreign key (categoria) references categorias (codCat)
 );
 create table pedidosProductos (
@@ -62,9 +61,8 @@ create view vista_lista_categorias as select * from categorias;
 create view vista_stocks as select nombre,stock from productos;
 create view lista_caracteristicas_producto as select nombre,descripcion,peso,stock from productos;
 create view lista_caracteristicas_categoria as select nombre,descripcion from categorias;
-create view lista_fotos as select nombre,foto from productos;
 create view vista_nombres_producto as select * from productos;
-
+create view vista_codPed_fecha_restaurante as select codPed,fecha,restaurante from pedidos;
 
 
 /*Procedimientos*/
@@ -82,6 +80,26 @@ BEGIN
 END $
 DELIMITER ;
 
+DELIMITER $
+CREATE PROCEDURE updateProductos(cantidadStockActual int,nombreProducto varchar(40),cantidadStockARetirar int)
+Begin
+	UPDATE productos set stock = (cantidadStockActual - cantidadStockARetirar) where nombre like nombreProducto;
+END $
+DELIMITER ;
+
+DELIMITER $ 
+CREATE PROCEDURE realizarPedido(fechaPedido varchar(21),codRestaurante int)
+BEGIN
+	INSERT INTO pedidos (fecha,restaurante) VALUES (fechaPedido,codRestaurante);
+END $
+DELIMITER ;
+
+DELIMITER $ 
+CREATE PROCEDURE anadirPedidosProductos(codPedido int, codProducto int,unidades int) 
+BEGIN
+	INSERT INTO pedidosProductos (pedido,producto,unidades) VALUES (codPedido,codProducto,unidades);
+END $
+DELIMITER ;
 
 /*Usuarios*/
 CREATE USER 'restaurante'@'localhost' IDENTIFIED BY 'restaurante';
@@ -89,7 +107,6 @@ GRANT SELECT ON cadenarestaurantes.vista_lista_categorias TO 'restaurante'@'loca
 GRANT SELECT ON cadenarestaurantes.vista_stocks TO 'restaurante'@'localhost';
 GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_producto TO 'restaurante'@'localhost';
 GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_categoria TO 'restaurante'@'localhost';
-GRANT SELECT ON cadenarestaurantes.lista_fotos TO 'restaurante'@'localhost';
 GRANT SELECT ON cadenarestaurantes.vista_nombres_producto TO 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarCategoriaPorNombre to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarTodosLosProductosCategoria to 'restaurante'@'localhost';
