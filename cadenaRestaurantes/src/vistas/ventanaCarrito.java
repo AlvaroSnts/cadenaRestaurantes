@@ -157,14 +157,16 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==botonEliminar) {
 			int posicionMarcada=carrito.getSelectedIndex();
-			String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
-			arrayAsociativo.remove(nombreProducto);
-			list.remove(carrito.getSelectedIndex());
-			modelo.clear();
-			for(int i=0;i<arrayAsociativo.size();i++) {
-				modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+			if(posicionMarcada!=-1) {
+				String nombreProducto=list.get(carrito.getSelectedIndex()).getKey();
+				arrayAsociativo.remove(nombreProducto);
+				list.remove(carrito.getSelectedIndex());
+				modelo.clear();
+				for(int i=0;i<arrayAsociativo.size();i++) {
+					modelo.add(i, list.get(i).getKey()+" Cantidad: "+list.get(i).getValue());
+				}
+				carrito.setSelectedIndex(posicionMarcada);
 			}
-			carrito.setSelectedIndex(posicionMarcada);
 		}
 		if(e.getSource()==botonLogout) {
 			coordinador.mostrarVentanaCerrarSesion();
