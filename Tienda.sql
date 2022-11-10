@@ -44,6 +44,7 @@ insert into categorias values(2, "Vegetales", "Todo tipo de vegetales desde acel
 insert into categorias values(3, "Legumbres", "Todo tipo de legumbres desde garbanzos hasta lentejas");
 insert into categorias values(4, "Carnes", "Todo tipo de carnes desde filetes de pollo hasta filetes de ternera");
 insert into categorias values(5,"Especias", "Todo tipo de especias desde anis hasta pimenton");
+insert into categorias values(6,"Pescados", "Todo tipo de pescados desde el pez espada hasta la lubina");
 insert into restaurantes values(1, "hola@gmail.com", md5("123"), "España", 28900, "Getafe", "Calle hola");
 insert into restaurantes values(2, "adios@gmail.com", md5("abc"), "España", 28900, "Getafe", "Calle adios");
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Macarrones", "Marca Soprano", 2.00, 0, 1);
@@ -55,6 +56,13 @@ insert into productos (nombre,descripcion,peso,stock,categoria)values("Garbanzos
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Judias", "Si", 2.00, 7, 3);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de ternera", "Ganaderia Pi", 1.00, 8, 4);
 insert into productos (nombre,descripcion,peso,stock,categoria)values("Filete de Pollo", "Granjas CAE", 0.50, 6, 4);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Orégano", "Procedente de Perales del Río", 0.50, 10, 5);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Albahaca", "Procedente de Gibraltar", 0.50, 8, 5);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Pimentón", "Procedente de Madrid", 0.50, 8, 5);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Lubina", "Procedente del Atlántico", 2, 4, 6);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Pez espada", "Procedente del Catntábrico", 3, 4, 6);
+insert into productos (nombre,descripcion,peso,stock,categoria)values("Atún", "Procedente del Pacífico", 3.50, 3, 6);
+select * from productos;
 
 /*Vistas*/
 create view vista_lista_categorias as select * from categorias;
@@ -63,6 +71,7 @@ create view lista_caracteristicas_producto as select nombre,descripcion,peso,sto
 create view lista_caracteristicas_categoria as select nombre,descripcion from categorias;
 create view vista_nombres_producto as select * from productos;
 create view vista_codPed_fecha_restaurante as select codPed,fecha,restaurante from pedidos;
+create view vista_ver_restaurantes as select * from restaurantes;
 
 
 /*Procedimientos*/
@@ -122,12 +131,15 @@ GRANT SELECT ON cadenarestaurantes.vista_stocks TO 'restaurante'@'localhost';
 GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_producto TO 'restaurante'@'localhost';
 GRANT SELECT ON cadenarestaurantes.lista_caracteristicas_categoria TO 'restaurante'@'localhost';
 GRANT SELECT ON cadenarestaurantes.vista_nombres_producto TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.vista_ver_restaurantes TO 'restaurante'@'localhost';
+GRANT SELECT ON cadenarestaurantes.vista_codped_fecha_restaurante TO 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarCategoriaPorNombre to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.mostrarTodosLosProductosCategoria to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.updateProductos to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.realizarPedido to 'restaurante'@'localhost';
 GRANT EXECUTE ON PROCEDURE cadenarestaurantes.anadirPedidosProductos to 'restaurante'@'localhost';
 
-
+/*drop user 'administrador'@'localhost';
+drop user 'restaurante'@'localhost';*/
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'administrador';
 GRANT ALL PRIVILEGES ON * . * TO 'administrador'@'localhost';
