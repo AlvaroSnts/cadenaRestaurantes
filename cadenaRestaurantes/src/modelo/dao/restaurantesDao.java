@@ -21,7 +21,7 @@ public class restaurantesDao {
 		
 		boolean existe=false;
 		try {
-			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM restaurantes");
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM vista_ver_restaurantes");
 			ResultSet res = prepState1.executeQuery();
 			while(res.next()){
 				existe=true;

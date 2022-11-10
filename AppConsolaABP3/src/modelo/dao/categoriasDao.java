@@ -34,7 +34,7 @@ public class categoriasDao {
 		
 		boolean existe=false;
 		try {
-			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM vista_mostrar_categorias");
+			PreparedStatement prepState1 = conexionBD.conectarBD().prepareStatement("SELECT * FROM vista_lista_categorias");
 			ResultSet res = prepState1.executeQuery();
 			while(res.next()){
 				existe=true;
@@ -47,7 +47,7 @@ public class categoriasDao {
 			conexionBD.desconectarBD();
 								
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error, no se ha podido conectar");
+			e.printStackTrace();
 			System.out.println(e);
 		}
 		

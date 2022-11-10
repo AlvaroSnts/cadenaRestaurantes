@@ -37,7 +37,7 @@ public class principal {
 				password=in.nextLine();
 
 					
-				if(((login.equals("admin"))&&(password.equals("admin")))||(login.equals("root"))&&(password.equals("root"))) {
+				if((login.equals("administrador"))&&(password.equals("administrador"))) {
 					haConectado=true;
 					conexion.setLogin(login);
 					conexion.setPassword(password);
@@ -121,7 +121,7 @@ public class principal {
 					do {
 						System.out.println("Introduzca su stock:");
 						stockString=in.nextLine();
-						
+						comprobarStock(stockString);
 						if (comprobarStock(stockString)==false) {
 							System.out.println("Error. Debes escribir un número.");
 						}

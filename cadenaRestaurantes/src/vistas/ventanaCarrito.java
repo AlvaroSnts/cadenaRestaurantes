@@ -28,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 public class ventanaCarrito extends JFrame implements ActionListener {
 
@@ -40,6 +41,7 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 	private static DefaultListModel<String> modelo;
 	public static Map<String, Integer> arrayAsociativo = new HashMap<>();
 	public static List<Map.Entry<String ,Integer>> list;
+	private JScrollPane scrollPane;
 
 	public ventanaCarrito() {
 		setSize(950, 700);
@@ -77,10 +79,13 @@ public class ventanaCarrito extends JFrame implements ActionListener {
 		btnVolver.setBounds(10, 610, 119, 40);
 		panel.add(btnVolver);
 		btnVolver.addActionListener(this);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(215, 160, 548, 232);
+		panel.add(scrollPane);
 
 		carrito = new JList<String>();
-		carrito.setBounds(215, 160, 548, 232);
-		panel.add(carrito);
+		scrollPane.setViewportView(carrito);
 
 		panelCabecera = new JPanel();
 		panelCabecera.setLayout(null);
